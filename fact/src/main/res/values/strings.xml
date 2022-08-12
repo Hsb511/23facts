@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">fact</string>
+    <string name="fact_image_description">23 fact illustration</string>
+    <string name="fact_sources">sources:</string>
+</resources>

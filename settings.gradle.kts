@@ -13,4 +13,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "facts23"
+
 include(":app")
+include(":fact")
