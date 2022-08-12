@@ -31,9 +31,18 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.COMPOSE
+    }
 }
 
 dependencies {
+    // Compose
+    implementation("androidx.activity:activity-compose:1.5.1")
+
     // Hilt
     implementation("com.google.dagger:hilt-android:${Versions.HILT}")
     kapt("com.google.dagger:hilt-android-compiler:${Versions.HILT}")
