@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.statistics.ReportStatisticsToElasticSearch.url
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     id("com.android.application") version Versions.ANDROID_PLUGIN apply false
@@ -16,6 +18,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven("https://jitpack.io")
     }
 
     dependencies {

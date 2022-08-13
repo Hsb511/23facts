@@ -47,6 +47,9 @@ dependencies {
     implementation("com.google.dagger:hilt-android:${Versions.HILT}")
     kapt("com.google.dagger:hilt-android-compiler:${Versions.HILT}")
 
+    // Navigation
+    implementation(project(":fact"))
+
     implementation("androidx.core:core-ktx:${Versions.ANDROID_CORE}")
     implementation("androidx.appcompat:appcompat:1.4.2")
     implementation("com.google.android.material:material:1.6.1")

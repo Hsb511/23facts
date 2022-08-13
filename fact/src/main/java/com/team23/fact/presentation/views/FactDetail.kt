@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
@@ -15,11 +16,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.team23.fact.R
+import com.team23.fact.presentation.viewobjects.FactDetailLinkVO
 import com.team23.fact.presentation.viewobjects.FactDetailVO
 
 @Composable
 fun FactDetail(factDetailVO: FactDetailVO) {
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize()
+    ) {
         Text(
             text = factDetailVO.title,
             style = MaterialTheme.typography.h4,
@@ -39,7 +44,7 @@ fun FactDetail(factDetailVO: FactDetailVO) {
                 painter = rememberAsyncImagePainter(factDetailVO.imageUrl),
                 contentDescription = stringResource(id = R.string.fact_image_description),
                 modifier = Modifier
-                    .size(120.dp)
+                    .size(200.dp)
                     .clip(MaterialTheme.shapes.medium)
             )
         } else if (factDetailVO.imageBitmap != null) {
@@ -47,7 +52,7 @@ fun FactDetail(factDetailVO: FactDetailVO) {
                 bitmap = factDetailVO.imageBitmap,
                 contentDescription = stringResource(id = R.string.fact_image_description),
                 modifier = Modifier
-                    .size(120.dp)
+                    .size(200.dp)
                     .clip(MaterialTheme.shapes.medium)
             )
         }
@@ -56,16 +61,25 @@ fun FactDetail(factDetailVO: FactDetailVO) {
             style = MaterialTheme.typography.body1,
             modifier = Modifier.padding(8.dp)
         )
-        Text(
-            text = stringResource(id = R.string.fact_sources),
-            style = MaterialTheme.typography.body2,
-            modifier = Modifier.padding(8.dp, 16.dp, 8.dp, 8.dp)
-        )
-        LazyColumn(modifier = Modifier.padding(8.dp, 0.dp)) {
-            items(factDetailVO.sources) {
-                // TODO CLICKABLE LINKS
+        LazyColumn(
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.padding(8.dp).fillMaxHeight()
+        ) {
+            item {
                 Text(
-                    text = it
+                    text = stringResource(id = R.string.fact_sources),
+                    style = MaterialTheme.typography.body2
+                )
+            }
+            items(factDetailVO.sources) {
+                // TODO USE VM
+                FactDetailLink(
+                    FactDetailLinkVO(
+                        url = it,
+                        title = "The Birthday paradox",
+                        domainName = it.split("https://").get(1).split("/").get(0)
+                    )
                 )
             }
         }
