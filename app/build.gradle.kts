@@ -42,6 +42,8 @@ android {
 dependencies {
     // Compose
     implementation("androidx.activity:activity-compose:1.5.1")
+    implementation("androidx.compose.material:material:${Versions.COMPOSE}")
+
 
     // Hilt
     implementation("com.google.dagger:hilt-android:${Versions.HILT}")

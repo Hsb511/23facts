@@ -2,5 +2,8 @@
     <string name="app_name">fact</string>
     <string name="fact_image_description">23 fact illustration</string>
     <string name="fact_sources">sources:</string>
+    <string name="fact_icon_like">like icon</string>
+    <string name="fact_icon_share">share icon</string>
+    <string name="fact_icon_favorite">favorite icon</string>
     <string name="fact_link_image_description">link preview</string>
 </resources>

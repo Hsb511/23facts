@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -19,40 +20,42 @@ import com.team23.fact.presentation.viewobjects.FactDetailLinkVO
 @Composable
 fun FactDetailLink(factDetailLinkVO: FactDetailLinkVO) {
     // TODO MAKE THE CARD CLICKABLE
-    Card(
-        elevation = 2.dp,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Row {
-            if (factDetailLinkVO.imageBitmap != null) {
-                Image(
-                    bitmap = factDetailLinkVO.imageBitmap,
-                    contentDescription = stringResource(id = R.string.fact_link_image_description),
-                    modifier = Modifier.size(60.dp)
-                )
-            } else {
-                Icon(
-                    imageVector = Icons.Filled.Info,
-                    contentDescription = stringResource(id = R.string.fact_link_image_description),
-                    modifier = Modifier.size(60.dp)
-                )
-            }
-            Column(modifier = Modifier.padding(8.dp)) {
-                if (factDetailLinkVO.title != null && factDetailLinkVO.domainName != null) {
-
-                    Text(
-                        text = factDetailLinkVO.title,
-                        style = MaterialTheme.typography.body1
-                    )
-                    Text(
-                        text = factDetailLinkVO.domainName,
-                        style = MaterialTheme.typography.body2
+    Box (modifier = Modifier.padding(4.dp)) {
+        Card(
+            elevation = 2.dp,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Row {
+                if (factDetailLinkVO.imageBitmap != null) {
+                    Image(
+                        bitmap = factDetailLinkVO.imageBitmap,
+                        contentDescription = stringResource(id = R.string.fact_link_image_description),
+                        modifier = Modifier.size(60.dp)
                     )
                 } else {
-                    Text(
-                        text = factDetailLinkVO.url,
-                        style = MaterialTheme.typography.body2
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_twotone_web_24),
+                        contentDescription = stringResource(id = R.string.fact_link_image_description),
+                        modifier = Modifier.size(60.dp)
                     )
+                }
+                Column(modifier = Modifier.padding(8.dp)) {
+                    if (factDetailLinkVO.title != null && factDetailLinkVO.domainName != null) {
+
+                        Text(
+                            text = factDetailLinkVO.title,
+                            style = MaterialTheme.typography.body1
+                        )
+                        Text(
+                            text = factDetailLinkVO.domainName,
+                            style = MaterialTheme.typography.body2
+                        )
+                    } else {
+                        Text(
+                            text = factDetailLinkVO.url,
+                            style = MaterialTheme.typography.body2
+                        )
+                    }
                 }
             }
         }
