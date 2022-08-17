@@ -1,42 +1,50 @@
 package com.team23.fact.presentation.views
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.team23.fact.R
 import com.team23.fact.presentation.viewobjects.FactDetailLinkVO
 
 @Composable
 fun FactDetailLink(factDetailLinkVO: FactDetailLinkVO) {
     // TODO MAKE THE CARD CLICKABLE
-    Box (modifier = Modifier.padding(4.dp)) {
+    Box(modifier = Modifier.padding(4.dp)) {
         Card(
             elevation = 2.dp,
             modifier = Modifier.fillMaxWidth()
         ) {
             Row {
-                if (factDetailLinkVO.imageBitmap != null) {
+                if (factDetailLinkVO.image != null) {
                     Image(
-                        bitmap = factDetailLinkVO.imageBitmap,
+                        painter = rememberAsyncImagePainter(factDetailLinkVO.image),
                         contentDescription = stringResource(id = R.string.fact_link_image_description),
-                        modifier = Modifier.size(60.dp)
+                        modifier = Modifier
+                            .height(60.dp)
+                            .width(100.dp)
+                            .background(color = Color.White)
                     )
                 } else {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_twotone_web_24),
+                        painter = painterResource(id = R.drawable.ic_light_world_wide_web),
                         contentDescription = stringResource(id = R.string.fact_link_image_description),
-                        modifier = Modifier.size(60.dp)
+                        tint = Color.Black,
+                        modifier = Modifier
+                            .height(60.dp)
+                            .width(100.dp)
+                            .background(color = Color.White)
                     )
                 }
                 Column(modifier = Modifier.padding(8.dp)) {
@@ -68,7 +76,7 @@ fun FactDetailLinkPreview() {
     FactDetailLink(
         FactDetailLinkVO(
             url = "https://en.wikipedia.org/wiki/Birthday_problem",
-            imageBitmap = null,
+            image = null,
             title = "The Birthday problem",
             domainName = "en.wikipedia.org"
         )

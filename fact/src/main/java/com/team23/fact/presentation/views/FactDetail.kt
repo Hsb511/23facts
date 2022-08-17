@@ -114,14 +114,7 @@ fun FactDetail(
                     .fillMaxHeight()
             ) {
                 items(factDetailVO.sources) {
-                    FactDetailLink(
-                        // TODO USE VM
-                        FactDetailLinkVO(
-                            url = it,
-                            title = "The Birthday paradox",
-                            domainName = it.split("https://").get(1).split("/").get(0)
-                        )
-                    )
+                    FactDetailLink(it)
                 }
             }
         }
@@ -139,9 +132,16 @@ fun FactDetailPreview() {
             imageUrl = "https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
             description = "The birthday paradox is that, counterintuitively, the probability of a shared birthday exceeds 50% in a group of only 23 people.",
             sources = listOf(
-                "https://en.wikipedia.org/wiki/Birthday_problem",
-                "https://pudding.cool/2018/04/birthday-paradox/",
-                "https://betterexplained.com/articles/understanding-the-birthday-paradox/"
+                FactDetailLinkVO(
+                    url = "https://pudding.cool/2018/04/birthday-paradox/",
+                    title = "The Birthday paradox",
+                    domainName = "pudding.cool"
+                ),
+                FactDetailLinkVO(
+                    url = "https://betterexplained.com/articles/understanding-the-birthday-paradox/",
+                    title = "The Birthday paradox",
+                    domainName = "betterexplained.com"
+                ),
             )
         )
     )

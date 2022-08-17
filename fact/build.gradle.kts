@@ -40,7 +40,8 @@ dependencies {
     implementation("com.google.dagger:hilt-android:${Versions.HILT}")
     kapt("com.google.dagger:hilt-android-compiler:${Versions.HILT}")
 
-    // implementation("com.github.lukasroberts:AndroidLinkView:1.0.1")
+    implementation("org.jsoup:jsoup:1.13.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
     implementation("androidx.core:core-ktx:${Versions.ANDROID_CORE}")
     implementation("androidx.appcompat:appcompat:1.5.0")
