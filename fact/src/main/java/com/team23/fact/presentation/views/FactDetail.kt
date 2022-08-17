@@ -17,15 +17,27 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.team23.fact.R
+import com.team23.fact.presentation.viewmodels.FactDetailVM
 import com.team23.fact.presentation.viewobjects.FactDetailLinkVO
 import com.team23.fact.presentation.viewobjects.FactDetailVO
 
 @Composable
-fun FactDetail(factDetailVO: FactDetailVO) {
+fun FactDetail(factDetailVM: FactDetailVM) {
+    FactDetail(
+        factDetailVO = factDetailVM.factDetail.value,
+        onShareFact = { /* TODO */ }
+    )
+}
+
+@Composable
+fun FactDetail(
+    factDetailVO: FactDetailVO,
+    onShareFact: () -> Unit = {}
+) {
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { /* TODO */ },
+                onClick = { onShareFact() },
                 elevation = FloatingActionButtonDefaults.elevation(8.dp)
             ) {
                 Icon(
