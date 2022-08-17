@@ -6,4 +6,5 @@
     <string name="fact_icon_share">share icon</string>
     <string name="fact_icon_favorite">favorite icon</string>
     <string name="fact_link_image_description">link preview</string>
+    <string name="fact_link_url_saved">The link has been saved in your clipboard</string>
 </resources>

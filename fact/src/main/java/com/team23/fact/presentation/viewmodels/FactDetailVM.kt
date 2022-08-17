@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FactDetailVM @Inject constructor(
     private val getOpenGraphMetaDataFromUrlUseCase: GetOpenGraphMetaDataFromUrlUseCase
-): ViewModel() {
+) : ViewModel() {
     val factDetail: MutableState<FactDetailVO> = mutableStateOf(
         FactDetailVO(
             id = "#46",
@@ -59,6 +59,5 @@ class FactDetailVM @Inject constructor(
                 }
             )
         }
-
     }
 }

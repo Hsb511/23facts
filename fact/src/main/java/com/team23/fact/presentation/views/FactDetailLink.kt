@@ -1,7 +1,6 @@
 package com.team23.fact.presentation.views
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
@@ -18,13 +17,22 @@ import coil.compose.rememberAsyncImagePainter
 import com.team23.fact.R
 import com.team23.fact.presentation.viewobjects.FactDetailLinkVO
 
+@ExperimentalFoundationApi
 @Composable
-fun FactDetailLink(factDetailLinkVO: FactDetailLinkVO) {
-    // TODO MAKE THE CARD CLICKABLE
+fun FactDetailLink(
+    factDetailLinkVO: FactDetailLinkVO,
+    onLinkClicked: (url: String) -> Unit = {},
+    onLinkSaved: (url: String) -> Unit = {}
+) {
     Box(modifier = Modifier.padding(4.dp)) {
         Card(
             elevation = 2.dp,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .combinedClickable(
+                    onClick = { onLinkClicked(factDetailLinkVO.url) },
+                    onLongClick = { onLinkSaved(factDetailLinkVO.url) },
+                )
         ) {
             Row {
                 if (factDetailLinkVO.image != null) {
@@ -70,6 +78,7 @@ fun FactDetailLink(factDetailLinkVO: FactDetailLinkVO) {
     }
 }
 
+@ExperimentalFoundationApi
 @Preview(showSystemUi = true)
 @Composable
 fun FactDetailLinkPreview() {
