@@ -48,14 +48,32 @@ private val appFontFamily = FontFamily(
 val Facts23Typography = Typography(
     h4 = TextStyle(
         fontFamily = appFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 34.sp,
+        letterSpacing = 0.25.sp
     ),
     h6 = TextStyle(
         fontFamily = appFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 20.sp,
+        letterSpacing = 0.15.sp
     ),
     subtitle1 = TextStyle(
         fontFamily = appFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        letterSpacing = 0.15.sp
     ),
     body1 = TextStyle(
         fontFamily = appFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 16.sp,
+        letterSpacing = 0.3.sp
+    ),
+    body2 = TextStyle(
+        fontFamily = appFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        letterSpacing = 0.25.sp
     ),
 )
