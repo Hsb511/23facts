@@ -13,6 +13,8 @@ fun light23FactsColors() = lightColors(
     secondary = colorResource(id = R.color.may_green),
     secondaryVariant = colorResource(id = R.color.hunter_green),
     onSecondary = colorResource(id = R.color.white),
+    surface = colorResource(id = R.color.platinum),
+    onSurface = colorResource(id = R.color.eerie_black),
 )
 
 @Composable
@@ -22,4 +24,6 @@ fun dark23FactsColors() = darkColors(
     secondary = colorResource(id = R.color.hunter_green),
     secondaryVariant = colorResource(id = R.color.may_green),
     onSecondary = colorResource(id = R.color.white),
+    surface = colorResource(id = R.color.eerie_black),
+    onSurface = colorResource(id = R.color.platinum),
 )

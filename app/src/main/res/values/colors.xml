@@ -5,5 +5,7 @@
     <color name="may_green">#FF458A45</color>
     <color name="hunter_green">#FF2E5C45</color>
     <color name="black">#FF000000</color>
+    <color name="eerie_black">#FF171717</color>
+    <color name="platinum">#FFE6E6E6</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

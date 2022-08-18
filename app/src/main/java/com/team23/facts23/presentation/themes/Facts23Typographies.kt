@@ -45,7 +45,7 @@ private val appFontFamily = FontFamily(
     )
 )
 
-val Typography = Typography(
+val Facts23Typography = Typography(
     h4 = TextStyle(
         fontFamily = appFontFamily,
     ),

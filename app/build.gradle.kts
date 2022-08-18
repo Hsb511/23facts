@@ -51,6 +51,7 @@ dependencies {
 
     // Navigation
     implementation(project(":fact"))
+    implementation("androidx.navigation:navigation-compose:2.5.1")
 
     implementation("androidx.core:core-ktx:${Versions.ANDROID_CORE}")
     implementation("androidx.appcompat:appcompat:1.4.2")

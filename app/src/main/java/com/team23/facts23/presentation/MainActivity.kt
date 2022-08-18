@@ -6,8 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import com.team23.fact.presentation.viewmodels.FactDetailVM
-import com.team23.fact.presentation.views.FactDetail
 import com.team23.facts23.presentation.themes.Facts23Theme
+import com.team23.facts23.presentation.views.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,9 +19,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Facts23Theme {
-                FactDetail(
-                    factDetailVM
-                )
+                NavigationView(factDetailVM)
             }
         }
     }

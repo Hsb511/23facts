@@ -13,8 +13,8 @@ fun Facts23Theme(
 ) {
     MaterialTheme(
         colors = if (darkTheme) { dark23FactsColors() } else { light23FactsColors() },
-        typography = Typography(),
-        shapes = Shapes(),
+        typography = Facts23Typography,
+        shapes = Facts23Shapes,
         content = content
     )
 }
