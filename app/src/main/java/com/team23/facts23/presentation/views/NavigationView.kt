@@ -1,7 +1,6 @@
 package com.team23.facts23.presentation.views
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -15,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,6 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import com.team23.fact.presentation.viewmodels.FactDetailVM
 import com.team23.fact.presentation.views.FactDetail
 import com.team23.facts23.R
+import com.team23.home.presentation.views.HomeCategories
 
 @ExperimentalFoundationApi
 @Composable
@@ -32,7 +31,7 @@ fun NavigationView(factDetailVM: FactDetailVM) {
     Scaffold(
         bottomBar = {
             BottomAppBar(contentPadding = PaddingValues(0.dp, 0.dp)) {
-                val selectedIndex = remember { mutableStateOf(0) }
+                val selectedIndex = remember { mutableStateOf(1) }
                 BottomNavigation(
                     backgroundColor = MaterialTheme.colors.surface
                 ) {
@@ -54,7 +53,7 @@ fun NavigationView(factDetailVM: FactDetailVM) {
                         selectedContentColor = MaterialTheme.colors.secondaryVariant,
                         onClick = {
                             selectedIndex.value = 0
-                            // TODO
+                            navController.navigate("home")
                         }
                     )
                     BottomNavigationItem(
@@ -130,6 +129,9 @@ fun NavigationView(factDetailVM: FactDetailVM) {
         ) {
             composable(route = "random") {
                 FactDetail(factDetailVM = factDetailVM)
+            }
+            composable(route = "home") {
+                HomeCategories()
             }
         }
     }
