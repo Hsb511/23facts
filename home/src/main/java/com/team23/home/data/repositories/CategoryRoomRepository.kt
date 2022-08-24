@@ -9,6 +9,6 @@ import javax.inject.Inject
 class CategoryRoomRepository @Inject constructor(
     private val categoryDao: CategoryDao
 ): CategoryRepository {
-    override suspend fun loadCategories(language: String): List<CategoryModel> =
-        categoryDao.loadAll().map { it.toModel(language) }
+    override suspend fun loadCategories(): List<CategoryModel> =
+        categoryDao.loadAll().map { it.toModel() }
 }
