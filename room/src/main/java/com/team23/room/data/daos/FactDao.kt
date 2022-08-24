@@ -1,4 +1,7 @@
 package com.team23.room.data.daos
 
-class FactDao {
+import androidx.room.Dao
+
+@Dao
+interface FactDao {
 }

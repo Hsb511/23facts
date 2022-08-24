@@ -30,6 +30,8 @@ dependencies {
     implementation("com.google.dagger:hilt-android:${Versions.HILT}")
     kapt("com.google.dagger:hilt-android-compiler:${Versions.HILT}")
 
+    implementation(project(":room"))
+
     implementation("androidx.core:core-ktx:${Versions.ANDROID_CORE}")
     implementation("androidx.appcompat:appcompat:1.5.0")
     implementation("com.google.android.material:material:1.6.1")
