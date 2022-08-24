@@ -60,7 +60,7 @@ fun FactDetailLink(
 
                         Text(
                             text = factDetailLinkVO.title,
-                            style = MaterialTheme.typography.body1
+                            style = MaterialTheme.typography.subtitle1
                         )
                         Text(
                             text = factDetailLinkVO.domainName,

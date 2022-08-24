@@ -41,26 +41,37 @@ private val appFontFamily = FontFamily(
             resId = R.font.opensans_bolditalic,
             weight = FontWeight.W700,
             style = FontStyle.Italic
+        ),
+    )
+)
+
+private val titleFontFamily = FontFamily(
+    fonts = listOf(
+        Font(
+            resId = R.font.orelgaone_regular,
+            weight = FontWeight.W400,
+            style = FontStyle.Normal
         )
     )
 )
 
+
 val Facts23Typography = Typography(
     h4 = TextStyle(
-        fontFamily = appFontFamily,
+        fontFamily = titleFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 34.sp,
         letterSpacing = 0.25.sp
     ),
     h6 = TextStyle(
-        fontFamily = appFontFamily,
+        fontFamily = titleFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 20.sp,
         letterSpacing = 0.15.sp
     ),
     subtitle1 = TextStyle(
         fontFamily = appFontFamily,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Light,
         fontSize = 16.sp,
         letterSpacing = 0.15.sp
     ),
