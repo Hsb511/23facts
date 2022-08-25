@@ -10,6 +10,12 @@ android {
 
     defaultConfig {
         minSdk = 26
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
     }
 }
 
