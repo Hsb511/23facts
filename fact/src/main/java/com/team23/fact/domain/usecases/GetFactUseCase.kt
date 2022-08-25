@@ -7,8 +7,8 @@ import javax.inject.Inject
 class GetFactUseCase @Inject constructor(
     private val factRepository: FactRepository
 ) {
-    suspend fun execute(id: String): FactModel? =
-        id.toLongOrNull()?.let {
+    suspend fun execute(id: String?): FactModel? =
+        id?.toLongOrNull()?.let {
             val language = "fr"
             factRepository.getFactById(it, language)
     }

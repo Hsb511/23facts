@@ -3,20 +3,23 @@ package com.team23.fact.presentation.viewmodels
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.CreationExtras
 import com.team23.fact.domain.usecases.GetCategoryUseCase
 import com.team23.fact.domain.usecases.GetFactUseCase
 import com.team23.fact.domain.usecases.GetOpenGraphMetaDataFromUrlUseCase
 import com.team23.fact.presentation.viewobjects.FactDetailLinkVO
 import com.team23.fact.presentation.viewobjects.FactDetailVO
-import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-@HiltViewModel
-class FactDetailVM @Inject constructor(
+class FactDetailVM @AssistedInject constructor(
+    @Assisted var factId: String?,
     private val getFactUseCase: GetFactUseCase,
     private val getCategoryUseCase: GetCategoryUseCase,
     private val getOpenGraphMetaDataFromUrlUseCase: GetOpenGraphMetaDataFromUrlUseCase
@@ -24,11 +27,12 @@ class FactDetailVM @Inject constructor(
     val factDetail: MutableState<FactDetailVO> = mutableStateOf(FactDetailVO())
 
     init {
+        loadFactDetail()
+    }
+
+    fun loadFactDetail() {
         viewModelScope.launch(Dispatchers.IO) {
-            val factModel = getFactUseCase.execute(
-                // TODO CHANGE THAT
-                listOf("69", "92", "115", "138").random()
-            )
+            val factModel = getFactUseCase.execute(factId)
             val category = getCategoryUseCase.execute(factModel?.category)
             val sources = factModel?.sources
                 ?.split(";")
@@ -36,10 +40,10 @@ class FactDetailVM @Inject constructor(
                 ?.map {
                     getOpenGraphMetaDataFromUrlUseCase.execute(it).let { og ->
                         FactDetailLinkVO(
-                            url = og.url!!,
+                            url = it,
                             image = og.image,
                             title = og.title ?: factDetail.value.title,
-                            domainName = og.siteName ?: og.url!!.split("://")[1].split("/")[0]
+                            domainName = og.siteName ?: it.split("://")[1].split("/")[0]
                         )
                     }
                 } ?: emptyList()
@@ -49,9 +53,26 @@ class FactDetailVM @Inject constructor(
                     title = factModel?.title ?: "",
                     category = category,
                     imageUrl = factModel?.image,
-                    description = factModel?.description ?: "",
+                    description = factModel?.description?.replace("\\n", "\n") ?: "",
                     sources = sources
                 )
+            }
+        }
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(factId: String?): FactDetailVM
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    companion object {
+        fun provideFactory(
+            assistedFactory: Factory,
+            factId: String?
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
+                return assistedFactory.create(factId) as T
             }
         }
     }

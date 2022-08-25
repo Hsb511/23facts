@@ -10,11 +10,20 @@ import com.team23.facts23.presentation.themes.Facts23Theme
 import com.team23.facts23.presentation.views.NavigationView
 import com.team23.home.presentation.viewmodels.HomeVM
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 @ExperimentalFoundationApi
 class MainActivity : ComponentActivity() {
-    private val factDetailVM: FactDetailVM by viewModels()
+    @Inject
+    lateinit var viewModelAssistedFactory: FactDetailVM.Factory
+
+    private val factDetailVM: FactDetailVM by viewModels {
+        FactDetailVM.provideFactory(
+            viewModelAssistedFactory,
+            listOf(46..276 step 23).flatten().map{it.toString() }.random()
+        )
+    }
     private val homeVM: HomeVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
