@@ -42,8 +42,16 @@ class FactDetailVM @AssistedInject constructor(
                         FactDetailLinkVO(
                             url = it,
                             image = og.image,
-                            title = og.title ?: factDetail.value.title,
-                            domainName = og.siteName ?: it.split("://")[1].split("/")[0]
+                            title = if (og.title != null && og.title!!.contains(" — Wikipédia")) {
+                                og.title!!.split(" — Wikipédia")[0]
+                            } else {
+                                og.title ?: factDetail.value.title
+                            }.trim().take(31),
+                            domainName = when {
+                                og.siteName != null -> og.siteName!!
+                                og.title != null && og.title!!.contains(" — Wikipédia") -> "Wikipédia"
+                                else -> it.split("://")[1].split("/")[0]
+                            }.trim().take(31)
                         )
                     }
                 } ?: emptyList()

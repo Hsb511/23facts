@@ -34,7 +34,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0-alpha01")
     debugImplementation("androidx.customview:customview:1.2.0-alpha01")
     debugImplementation("androidx.customview:customview-poolingcontainer:1.0.0")
-    implementation("io.coil-kt:coil-compose:2.0.0-rc01")
+    implementation("io.coil-kt:coil-compose:2.0.0")
+    implementation("io.coil-kt:coil-svg:2.0.0")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:${Versions.HILT}")

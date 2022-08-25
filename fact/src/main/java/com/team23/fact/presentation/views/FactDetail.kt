@@ -24,6 +24,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
 import coil.compose.rememberAsyncImagePainter
+import coil.decode.SvgDecoder
+import coil.request.ImageRequest
+import coil.size.Size
 import com.team23.fact.R
 import com.team23.fact.presentation.viewmodels.FactDetailVM
 import com.team23.fact.presentation.viewobjects.FactDetailLinkVO
@@ -100,34 +103,49 @@ fun FactDetail(
             )
             if (factDetailVO.imageUrl != null) {
                 Image(
-                    painter = rememberAsyncImagePainter(factDetailVO.imageUrl),
+                    painter = if (factDetailVO.imageUrl.endsWith(".svg")) {
+                        rememberAsyncImagePainter(
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .decoderFactory(SvgDecoder.Factory())
+                                .data(factDetailVO.imageUrl)
+                                .size(Size.ORIGINAL)
+                                .build()
+                        )
+                    } else {
+                        rememberAsyncImagePainter(factDetailVO.imageUrl)
+                    },
                     contentDescription = stringResource(id = R.string.fact_image_description),
                     modifier = Modifier
-                        .size(200.dp)
+                        .width(250.dp)
+                        .heightIn(0.dp, 200.dp)
                         .clip(MaterialTheme.shapes.medium)
+                        .padding(8.dp)
                 )
             } else if (factDetailVO.imageBitmap != null) {
                 Image(
                     bitmap = factDetailVO.imageBitmap,
                     contentDescription = stringResource(id = R.string.fact_image_description),
                     modifier = Modifier
-                        .size(200.dp)
+                        .width(250.dp)
+                        .heightIn(0.dp, 200.dp)
                         .clip(MaterialTheme.shapes.medium)
+                        .padding(8.dp)
                 )
             }
-            Text(
-                text = factDetailVO.description,
-                style = MaterialTheme.typography.body1,
-                color = MaterialTheme.colors.onBackground,
-                modifier = Modifier.padding(8.dp)
-            )
             LazyColumn(
                 horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.Bottom,
                 modifier = Modifier
                     .padding(8.dp)
                     .fillMaxHeight()
             ) {
+                item {
+                    Text(
+                        text = factDetailVO.description,
+                        style = MaterialTheme.typography.body1,
+                        color = MaterialTheme.colors.onBackground,
+                        modifier = Modifier.padding(8.dp, 0.dp, 8.dp, 16.dp)
+                    )
+                }
                 items(factDetailVO.sources) {
                     FactDetailLink(
                         factDetailLinkVO = it,

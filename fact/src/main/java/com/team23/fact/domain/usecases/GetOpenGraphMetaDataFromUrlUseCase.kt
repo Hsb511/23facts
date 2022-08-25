@@ -8,11 +8,6 @@ class GetOpenGraphMetaDataFromUrlUseCase @Inject constructor(
     private val jsoupRepository: JsoupRepository
 ){
     suspend fun execute(url: String): OpenGraphResult {
-        val correctUrl = if (!url.startsWith("http")) {
-            "http://$url"
-        } else {
-            url
-        }
         return jsoupRepository.getOpenGraphFromUrl(url)
     }
 }
