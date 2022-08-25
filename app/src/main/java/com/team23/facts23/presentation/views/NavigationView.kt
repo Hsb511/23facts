@@ -21,11 +21,12 @@ import androidx.navigation.compose.rememberNavController
 import com.team23.fact.presentation.viewmodels.FactDetailVM
 import com.team23.fact.presentation.views.FactDetail
 import com.team23.facts23.R
+import com.team23.home.presentation.viewmodels.HomeVM
 import com.team23.home.presentation.views.HomeCategories
 
 @ExperimentalFoundationApi
 @Composable
-fun NavigationView(factDetailVM: FactDetailVM) {
+fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM) {
     val navController = rememberNavController()
 
     Scaffold(
@@ -131,7 +132,7 @@ fun NavigationView(factDetailVM: FactDetailVM) {
                 FactDetail(factDetailVM = factDetailVM)
             }
             composable(route = "home") {
-                HomeCategories()
+                HomeCategories(homeVM = homeVM)
             }
         }
     }

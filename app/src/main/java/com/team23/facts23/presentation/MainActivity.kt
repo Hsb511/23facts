@@ -8,18 +8,20 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import com.team23.fact.presentation.viewmodels.FactDetailVM
 import com.team23.facts23.presentation.themes.Facts23Theme
 import com.team23.facts23.presentation.views.NavigationView
+import com.team23.home.presentation.viewmodels.HomeVM
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 @ExperimentalFoundationApi
 class MainActivity : ComponentActivity() {
     private val factDetailVM: FactDetailVM by viewModels()
+    private val homeVM: HomeVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Facts23Theme {
-                NavigationView(factDetailVM)
+                NavigationView(factDetailVM, homeVM)
             }
         }
     }
