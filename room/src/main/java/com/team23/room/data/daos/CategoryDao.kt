@@ -8,4 +8,7 @@ import com.team23.room.data.entities.CategoryEntity
 interface CategoryDao {
     @Query("SELECT * FROM T_CATEGORY")
     fun loadAll(): List<CategoryEntity>
+
+    @Query("SELECT * FROM T_CATEGORY WHERE code = :code")
+    fun findByCode(code: String): CategoryEntity?
 }

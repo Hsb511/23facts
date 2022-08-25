@@ -1,6 +1,6 @@
 package com.team23.fact.domain.usecases
 
-import com.team23.fact.data.repositories.JsoupRepository
+import com.team23.fact.domain.repositories.JsoupRepository
 import com.team23.fact.domain.models.OpenGraphResult
 import javax.inject.Inject
 

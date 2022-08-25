@@ -2,6 +2,7 @@ package com.team23.fact.data.repositories
 
 import com.team23.fact.data.const.JsoupConst
 import com.team23.fact.domain.models.OpenGraphResult
+import com.team23.fact.domain.repositories.JsoupRepository
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import javax.inject.Inject

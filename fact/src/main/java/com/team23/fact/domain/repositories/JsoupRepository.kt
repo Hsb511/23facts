@@ -1,4 +1,4 @@
-package com.team23.fact.data.repositories
+package com.team23.fact.domain.repositories
 
 import com.team23.fact.domain.models.OpenGraphResult
 

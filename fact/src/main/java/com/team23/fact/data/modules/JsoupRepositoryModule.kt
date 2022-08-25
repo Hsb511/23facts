@@ -1,6 +1,6 @@
 package com.team23.fact.data.modules
 
-import com.team23.fact.data.repositories.JsoupRepository
+import com.team23.fact.domain.repositories.JsoupRepository
 import com.team23.fact.data.repositories.JsoupRepositoryImpl
 import dagger.Binds
 import dagger.Module
