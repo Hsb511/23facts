@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "d08dca1874580a398b862983f80781bc",
+    "identityHash": "0df765d8cae3ad66a952cf2de5789ee9",
     "entities": [
       {
-        "tableName": "T_FORM",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_fonc` INTEGER NOT NULL, `language` TEXT NOT NULL, `code` TEXT NOT NULL, `image` TEXT NOT NULL, `content` TEXT NOT NULL, `links` TEXT NOT NULL, PRIMARY KEY(`id_fonc`, `language`), FOREIGN KEY(`code`) REFERENCES `T_CATEGORY`(`code`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "tableName": "T_FACT",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_fonc` INTEGER NOT NULL, `language` TEXT NOT NULL, `code` TEXT NOT NULL, `title` TEXT NOT NULL, `image` TEXT NOT NULL, `content` TEXT NOT NULL, `links` TEXT NOT NULL, PRIMARY KEY(`id_fonc`, `language`), FOREIGN KEY(`code`) REFERENCES `T_CATEGORY`(`code`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id_fonc",
@@ -23,6 +23,12 @@
           {
             "fieldPath": "code",
             "columnName": "code",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -54,23 +60,23 @@
         },
         "indices": [
           {
-            "name": "index_T_FORM_id_fonc_language",
+            "name": "index_T_FACT_id_fonc_language",
             "unique": false,
             "columnNames": [
               "id_fonc",
               "language"
             ],
             "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_T_FORM_id_fonc_language` ON `${TABLE_NAME}` (`id_fonc`, `language`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_T_FACT_id_fonc_language` ON `${TABLE_NAME}` (`id_fonc`, `language`)"
           },
           {
-            "name": "index_T_FORM_code",
+            "name": "index_T_FACT_code",
             "unique": false,
             "columnNames": [
               "code"
             ],
             "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_T_FORM_code` ON `${TABLE_NAME}` (`code`)"
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_T_FACT_code` ON `${TABLE_NAME}` (`code`)"
           }
         ],
         "foreignKeys": [
@@ -133,7 +139,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd08dca1874580a398b862983f80781bc')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0df765d8cae3ad66a952cf2de5789ee9')"
     ]
   }
 }
