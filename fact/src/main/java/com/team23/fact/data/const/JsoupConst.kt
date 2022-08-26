@@ -13,4 +13,5 @@ object JsoupConst {
     const val OG_TITLE = "og:title"
     const val OG_SITE_NAME = "og:site_name"
     const val OG_TYPE = "og:type"
+    const val OG_FAVICON = "og:favicon"
 }

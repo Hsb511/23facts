@@ -5,6 +5,7 @@ import android.net.Uri
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -15,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -26,7 +28,6 @@ import androidx.core.content.ContextCompat.startActivity
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
-import coil.size.Size
 import com.team23.fact.R
 import com.team23.fact.presentation.viewmodels.FactDetailVM
 import com.team23.fact.presentation.viewobjects.FactDetailLinkVO
@@ -108,7 +109,6 @@ fun FactDetail(
                             model = ImageRequest.Builder(LocalContext.current)
                                 .decoderFactory(SvgDecoder.Factory())
                                 .data(factDetailVO.imageUrl)
-                                .size(Size.ORIGINAL)
                                 .build()
                         )
                     } else {
@@ -116,20 +116,28 @@ fun FactDetail(
                     },
                     contentDescription = stringResource(id = R.string.fact_image_description),
                     modifier = Modifier
-                        .width(250.dp)
-                        .heightIn(0.dp, 200.dp)
+                        .widthIn(0.dp, 300.dp)
+                        .heightIn(100.dp, 200.dp)
                         .clip(MaterialTheme.shapes.medium)
                         .padding(8.dp)
+                        .background(
+                            color = Color.White,
+                            shape = MaterialTheme.shapes.medium
+                        )
                 )
             } else if (factDetailVO.imageBitmap != null) {
                 Image(
                     bitmap = factDetailVO.imageBitmap,
                     contentDescription = stringResource(id = R.string.fact_image_description),
                     modifier = Modifier
-                        .width(250.dp)
+                        .widthIn(0.dp, 300.dp)
                         .heightIn(0.dp, 200.dp)
                         .clip(MaterialTheme.shapes.medium)
                         .padding(8.dp)
+                        .background(
+                            color = Color.White,
+                            shape = MaterialTheme.shapes.medium
+                        )
                 )
             }
             LazyColumn(

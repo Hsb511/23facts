@@ -41,7 +41,7 @@ class FactDetailVM @AssistedInject constructor(
                     getOpenGraphMetaDataFromUrlUseCase.execute(it).let { og ->
                         FactDetailLinkVO(
                             url = it,
-                            image = og.image,
+                            image = og.image?.ifBlank { null } ?: og.favicon,
                             title = if (og.title != null && og.title!!.contains(" — Wikipédia")) {
                                 og.title!!.split(" — Wikipédia")[0]
                             } else {
