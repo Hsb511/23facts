@@ -1,5 +1,6 @@
 package com.team23.fact.domain.usecases
 
+import androidx.compose.ui.text.intl.Locale
 import com.team23.fact.domain.repositories.CategoryRepository
 import javax.inject.Inject
 
@@ -8,9 +9,7 @@ class GetCategoryUseCase @Inject constructor(
 ) {
     suspend fun execute(code: String?) = code?.let {
         categoryRepository.getCategoryNameByCode(code).let { category ->
-            // TODO GET SYSTEM LANGUAGE
-            val language = "fr"
-            if (language == "fr") {
+            if (Locale.current.language == "fr") {
                 category.nameFr
             } else {
                 category.nameEn
