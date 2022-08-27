@@ -75,6 +75,13 @@ val Facts23Typography = Typography(
         fontSize = 16.sp,
         letterSpacing = 0.15.sp
     ),
+    subtitle2 = TextStyle(
+        fontFamily = appFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        letterSpacing = 0.15.sp,
+        lineHeight = 15.sp
+    ),
     body1 = TextStyle(
         fontFamily = appFontFamily,
         fontWeight = FontWeight.Medium,

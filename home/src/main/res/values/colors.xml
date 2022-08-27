@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Categories colors -->
+    <color name="persian_red">#FFCF2E2E</color>
+    <color name="imperial_red">#FFE64545</color>
+    <color name="spanish_orange">#FFE6732E</color>
+    <color name="copper_crayola">#FFE68A5C</color>
+    <color name="orange_yellow">#FFE6B82E</color>
+    <color name="citrine">#FFE6CF45</color>
+    <color name="yellow_green">#FFA1CF45</color>
+    <color name="green_ryb">#FF73A145</color>
+    <color name="may_green">#FF458A45</color>
+    <color name="hunter_green">#FF2E5C45</color>
+    <color name="persian_green">#FF17A184</color>
+    <color name="caribbean_green">#FF17CFA1</color>
+    <color name="han_blue">#FF5C73CF</color>
+    <color name="liberty">#FF455CA1</color>
+    <color name="persian_indigo">#FF2E1784</color>
+    <color name="prussian_blue">#FF172E45</color>
+    <color name="russian_violet">#FF451745</color>
+    <color name="razzmic_berry">#FF734573</color>
+    <color name="irresitible">#FFB84573</color>
+    <color name="english_lavender">#FFB8738A</color>
+    <color name="davys_grey">#FF5C5C5C</color>
+    <color name="battleship_grey">#FF8A8A8A</color>
+    <color name="sepia">#FF734517</color>
+</resources>

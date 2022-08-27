@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Theme colors -->
     <color name="liberty">#FF455CA1</color>
     <color name="prussian_blue">#FF172E45</color>
     <color name="may_green">#FF458A45</color>
