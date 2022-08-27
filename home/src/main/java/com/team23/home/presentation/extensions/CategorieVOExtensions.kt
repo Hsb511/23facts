@@ -20,7 +20,7 @@ fun CategoryVO.getBackgroundColor() = when(this.code) {
     "GF" -> colorResource(id = R.color.hunter_green)
     "HI" -> colorResource(id = R.color.persian_green)
     "GE" -> colorResource(id = R.color.caribbean_green)
-    "FE" -> colorResource(id = R.color.han_blue)
+    "FE" -> colorResource(id = R.color.cornflower_blue)
     "IB" -> colorResource(id = R.color.liberty)
     "AT" -> colorResource(id = R.color.persian_indigo)
     "AM" -> colorResource(id = R.color.prussian_blue)
@@ -44,7 +44,7 @@ fun CategoryVO.getTextColor() = when(this.code) {
     "VG" -> Color.Black
     "MU" -> Color.Black
     "MS" -> Color.Black
-    "AL" -> Color.Black
+    "AL" -> Color.White
     "GF" -> Color.White
     "HI" -> Color.Black
     "GE" -> Color.Black
