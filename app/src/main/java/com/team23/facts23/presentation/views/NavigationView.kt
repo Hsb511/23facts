@@ -23,6 +23,7 @@ import com.team23.fact.presentation.views.FactDetail
 import com.team23.facts23.R
 import com.team23.home.presentation.viewmodels.HomeVM
 import com.team23.home.presentation.views.HomeCategories
+import com.team23.home.presentation.views.HomeFacts
 
 @ExperimentalFoundationApi
 @Composable
@@ -135,7 +136,10 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM) {
                 FactDetail(factDetailVM = factDetailVM)
             }
             composable(route = "home") {
-                HomeCategories(homeVM = homeVM)
+                HomeCategories(homeVM = homeVM, navController = navController)
+            }
+            composable(route = "category") {
+                HomeFacts(navController = navController)
             }
         }
     }

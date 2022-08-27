@@ -23,6 +23,7 @@ dependencies {
     // Compose
     implementation("androidx.compose.compiler:compiler:${Versions.COMPOSE}")
     implementation("androidx.compose.runtime:runtime-livedata:${Versions.COMPOSE}")
+    implementation("androidx.navigation:navigation-compose:2.5.1")
     implementation("androidx.compose.material:material:${Versions.COMPOSE}")
     implementation("androidx.compose.ui:ui:${Versions.COMPOSE}")
     implementation("androidx.compose.ui:ui-tooling-preview:1.2.1")

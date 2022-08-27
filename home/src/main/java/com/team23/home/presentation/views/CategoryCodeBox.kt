@@ -1,0 +1,52 @@
+package com.team23.home.presentation.views
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.team23.home.presentation.extensions.getBackgroundColor
+import com.team23.home.presentation.extensions.getTextColor
+import com.team23.home.presentation.viewobjects.CategoryVO
+
+@Composable
+fun CategoryCodeBox(category: CategoryVO) {
+    Box(
+        modifier = Modifier
+            .padding(4.dp)
+            .size(42.dp)
+            .background(
+                color = category.getBackgroundColor(),
+                shape = CircleShape
+            )
+    ) {
+        Text(
+            text = category.code,
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.subtitle2,
+            color = category.getTextColor(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(0.dp, 10.dp, 0.dp, 0.dp)
+        )
+    }
+}
+
+@Composable
+@Preview(showSystemUi = true)
+fun CategoryCodeBoxPreview() {
+    CategoryCodeBox(
+        CategoryVO(
+            code = "MA",
+            title ="Mathematics"
+        )
+    )
+}
