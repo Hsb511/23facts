@@ -29,7 +29,8 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:1.2.1")
     debugImplementation("androidx.customview:customview:1.2.0-alpha01")
     debugImplementation("androidx.customview:customview-poolingcontainer:1.0.0")
-    implementation("io.coil-kt:coil-compose:2.0.0")
+    implementation("io.coil-kt:coil-compose:${Versions.COIL}")
+    implementation("io.coil-kt:coil-svg:${Versions.COIL}")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:${Versions.HILT}")
