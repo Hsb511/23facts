@@ -24,14 +24,14 @@ class FactDetailVM @AssistedInject constructor(
     private val getCategoryUseCase: GetCategoryUseCase,
     private val getOpenGraphMetaDataFromUrlUseCase: GetOpenGraphMetaDataFromUrlUseCase
 ) : ViewModel() {
-    val factDetail: MutableState<FactDetailVO> = mutableStateOf(FactDetailVO())
+    val factDetail: MutableState<FactDetailVO?> = mutableStateOf(null)
 
     init {
         loadFactDetail(factId)
     }
 
     fun loadFactDetail(newFactId: String?) {
-        factDetail.value = FactDetailVO()
+        factDetail.value = null
         factId = newFactId
         viewModelScope.launch(Dispatchers.IO) {
             val factModel = getFactUseCase.execute(factId)

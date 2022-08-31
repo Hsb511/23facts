@@ -56,7 +56,7 @@ fun FactDetail(factDetailVM: FactDetailVM) {
 @ExperimentalFoundationApi
 @Composable
 fun FactDetail(
-    factDetailVO: FactDetailVO,
+    factDetailVO: FactDetailVO?,
     onShareFact: () -> Unit = {},
     onClickLink: (url: String) -> Unit = {},
     onLongClickLink: (url: String) -> Unit = {},
@@ -73,96 +73,110 @@ fun FactDetail(
                 )
             }
         }) { padding ->
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            Text(
-                text = factDetailVO.title,
-                style = MaterialTheme.typography.h4,
-                color = MaterialTheme.colors.onBackground,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .fillMaxWidth()
-            )
-            Text(
-                text = factDetailVO.id,
-                style = MaterialTheme.typography.subtitle1,
-                color = MaterialTheme.colors.onBackground,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
-            Text(
-                text = factDetailVO.category,
-                style = MaterialTheme.typography.h6,
-                color = MaterialTheme.colors.onBackground,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
-            if (factDetailVO.imageUrl != null) {
-                Image(
-                    painter = if (factDetailVO.imageUrl.endsWith(".svg")) {
-                        rememberAsyncImagePainter(
-                            model = ImageRequest.Builder(LocalContext.current)
-                                .decoderFactory(SvgDecoder.Factory())
-                                .data(factDetailVO.imageUrl)
-                                .build()
-                        )
-                    } else {
-                        rememberAsyncImagePainter(factDetailVO.imageUrl)
-                    },
-                    contentDescription = stringResource(id = R.string.fact_image_description),
+            if (factDetailVO == null) {
+                CircularProgressIndicator(
+                    strokeWidth = 11.5.dp,
                     modifier = Modifier
-                        .widthIn(0.dp, 300.dp)
-                        .heightIn(100.dp, 200.dp)
-                        .clip(MaterialTheme.shapes.medium)
-                        .padding(8.dp)
-                        .background(
-                            color = Color.White,
-                            shape = MaterialTheme.shapes.medium
-                        )
+                        .align(Alignment.Center)
+                        .size(115.dp)
                 )
-            } else if (factDetailVO.imageBitmap != null) {
-                Image(
-                    bitmap = factDetailVO.imageBitmap,
-                    contentDescription = stringResource(id = R.string.fact_image_description),
-                    modifier = Modifier
-                        .widthIn(0.dp, 300.dp)
-                        .heightIn(0.dp, 200.dp)
-                        .clip(MaterialTheme.shapes.medium)
-                        .padding(8.dp)
-                        .background(
-                            color = Color.White,
-                            shape = MaterialTheme.shapes.medium
-                        )
-                )
-            }
-            LazyColumn(
-                horizontalAlignment = Alignment.Start,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .fillMaxHeight()
-            ) {
-                item {
+            } else {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxSize()
+                ) {
                     Text(
-                        text = factDetailVO.description,
-                        style = MaterialTheme.typography.body1,
+                        text = factDetailVO.title,
+                        style = MaterialTheme.typography.h4,
                         color = MaterialTheme.colors.onBackground,
-                        modifier = Modifier.padding(8.dp, 0.dp, 8.dp, 16.dp)
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth()
                     )
-                }
-                items(factDetailVO.sources) {
-                    FactDetailLink(
-                        factDetailLinkVO = it,
-                        onLinkClicked = { url -> onClickLink(url) },
-                        onLinkSaved = { url -> onLongClickLink(url) }
+                    Text(
+                        text = factDetailVO.id,
+                        style = MaterialTheme.typography.subtitle1,
+                        color = MaterialTheme.colors.onBackground,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
                     )
+                    Text(
+                        text = factDetailVO.category,
+                        style = MaterialTheme.typography.h6,
+                        color = MaterialTheme.colors.onBackground,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    if (factDetailVO.imageUrl != null) {
+                        Image(
+                            painter = if (factDetailVO.imageUrl.endsWith(".svg")) {
+                                rememberAsyncImagePainter(
+                                    model = ImageRequest.Builder(LocalContext.current)
+                                        .decoderFactory(SvgDecoder.Factory())
+                                        .data(factDetailVO.imageUrl)
+                                        .build()
+                                )
+                            } else {
+                                rememberAsyncImagePainter(factDetailVO.imageUrl)
+                            },
+                            contentDescription = stringResource(id = R.string.fact_image_description),
+                            modifier = Modifier
+                                .widthIn(0.dp, 300.dp)
+                                .heightIn(100.dp, 200.dp)
+                                .clip(MaterialTheme.shapes.medium)
+                                .padding(8.dp)
+                                .background(
+                                    color = Color.White,
+                                    shape = MaterialTheme.shapes.medium
+                                )
+                        )
+                    } else if (factDetailVO.imageBitmap != null) {
+                        Image(
+                            bitmap = factDetailVO.imageBitmap,
+                            contentDescription = stringResource(id = R.string.fact_image_description),
+                            modifier = Modifier
+                                .widthIn(0.dp, 300.dp)
+                                .heightIn(0.dp, 200.dp)
+                                .clip(MaterialTheme.shapes.medium)
+                                .padding(8.dp)
+                                .background(
+                                    color = Color.White,
+                                    shape = MaterialTheme.shapes.medium
+                                )
+                        )
+                    }
+                    LazyColumn(
+                        horizontalAlignment = Alignment.Start,
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxHeight()
+                    ) {
+                        item {
+                            Text(
+                                text = factDetailVO.description,
+                                style = MaterialTheme.typography.body1,
+                                color = MaterialTheme.colors.onBackground,
+                                modifier = Modifier.padding(8.dp, 0.dp, 8.dp, 16.dp)
+                            )
+                        }
+                        items(factDetailVO.sources) {
+                            FactDetailLink(
+                                factDetailLinkVO = it,
+                                onLinkClicked = { url -> onClickLink(url) },
+                                onLinkSaved = { url -> onLongClickLink(url) }
+                            )
+                        }
+                    }
                 }
             }
         }
+
     }
 }
 
