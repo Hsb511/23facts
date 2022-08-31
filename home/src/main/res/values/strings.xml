@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="home_categories_title">Categories</string>
+    <string name="home_fact_picture">fact picture</string>
 </resources>

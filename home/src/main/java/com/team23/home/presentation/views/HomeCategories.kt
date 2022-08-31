@@ -27,14 +27,17 @@ import com.team23.home.presentation.viewobjects.CategoryVO
 fun HomeCategories(homeVM: HomeVM, navController: NavHostController) {
     HomeCategories(
         categories = homeVM.categories,
-        onCategoryClicked = { navController.navigate("category") }
+        onCategoryClicked = {
+            homeVM.onCategoryClicked(it)
+            navController.navigate("category")
+        }
     )
 }
 
 @Composable
 fun HomeCategories(
     categories: List<CategoryVO>,
-    onCategoryClicked: () -> Unit
+    onCategoryClicked: (CategoryVO) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -75,7 +78,7 @@ fun HomeCategories(
                         )
                         .height(50.dp)
                         .clickable {
-                            onCategoryClicked()
+                            onCategoryClicked(it)
                         }
                 ) {
                     CategoryCodeBox(category = it)

@@ -45,7 +45,7 @@ class FactDetailVM @AssistedInject constructor(
                             title = if (og.title != null && og.title!!.contains(" — Wikipédia")) {
                                 og.title!!.split(" — Wikipédia")[0]
                             } else {
-                                og.title ?: factDetail.value.title
+                                og.title ?: "" //factDetail.value.title
                             }.trim().take(31),
                             domainName = when {
                                 og.siteName != null -> og.siteName!!

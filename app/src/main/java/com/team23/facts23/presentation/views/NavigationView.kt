@@ -129,7 +129,7 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM) {
     ) { padding ->
         NavHost(
             navController = navController,
-            startDestination = "random",
+            startDestination = "home",
             modifier = Modifier.padding(padding)
         ) {
             composable(route = "random") {
@@ -139,7 +139,7 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM) {
                 HomeCategories(homeVM = homeVM, navController = navController)
             }
             composable(route = "category") {
-                HomeFacts(navController = navController)
+                HomeFacts(homeVM = homeVM, navController = navController)
             }
         }
     }
