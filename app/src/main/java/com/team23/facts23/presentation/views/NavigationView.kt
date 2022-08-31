@@ -77,8 +77,7 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM) {
                         onClick = {
                             selectedIndex.value = 1
                             val factId = listOf(46..276 step 23).flatten().map{it.toString() }.random()
-                            factDetailVM.factId = factId
-                            factDetailVM.loadFactDetail()
+                            factDetailVM.loadFactDetail(factId)
                             navController.navigate("random")
                         },
                     )
@@ -133,6 +132,10 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM) {
             modifier = Modifier.padding(padding)
         ) {
             composable(route = "random") {
+                FactDetail(factDetailVM = factDetailVM)
+            }
+            composable(route = "fact/{factId}") { backStackEntry ->
+                factDetailVM.loadFactDetail(backStackEntry.arguments?.getString("factId"))
                 FactDetail(factDetailVM = factDetailVM)
             }
             composable(route = "home") {

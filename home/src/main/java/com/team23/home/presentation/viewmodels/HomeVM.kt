@@ -35,6 +35,7 @@ class HomeVM @Inject constructor(
     }
 
     fun onCategoryClicked(categoryVO: CategoryVO) {
+        facts.clear()
         selectedCategory.value = categoryVO
         viewModelScope.launch(Dispatchers.IO) {
             facts.addAll(

@@ -39,8 +39,8 @@ fun HomeFacts(homeVM: HomeVM, navController: NavHostController) {
                 navController.popBackStack()
                 homeVM.onReturnHome()
             },
-            onFactClicked = {
-                navController.navigate("fact")
+            onFactClicked = { factId ->
+                navController.navigate("fact/$factId")
             }
         )
     }

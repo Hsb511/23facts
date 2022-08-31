@@ -27,10 +27,12 @@ class FactDetailVM @AssistedInject constructor(
     val factDetail: MutableState<FactDetailVO> = mutableStateOf(FactDetailVO())
 
     init {
-        loadFactDetail()
+        loadFactDetail(factId)
     }
 
-    fun loadFactDetail() {
+    fun loadFactDetail(newFactId: String?) {
+        factDetail.value = FactDetailVO()
+        factId = newFactId
         viewModelScope.launch(Dispatchers.IO) {
             val factModel = getFactUseCase.execute(factId)
             val category = getCategoryUseCase.execute(factModel?.category)
