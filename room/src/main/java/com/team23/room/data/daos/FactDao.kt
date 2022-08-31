@@ -11,4 +11,7 @@ interface FactDao {
 
     @Query("SELECT * FROM T_FACT WHERE id_fonc = :id AND language = :language")
     fun findById(id: Long, language: String): FactEntity?
+
+    @Query("SELECT * FROM T_FACT WHERE code = :category AND language = :language")
+    fun findByCategoryAndLanguage(category: String, language: String): List<FactEntity>
 }
