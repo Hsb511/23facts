@@ -99,16 +99,16 @@ fun HomeFacts(
                         .clickable { onFactClicked(it) }
                 ) {
                     Image(
-                        painter = if (it.picture.endsWith(".svg")) {
-                            rememberAsyncImagePainter(
-                                model = ImageRequest.Builder(LocalContext.current)
+                        painter = rememberAsyncImagePainter(
+                            model = if (it.picture.endsWith(".svg")) {
+                                ImageRequest.Builder(LocalContext.current)
                                     .decoderFactory(SvgDecoder.Factory())
                                     .data(it.picture)
                                     .build()
-                            )
-                        } else {
-                            rememberAsyncImagePainter(it.picture)
-                        },
+                            } else {
+                                it.picture
+                            }
+                        ),
                         contentDescription = stringResource(id = R.string.home_fact_picture),
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
@@ -131,13 +131,17 @@ fun HomeFacts(
                         text = it.title,
                         style = MaterialTheme.typography.subtitle2,
                         color = MaterialTheme.colors.onSurface,
-                        modifier = Modifier.padding(8.dp, 0.dp).weight(0.9f)
+                        modifier = Modifier
+                            .padding(8.dp, 0.dp)
+                            .weight(0.9f)
                     )
                     if (it.new) {
                         Text(
                             text = stringResource(id = R.string.home_fact_new),
                             color = MaterialTheme.colors.primary,
-                            modifier = Modifier.weight(0.2f).padding(8.dp, 0.dp)
+                            modifier = Modifier
+                                .weight(0.2f)
+                                .padding(8.dp, 0.dp)
                         )
                     }
                 }

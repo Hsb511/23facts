@@ -33,7 +33,7 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM) {
     Scaffold(
         bottomBar = {
             BottomAppBar(contentPadding = PaddingValues(0.dp, 0.dp)) {
-                val selectedIndex = remember { mutableStateOf(1) }
+                val selectedIndex = remember { mutableStateOf(0) }
                 BottomNavigation(
                     backgroundColor = MaterialTheme.colors.surface
                 ) {
