@@ -43,7 +43,8 @@ class HomeVM @Inject constructor(
                     FactVO(
                         picture = it.picture,
                         title = it.title,
-                        id = it.id.toString()
+                        id = it.id.toString(),
+                        new = it.new
                     )
                 }
             )
@@ -53,5 +54,9 @@ class HomeVM @Inject constructor(
     fun onReturnHome() {
         selectedCategory.value = null
         facts.clear()
+    }
+
+    fun onFactClicked(fact: FactVO) {
+        facts.firstOrNull{it == fact}?.new = false
     }
 }

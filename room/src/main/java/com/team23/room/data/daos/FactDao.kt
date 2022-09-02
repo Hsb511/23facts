@@ -10,8 +10,11 @@ interface FactDao {
     fun loadAll(): List<FactEntity>
 
     @Query("SELECT * FROM T_FACT WHERE id_fonc = :id AND language = :language")
-    fun findById(id: Long, language: String): FactEntity?
+    fun findByIdAndLanguage(id: Long, language: String): FactEntity?
 
     @Query("SELECT * FROM T_FACT WHERE code = :category AND language = :language")
     fun findByCategoryAndLanguage(category: String, language: String): List<FactEntity>
+
+    @Query("UPDATE T_FACT SET isNew = :isNew WHERE id_fonc = :id")
+    fun updateNewById(id: Long, isNew: Boolean = false)
 }

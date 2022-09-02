@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0df765d8cae3ad66a952cf2de5789ee9",
+    "identityHash": "aac3c8807d72725dc4c32e67a304dc16",
     "entities": [
       {
         "tableName": "T_FACT",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_fonc` INTEGER NOT NULL, `language` TEXT NOT NULL, `code` TEXT NOT NULL, `title` TEXT NOT NULL, `image` TEXT NOT NULL, `content` TEXT NOT NULL, `links` TEXT NOT NULL, PRIMARY KEY(`id_fonc`, `language`), FOREIGN KEY(`code`) REFERENCES `T_CATEGORY`(`code`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_fonc` INTEGER NOT NULL, `language` TEXT NOT NULL, `code` TEXT NOT NULL, `title` TEXT NOT NULL, `image` TEXT NOT NULL, `content` TEXT NOT NULL, `links` TEXT NOT NULL, `isNew` INTEGER NOT NULL, PRIMARY KEY(`id_fonc`, `language`), FOREIGN KEY(`code`) REFERENCES `T_CATEGORY`(`code`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id_fonc",
@@ -48,6 +48,12 @@
             "fieldPath": "links",
             "columnName": "links",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isNew",
+            "columnName": "isNew",
+            "affinity": "INTEGER",
             "notNull": true
           }
         ],
@@ -139,7 +145,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0df765d8cae3ad66a952cf2de5789ee9')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'aac3c8807d72725dc4c32e67a304dc16')"
     ]
   }
 }

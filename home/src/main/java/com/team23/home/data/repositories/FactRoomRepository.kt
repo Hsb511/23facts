@@ -13,7 +13,8 @@ class FactRoomRepository @Inject constructor(
             FactPreviewModel(
                 id = it.id_fonc,
                 picture = it.image,
-                title = it.title
+                title = it.title,
+                new = it.isNew
             )
         }
 

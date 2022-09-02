@@ -39,8 +39,9 @@ fun HomeFacts(homeVM: HomeVM, navController: NavHostController) {
                 navController.popBackStack()
                 homeVM.onReturnHome()
             },
-            onFactClicked = { factId ->
-                navController.navigate("fact/$factId")
+            onFactClicked = { fact ->
+                homeVM.onFactClicked(fact)
+                navController.navigate("fact/${fact.id}")
             }
         )
     }
@@ -51,7 +52,7 @@ fun HomeFacts(
     category: CategoryVO,
     facts: List<FactVO>,
     onHomeReturn: () -> Unit = {},
-    onFactClicked: (String) -> Unit = {}
+    onFactClicked: (FactVO) -> Unit = {}
 ) {
     Scaffold(
         topBar = {
@@ -88,14 +89,14 @@ fun HomeFacts(
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
-                        .padding(4.dp)
+                        .padding(4.dp, 4.dp, 12.dp, 4.dp)
                         .background(
                             color = MaterialTheme.colors.surface,
                             shape = MaterialTheme.shapes.large
                         )
                         .fillMaxWidth()
                         .height(50.dp)
-                        .clickable { onFactClicked(it.id) }
+                        .clickable { onFactClicked(it) }
                 ) {
                     Image(
                         painter = if (it.picture.endsWith(".svg")) {
@@ -130,8 +131,15 @@ fun HomeFacts(
                         text = it.title,
                         style = MaterialTheme.typography.subtitle2,
                         color = MaterialTheme.colors.onSurface,
-                        modifier = Modifier.padding(8.dp, 0.dp)
+                        modifier = Modifier.padding(8.dp, 0.dp).weight(0.9f)
                     )
+                    if (it.new) {
+                        Text(
+                            text = stringResource(id = R.string.home_fact_new),
+                            color = MaterialTheme.colors.primary,
+                            modifier = Modifier.weight(0.2f).padding(8.dp, 0.dp)
+                        )
+                    }
                 }
             }
         }

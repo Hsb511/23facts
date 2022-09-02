@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.team23.fact.domain.usecases.GetCategoryUseCase
-import com.team23.fact.domain.usecases.GetFactUseCase
+import com.team23.fact.domain.usecases.GetAndReadFactUseCase
 import com.team23.fact.domain.usecases.GetOpenGraphMetaDataFromUrlUseCase
 import com.team23.fact.presentation.viewobjects.FactDetailLinkVO
 import com.team23.fact.presentation.viewobjects.FactDetailVO
@@ -20,7 +20,7 @@ import kotlinx.coroutines.withContext
 
 class FactDetailVM @AssistedInject constructor(
     @Assisted var factId: String?,
-    private val getFactUseCase: GetFactUseCase,
+    private val getAndReadFactUseCase: GetAndReadFactUseCase,
     private val getCategoryUseCase: GetCategoryUseCase,
     private val getOpenGraphMetaDataFromUrlUseCase: GetOpenGraphMetaDataFromUrlUseCase
 ) : ViewModel() {
@@ -34,7 +34,7 @@ class FactDetailVM @AssistedInject constructor(
         factDetail.value = null
         factId = newFactId
         viewModelScope.launch(Dispatchers.IO) {
-            val factModel = getFactUseCase.execute(factId)
+            val factModel = getAndReadFactUseCase.execute(factId)
             val category = getCategoryUseCase.execute(factModel?.category)
             val sources = factModel?.sources
                 ?.split(";")

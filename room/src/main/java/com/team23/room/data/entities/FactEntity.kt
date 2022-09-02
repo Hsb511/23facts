@@ -21,5 +21,6 @@ data class FactEntity(
     val title: String,
     val image: String,
     val content: String,
-    val links: String
+    val links: String,
+    val isNew: Boolean = true,
 )

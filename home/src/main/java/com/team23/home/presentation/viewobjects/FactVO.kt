@@ -4,4 +4,5 @@ data class FactVO(
     val picture: String,
     val title: String,
     val id: String,
+    var new: Boolean,
 )

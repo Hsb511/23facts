@@ -2,4 +2,5 @@
 <resources>
     <string name="home_categories_title">Categories</string>
     <string name="home_fact_picture">fact picture</string>
+    <string name="home_fact_new">NEW</string>
 </resources>

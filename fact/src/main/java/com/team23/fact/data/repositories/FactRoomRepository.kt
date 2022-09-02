@@ -9,7 +9,7 @@ class FactRoomRepository @Inject constructor(
     private val factDao: FactDao
 ) : FactRepository {
     override suspend fun getFactById(id: Long, language: String) =
-        factDao.findById(id, language)?.let {
+        factDao.findByIdAndLanguage(id, language)?.let {
             FactModel(
                 id = it.id_fonc.toString(),
                 title = it.title,
@@ -19,4 +19,8 @@ class FactRoomRepository @Inject constructor(
                 sources = it.links
             )
         }
+
+    override suspend fun setNewToFalseById(id: Long) {
+        factDao.updateNewById(id)
+    }
 }
