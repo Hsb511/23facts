@@ -100,15 +100,15 @@ fun FactDetail(
                             .fillMaxWidth()
                     )
                     Text(
-                        text = factDetailVO.id,
-                        style = MaterialTheme.typography.subtitle1,
+                        text = factDetailVO.category,
+                        style = MaterialTheme.typography.h6,
                         color = MaterialTheme.colors.onBackground,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth()
                     )
                     Text(
-                        text = factDetailVO.category,
-                        style = MaterialTheme.typography.h6,
+                        text = factDetailVO.id,
+                        style = MaterialTheme.typography.subtitle1,
                         color = MaterialTheme.colors.onBackground,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth()
