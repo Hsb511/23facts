@@ -15,5 +15,12 @@ class SettingsVM @Inject constructor() : ViewModel() {
      */
     val isForcedDarkMode: MutableState<Boolean?> = mutableStateOf(null)
 
-    val sliderValue: MutableState<Float> = mutableStateOf(0f)
+    fun onThemeModeChanged(selectedPosition: Int) {
+        when(selectedPosition) {
+            0 -> isForcedDarkMode.value = true
+            1 -> isForcedDarkMode.value = null
+            2 -> isForcedDarkMode.value = false
+            else -> isForcedDarkMode.value = null
+        }
+    }
 }

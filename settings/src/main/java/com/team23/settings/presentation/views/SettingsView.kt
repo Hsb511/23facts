@@ -2,7 +2,6 @@ package com.team23.settings.presentation.views
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -15,14 +14,25 @@ import com.team23.settings.presentation.viewmodels.SettingsVM
 
 @Composable
 fun SettingsView(settingsVM: SettingsVM) {
-    SettingsView()
+    SettingsView(
+        lastSelectedThemeMode = when (settingsVM.isForcedDarkMode.value) {
+            true -> 0
+            null -> 1
+            false -> 2
+        },
+        onThemeModeChanged = { selectedPosition ->
+            settingsVM.onThemeModeChanged(
+                selectedPosition
+            )
+        })
 }
 
 @Composable
 fun SettingsView(
-
+    lastSelectedThemeMode: Int = 1,
+    onThemeModeChanged: (Int) -> Unit = {}
 ) {
-    Column{
+    Column {
         Text(
             text = stringResource(id = R.string.settings_theme_mode),
             style = MaterialTheme.typography.h6,
@@ -34,7 +44,8 @@ fun SettingsView(
                 stringResource(id = R.string.settings_system_mode),
                 stringResource(id = R.string.settings_forced_light_mode),
             ),
-            onValueChanged = {}
+            onValueChanged = onThemeModeChanged,
+            lastSelectedValue = lastSelectedThemeMode,
         )
         Text(
             text = stringResource(id = R.string.settings_language),

@@ -24,11 +24,12 @@ import com.team23.facts23.R
 import com.team23.home.presentation.viewmodels.HomeVM
 import com.team23.home.presentation.views.HomeCategories
 import com.team23.home.presentation.views.HomeFacts
+import com.team23.settings.presentation.viewmodels.SettingsVM
 import com.team23.settings.presentation.views.SettingsView
 
 @ExperimentalFoundationApi
 @Composable
-fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM) {
+fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: SettingsVM) {
     val navController = rememberNavController()
 
     Scaffold(
@@ -146,7 +147,7 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM) {
                 HomeFacts(homeVM = homeVM, navController = navController)
             }
             composable(route = "settings") {
-                SettingsView()
+                SettingsView(settingsVM = settingsVM)
             }
         }
     }

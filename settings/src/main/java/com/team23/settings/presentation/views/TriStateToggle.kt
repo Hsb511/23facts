@@ -18,9 +18,10 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun TriStateToggle(
     values: List<String>,
-    onValueChanged: (Int) -> Unit
+    onValueChanged: (Int) -> Unit,
+    lastSelectedValue: Int = 1
 ) {
-    var selectedPosition by remember { mutableStateOf(0) }
+    var selectedPosition by remember { mutableStateOf(-1) }
 
     Surface(
         shape = MaterialTheme.shapes.large,
@@ -35,7 +36,11 @@ fun TriStateToggle(
                 .fillMaxWidth()
         ) {
             values.forEach {
-                val isValueSelected = selectedPosition == values.indexOf(it)
+                val isValueSelected = if (selectedPosition == -1) {
+                    lastSelectedValue == values.indexOf(it)
+                } else {
+                    selectedPosition == values.indexOf(it)
+                }
                 Text(
                     text = it,
                     overflow = TextOverflow.Ellipsis,

@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Facts23Theme(darkTheme = settingsVM.isForcedDarkMode.value ?: isSystemInDarkTheme()) {
-                NavigationView(factDetailVM, homeVM)
+                NavigationView(factDetailVM, homeVM, settingsVM)
             }
         }
     }
