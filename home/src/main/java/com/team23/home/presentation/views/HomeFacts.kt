@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -89,7 +90,7 @@ fun HomeFacts(
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
-                        .padding(4.dp, 4.dp, 12.dp, 4.dp)
+                        .padding(4.dp)
                         .background(
                             color = MaterialTheme.colors.surface,
                             shape = MaterialTheme.shapes.large
@@ -133,15 +134,20 @@ fun HomeFacts(
                         color = MaterialTheme.colors.onSurface,
                         modifier = Modifier
                             .padding(8.dp, 0.dp)
-                            .weight(0.9f)
+                            .weight(0.8f)
                     )
                     if (it.new) {
                         Text(
                             text = stringResource(id = R.string.home_fact_new),
-                            color = MaterialTheme.colors.primary,
+                            color = MaterialTheme.colors.secondary,
+                            textAlign = TextAlign.Center,
                             modifier = Modifier
-                                .weight(0.2f)
-                                .padding(8.dp, 0.dp)
+                                .weight(0.25f)
+                                .padding(16.dp, 4.dp)
+                                .background(
+                                    color = MaterialTheme.colors.secondary.copy(alpha = 0.2f),
+                                    shape = MaterialTheme.shapes.large
+                                )
                         )
                     }
                 }
