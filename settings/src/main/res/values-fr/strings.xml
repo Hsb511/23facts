@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">settings</string>
+    <string name="settings_theme_mode">Mode du thème</string>
+    <string name="settings_forced_dark_mode">mode sombre forcé</string>
+    <string name="settings_system_mode">paramètre du système</string>
+    <string name="settings_forced_light_mode">mode clair forcé</string>
+    <string name="settings_language">Langue</string>
+    <string name="settings_language_english">Anglais</string>
+    <string name="settings_language_system">Paramètre du système</string>
+    <string name="settings_language_french">Français</string>
+</resources>

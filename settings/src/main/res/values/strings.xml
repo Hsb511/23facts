@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">settings</string>
+    <string name="settings_theme_mode">Theme mode</string>
+    <string name="settings_forced_dark_mode">forced dark mode</string>
+    <string name="settings_system_mode">system setting</string>
+    <string name="settings_forced_light_mode">forced light mode</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_system">system setting</string>
+    <string name="settings_language_french">French</string>
 </resources>
