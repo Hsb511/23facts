@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">fact</string>
+    <string name="fact_image_description">illustration de fait 23</string>
+    <string name="fact_sources">sources:</string>
+    <string name="fact_icon_like">icone de like</string>
+    <string name="fact_icon_share">icone de partage</string>
+    <string name="fact_icon_favorite">icone de favoir</string>
+    <string name="fact_link_image_description">apperçu d\'URL</string>
+    <string name="fact_link_url_saved">L\'URL a été sauvegardé dans votre presse papier</string>
+</resources>

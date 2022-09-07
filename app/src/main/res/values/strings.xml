@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">23facts</string>
+    <string name="app_name" translatable="false">23facts</string>
 
     <string name="navigation_home">Home</string>
     <string name="navigation_random">Random</string>
