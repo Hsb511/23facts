@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Facts23Theme {
+            Facts23Theme(darkTheme = false) {
                 NavigationView(factDetailVM, homeVM)
             }
         }

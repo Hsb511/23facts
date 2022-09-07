@@ -24,6 +24,7 @@ import com.team23.facts23.R
 import com.team23.home.presentation.viewmodels.HomeVM
 import com.team23.home.presentation.views.HomeCategories
 import com.team23.home.presentation.views.HomeFacts
+import com.team23.settings.presentation.views.SettingsView
 
 @ExperimentalFoundationApi
 @Composable
@@ -118,7 +119,7 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM) {
                         selected = (selectedIndex.value == 3),
                         onClick = {
                             selectedIndex.value = 3
-                            // TODO
+                            navController.navigate("settings")
                         }
                     )
                 }
@@ -143,6 +144,9 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM) {
             }
             composable(route = "category") {
                 HomeFacts(homeVM = homeVM, navController = navController)
+            }
+            composable(route = "settings") {
+                SettingsView()
             }
         }
     }
