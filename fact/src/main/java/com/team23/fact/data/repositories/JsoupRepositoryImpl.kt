@@ -4,6 +4,7 @@ import com.team23.fact.data.const.JsoupConst
 import com.team23.fact.domain.models.OpenGraphResult
 import com.team23.fact.domain.repositories.JsoupRepository
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import javax.inject.Inject
 
@@ -21,18 +22,20 @@ class JsoupRepositoryImpl @Inject constructor() : JsoupRepository {
                 .parse()
             val attributes = parsedValues.select(JsoupConst.DOC_SELECT_QUERY)
             return OpenGraphResult(
-                title = attributes.getValue(JsoupConst.OG_TITLE),
+                title = attributes.getValue(JsoupConst.OG_TITLE)
+                    ?: parsedValues.select("html").select("head").select("title").text(),
                 description = attributes.getValue(JsoupConst.OG_DESCRIPTION),
                 url = url,
                 image = attributes.getValue(JsoupConst.OG_IMAGE),
                 siteName = attributes.getValue(JsoupConst.OG_SITE_NAME),
                 type = attributes.getValue(JsoupConst.OG_TYPE),
-                favicon = attributes.getValue(JsoupConst.OG_FAVICON)?.ifBlank { null }
-                    ?: url.split("://").let {
-                        "${it[0]}://${it[1].split("/")[0]}${
-                            parsedValues.select("link[rel^=shortcut]").firstOrNull()?.attr("href")
-                        }"
+                favicon = attributes.getValue(JsoupConst.OG_FAVICON).let {
+                    if (it.isIconInCorrect()) {
+                        url.getImageBySite(parsedValues)
+                    } else {
+                        it
                     }
+                }
             )
         }.also {
             return OpenGraphResult()
@@ -41,4 +44,21 @@ class JsoupRepositoryImpl @Inject constructor() : JsoupRepository {
 
     private fun List<Element>.getValue(property: String) =
         this.firstOrNull { it.attr("property") == property }?.attr("content")
+
+    private fun String?.isIconInCorrect() = this == null || this.isBlank() || this.endsWith("/.png")
+
+    private fun String.getImageBySite(parsedValues: Document) = when {
+        this.contains("wikipedia") -> this.split("://").let {
+            "${it[0]}://${it[1].split("/")[0]}${
+                parsedValues.select("link[rel^=icon]").firstOrNull()?.attr("href")
+            }"
+        }
+        this.contains("villemin.gerard.free.fr") ->
+            "http://villemin.gerard.free.fr/GVCV_fichiers/image013.jpg"
+        this.contains("lucaswillems") ->
+            "https://www.lucaswillems.com/img/lcswillems-400x400.png"
+        this.contains("maeckes") ->
+            "http://www.maeckes.nl/clips/logo%20maeckes.gif"
+        else -> null
+    }
 }
