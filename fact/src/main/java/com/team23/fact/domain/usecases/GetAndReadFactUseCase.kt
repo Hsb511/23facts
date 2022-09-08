@@ -10,7 +10,13 @@ class GetAndReadFactUseCase @Inject constructor(
 ) {
     suspend fun execute(id: String?): FactModel? =
         id?.toLongOrNull()?.let {
-            factRepository.setNewToFalseById(it)
-            factRepository.getFactById(it, Locale.current.language)
+            val localLanguage = Locale.current.language
+            if (it == -1L) {
+                factRepository.getRandomFact(localLanguage)
+            } else {
+                factRepository.getFactById(it, localLanguage)
+            }?.also { fact ->
+                factRepository.setNewToFalseById(fact.id.toLong())
+            }
     }
 }

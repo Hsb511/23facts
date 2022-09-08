@@ -1,5 +1,6 @@
 package com.team23.fact.data.repositories
 
+import com.team23.fact.data.mappers.toModel
 import com.team23.fact.domain.models.FactModel
 import com.team23.fact.domain.repositories.FactRepository
 import com.team23.room.data.daos.FactDao
@@ -9,16 +10,10 @@ class FactRoomRepository @Inject constructor(
     private val factDao: FactDao
 ) : FactRepository {
     override suspend fun getFactById(id: Long, language: String) =
-        factDao.findByIdAndLanguage(id, language)?.let {
-            FactModel(
-                id = it.id_fonc.toString(),
-                title = it.title,
-                category = it.code,
-                image = it.image,
-                description = it.content,
-                sources = it.links
-            )
-        }
+        factDao.findByIdAndLanguage(id, language)?.toModel()
+
+    override suspend fun getRandomFact(language: String) =
+        factDao.findRandomByLanguage(language)?.toModel()
 
     override suspend fun setNewToFalseById(id: Long) {
         factDao.updateNewById(id)

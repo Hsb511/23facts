@@ -22,12 +22,11 @@ class MainActivity : ComponentActivity() {
 
     private val factDetailVM: FactDetailVM by viewModels {
         FactDetailVM.provideFactory(
-            viewModelAssistedFactory,
-            listOf(46..276 step 23).flatten().map{it.toString() }.random()
+            assistedFactory = viewModelAssistedFactory,
+            factId = null
         )
     }
     private val homeVM: HomeVM by viewModels()
-
     private val settingsVM: SettingsVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

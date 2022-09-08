@@ -78,8 +78,7 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: Setti
                         selectedContentColor = MaterialTheme.colors.secondaryVariant,
                         onClick = {
                             selectedIndex.value = 1
-                            val factId = listOf(46..276 step 23).flatten().map{it.toString() }.random()
-                            factDetailVM.loadFactDetail(factId)
+                            factDetailVM.loadFactDetail("-1")
                             navController.navigate("random")
                         },
                     )
