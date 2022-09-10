@@ -51,11 +51,6 @@ class HomeVM @Inject constructor(
         }
     }
 
-    fun onReturnHome() {
-        selectedCategory.value = null
-        facts.clear()
-    }
-
     fun onFactClicked(fact: FactVO) {
         facts.firstOrNull{it == fact}?.new = false
     }

@@ -2,6 +2,7 @@
     <string name="app_name" translatable="false">23facts</string>
 
     <string name="navigation_home">Home</string>
+    <string name="navigation_categories">Categories</string>
     <string name="navigation_random">Random</string>
     <string name="navigation_search">Search</string>
     <string name="navigation_settings">Settings</string>

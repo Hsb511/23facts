@@ -1,4 +1,4 @@
-package com.team23.home.presentation.views
+package com.team23.home.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -15,10 +15,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.team23.home.presentation.extensions.getBackgroundColor
 import com.team23.home.presentation.extensions.getTextColor
-import com.team23.home.presentation.viewobjects.CategoryVO
 
 @Composable
-fun CategoryCodeBox(category: CategoryVO) {
+fun CategoryCodeBox(category: String) {
     Box(
         modifier = Modifier
             .padding(4.dp)
@@ -29,7 +28,7 @@ fun CategoryCodeBox(category: CategoryVO) {
             )
     ) {
         Text(
-            text = category.code,
+            text = category,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.subtitle2,
             color = category.getTextColor(),
@@ -43,10 +42,5 @@ fun CategoryCodeBox(category: CategoryVO) {
 @Composable
 @Preview(showSystemUi = true)
 fun CategoryCodeBoxPreview() {
-    CategoryCodeBox(
-        CategoryVO(
-            code = "MA",
-            title ="Mathematics"
-        )
-    )
+    CategoryCodeBox(category = "MA")
 }

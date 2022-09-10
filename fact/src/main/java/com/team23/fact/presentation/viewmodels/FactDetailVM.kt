@@ -35,6 +35,7 @@ class FactDetailVM @AssistedInject constructor(
         factId = newFactId
         viewModelScope.launch(Dispatchers.IO) {
             val factModel = getAndReadFactUseCase.execute(factId)
+            factId = factModel?.id
             val category = getCategoryUseCase.execute(factModel?.category)
             val sources = factModel?.sources
                 ?.split(";")

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="home_categories_title">Catégories</string>
     <string name="home_fact_picture">image du fait</string>
     <string name="home_fact_new">NOU.</string>
 </resources>

@@ -4,10 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import com.team23.home.R
-import com.team23.home.presentation.viewobjects.CategoryVO
 
 @Composable
-fun CategoryVO.getBackgroundColor() = when(this.code) {
+fun String.getBackgroundColor() = when (this) {
     "MA" -> colorResource(id = R.color.persian_red)
     "PC" -> colorResource(id = R.color.imperial_red)
     "BG" -> colorResource(id = R.color.spanish_orange)
@@ -35,7 +34,7 @@ fun CategoryVO.getBackgroundColor() = when(this.code) {
 }
 
 @Composable
-fun CategoryVO.getTextColor() = when(this.code) {
+fun String.getTextColor() = when (this) {
     "MA" -> Color.White
     "PC" -> Color.White
     "BG" -> Color.Black
