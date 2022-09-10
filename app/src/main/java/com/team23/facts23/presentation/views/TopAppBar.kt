@@ -2,13 +2,11 @@ package com.team23.facts23.presentation.views
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -27,6 +25,27 @@ fun TopAppBar(
 ) {
     TopAppBar(
         backgroundColor = MaterialTheme.colors.primary,
+        navigationIcon = {
+            when (screen) {
+                ScreenEnum.HOME -> Icon(
+                    imageVector = Icons.Filled.Face, // TODO
+                    contentDescription = "23 facts logo",
+                    tint = MaterialTheme.colors.onPrimary,
+                    modifier = Modifier.padding(16.dp, 0.dp, 0.dp, 0.dp)
+                )
+                ScreenEnum.CATEGORY,
+                ScreenEnum.FACT,
+                ScreenEnum.SETTINGS,
+                ScreenEnum.RANDOM -> Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = "back",
+                    tint = MaterialTheme.colors.onPrimary,
+                    modifier = Modifier
+                        .padding(16.dp, 0.dp, 0.dp, 0.dp)
+                        .clickable { onBackPressed() }
+                )
+            }
+        },
         title = {
             when (screen) {
                 ScreenEnum.HOME -> {
@@ -79,27 +98,10 @@ fun TopAppBar(
                 }
             }
         },
-        navigationIcon = {
-            when (screen) {
-                ScreenEnum.HOME -> Icon(
-                    imageVector = Icons.Filled.Face, // TODO
-                    contentDescription = "23 facts logo",
-                    tint = MaterialTheme.colors.onPrimary,
-                    modifier = Modifier.padding(16.dp, 0.dp, 0.dp, 0.dp)
-                )
-                ScreenEnum.CATEGORY,
-                ScreenEnum.FACT,
-                ScreenEnum.SETTINGS,
-                ScreenEnum.RANDOM -> Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = "back",
-                    tint = MaterialTheme.colors.onPrimary,
-                    modifier = Modifier
-                        .padding(16.dp, 0.dp, 0.dp, 0.dp)
-                        .clickable { onBackPressed() }
-                )
+        actions = {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(imageVector = Icons.Filled.Menu, contentDescription = "menu")
             }
-
         }
     )
 }
