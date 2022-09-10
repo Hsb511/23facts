@@ -99,20 +99,6 @@ fun FactDetail(
                             .padding(8.dp)
                             .fillMaxWidth()
                     )
-                    Text(
-                        text = factDetailVO.category,
-                        style = MaterialTheme.typography.h6,
-                        color = MaterialTheme.colors.onBackground,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Text(
-                        text = factDetailVO.id,
-                        style = MaterialTheme.typography.subtitle1,
-                        color = MaterialTheme.colors.onBackground,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    )
                     if (factDetailVO.imageUrl != null) {
                         Image(
                             painter = if (factDetailVO.imageUrl.endsWith(".svg")) {
