@@ -63,6 +63,7 @@ class FactDetailVM @AssistedInject constructor(
                     id = "#${factModel?.id}",
                     title = factModel?.title ?: "",
                     category = category,
+                    codeCategory = factModel?.category,
                     imageUrl = factModel?.image,
                     description = factModel?.description?.replace("\\n", "\n") ?: "",
                     sources = sources

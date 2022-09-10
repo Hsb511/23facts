@@ -30,8 +30,12 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: Setti
     Scaffold(
         bottomBar = {
             BottomAppBar(
-                onNavigateHome = { navController.navigate("home") },
+                onNavigateHome = {
+                    factDetailVM.factDetail.value = null
+                    navController.navigate("home")
+                                 },
                 onNavigateRandom = {
+                    homeVM.selectedCategory.value = null
                     factDetailVM.loadFactDetail("-1")
                     navController.navigate("random")
                 },
@@ -43,7 +47,7 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: Setti
             TopAppBar(
                 screen = currentScreen.value,
                 onBackPressed = { navController.popBackStack() },
-                codeCategory = homeVM.selectedCategory.value?.code,
+                codeCategory = factDetailVM.factDetail.value?.codeCategory?.ifBlank { null } ?: homeVM.selectedCategory.value?.code,
                 nameCategory = factDetailVM.factDetail.value?.category?.ifBlank { null } ?: homeVM.selectedCategory.value?.title,
                 factId = factDetailVM.factId
             )
