@@ -12,20 +12,19 @@ import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
+import com.team23.core.domain.ScreenEnum
 import com.team23.facts23.R
 
 @Composable
 fun BottomAppBar(
+    pageIndex: Int,
     onNavigateHome: () -> Unit,
     onNavigateRandom: () -> Unit,
     onNavigateSearch: () -> Unit,
     onNavigateSettings: () -> Unit
 ) {
 
-    val selectedIndex = remember { mutableStateOf(0) }
 
     BottomAppBar(contentPadding = PaddingValues(0.dp, 0.dp)) {
         BottomNavigation(
@@ -36,82 +35,70 @@ fun BottomAppBar(
                     NavigationIcon(
                         imageVector = Icons.Default.Home,
                         descriptionResId = R.string.navigation_home,
-                        selected = selectedIndex.value == 0
+                        selected = pageIndex == ScreenEnum.HOME.pageIndex
                     )
                 },
                 label = {
                     NavigationLabel(
                         textResId = R.string.navigation_home,
-                        selected = selectedIndex.value == 0,
+                        selected = pageIndex == ScreenEnum.HOME.pageIndex,
                     )
                 },
-                selected = (selectedIndex.value == 0),
+                selected = (pageIndex == ScreenEnum.HOME.pageIndex),
                 selectedContentColor = MaterialTheme.colors.secondaryVariant,
-                onClick = {
-                    selectedIndex.value = 0
-                    onNavigateHome()
-                }
+                onClick = { onNavigateHome() }
             )
             BottomNavigationItem(
                 icon = {
                     NavigationIcon(
                         imageVector = Icons.Default.Refresh,
                         descriptionResId = R.string.navigation_random,
-                        selected = selectedIndex.value == 1
+                        selected = pageIndex == ScreenEnum.RANDOM.pageIndex
                     )
                 },
                 label = {
                     NavigationLabel(
                         textResId = R.string.navigation_random,
-                        selected = selectedIndex.value == 1,
+                        selected = pageIndex == ScreenEnum.RANDOM.pageIndex,
                     )
                 },
-                selected = (selectedIndex.value == 1),
+                selected = (pageIndex == ScreenEnum.RANDOM.pageIndex),
                 selectedContentColor = MaterialTheme.colors.secondaryVariant,
-                onClick = {
-                    selectedIndex.value = 1
-                    onNavigateRandom()
-                },
+                onClick = { onNavigateRandom() },
             )
             BottomNavigationItem(
                 icon = {
                     NavigationIcon(
                         imageVector = Icons.Default.Search,
                         descriptionResId = R.string.navigation_search,
-                        selected = selectedIndex.value == 2
+                        selected = pageIndex == ScreenEnum.SEARCH.pageIndex
                     )
                 },
                 label = {
                     NavigationLabel(
                         textResId = R.string.navigation_search,
-                        selected = selectedIndex.value == 2,
+                        selected = pageIndex == ScreenEnum.SEARCH.pageIndex,
                     )
                 },
-                selected = (selectedIndex.value == 2),
-                onClick = {
-                    selectedIndex.value = 2
-                    onNavigateSearch()
-                }
+                selected = (pageIndex == ScreenEnum.SEARCH.pageIndex),
+                onClick = { onNavigateSearch() }
             )
             BottomNavigationItem(
                 icon = {
                     NavigationIcon(
                         imageVector = Icons.Default.Settings,
                         descriptionResId = R.string.navigation_settings,
-                        selected = selectedIndex.value == 3
+                        selected = pageIndex == ScreenEnum.SETTINGS.pageIndex
                     )
                 },
                 label = {
                     NavigationLabel(
                         textResId = R.string.navigation_settings,
-                        selected = selectedIndex.value == 3,
+                        selected = pageIndex == ScreenEnum.SETTINGS.pageIndex,
                     )
                 },
-                selected = (selectedIndex.value == 3),
-                onClick = {
-                    selectedIndex.value = 3
-                    onNavigateSettings()
-                }
+                selected = (pageIndex == ScreenEnum.SETTINGS.pageIndex),
+                onClick = { onNavigateSettings() }
             )
         }
     }

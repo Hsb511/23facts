@@ -26,16 +26,17 @@ import com.team23.settings.presentation.views.SettingsView
 fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: SettingsVM) {
     val navController = rememberNavController()
     val currentScreen: MutableState<ScreenEnum> = remember { mutableStateOf(ScreenEnum.HOME) }
+    val lastScreen: MutableState<ScreenEnum> = remember { mutableStateOf(ScreenEnum.HOME) }
 
     Scaffold(
         bottomBar = {
             BottomAppBar(
+                pageIndex = currentScreen.value.pageIndex,
                 onNavigateHome = {
                     factDetailVM.factDetail.value = null
                     navController.navigate("home")
-                                 },
+                },
                 onNavigateRandom = {
-                    homeVM.selectedCategory.value = null
                     factDetailVM.loadFactDetail("-1")
                     navController.navigate("random")
                 },
@@ -46,9 +47,18 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: Setti
         topBar = {
             TopAppBar(
                 screen = currentScreen.value,
-                onBackPressed = { navController.popBackStack() },
-                codeCategory = factDetailVM.factDetail.value?.codeCategory?.ifBlank { null } ?: homeVM.selectedCategory.value?.code,
-                nameCategory = factDetailVM.factDetail.value?.category?.ifBlank { null } ?: homeVM.selectedCategory.value?.title,
+                onBackPressed = {
+                    if (currentScreen.value == ScreenEnum.RANDOM) {
+                        factDetailVM.factDetail.value = null
+                        navController.navigate(lastScreen.value.route)
+                    } else {
+                        navController.popBackStack()
+                    }
+                },
+                codeCategory = factDetailVM.factDetail.value?.codeCategory?.ifBlank { null }
+                    ?: homeVM.selectedCategory.value?.code,
+                nameCategory = factDetailVM.factDetail.value?.category?.ifBlank { null }
+                    ?: homeVM.selectedCategory.value?.title,
                 factId = factDetailVM.factId
             )
         },
@@ -68,6 +78,9 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: Setti
                 HomeFacts(homeVM = homeVM, navController = navController)
             }
             composable(route = ScreenEnum.RANDOM.route) {
+                if (currentScreen.value != ScreenEnum.RANDOM) {
+                    lastScreen.value = currentScreen.value
+                }
                 currentScreen.value = ScreenEnum.RANDOM
                 FactDetail(factDetailVM = factDetailVM)
             }
