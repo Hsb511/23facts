@@ -1,13 +1,12 @@
 package com.team23.facts23.presentation.views
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -18,6 +17,7 @@ import com.team23.home.presentation.CategoryCodeBox
 @Composable
 fun TopAppBar(
     screen: ScreenEnum,
+    isMenuExpanded: MutableState<Boolean>,
     onBackPressed: () -> Unit,
     codeCategory: String?,
     nameCategory: String?,
@@ -36,7 +36,8 @@ fun TopAppBar(
                 ScreenEnum.CATEGORY,
                 ScreenEnum.FACT,
                 ScreenEnum.SETTINGS,
-                ScreenEnum.RANDOM -> Icon(
+                ScreenEnum.RANDOM,
+                ScreenEnum.SEARCH -> Icon(
                     imageVector = Icons.Filled.ArrowBack,
                     contentDescription = "back",
                     tint = MaterialTheme.colors.onPrimary,
@@ -89,6 +90,13 @@ fun TopAppBar(
                         )
                     }
                 }
+                ScreenEnum.SEARCH -> {
+                    Text(
+                        text = stringResource(id = R.string.navigation_search),
+                        style = MaterialTheme.typography.h5,
+                        color = MaterialTheme.colors.onPrimary
+                    )
+                }
                 ScreenEnum.SETTINGS -> {
                     Text(
                         text = stringResource(id = R.string.navigation_settings),
@@ -99,8 +107,16 @@ fun TopAppBar(
             }
         },
         actions = {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(imageVector = Icons.Filled.Menu, contentDescription = "menu")
+            IconButton(onClick = { isMenuExpanded.value = !isMenuExpanded.value }) {
+                Icon(
+                    imageVector = if (isMenuExpanded.value) {
+                        Icons.Filled.Close
+                    } else {
+                        Icons.Filled.Menu
+                    },
+                    contentDescription = "menu",
+                    tint = MaterialTheme.colors.onPrimary
+                )
             }
         }
     )

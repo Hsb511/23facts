@@ -4,11 +4,13 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -27,6 +29,7 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: Setti
     val navController = rememberNavController()
     val currentScreen: MutableState<ScreenEnum> = remember { mutableStateOf(ScreenEnum.HOME) }
     val lastScreen: MutableState<ScreenEnum> = remember { mutableStateOf(ScreenEnum.HOME) }
+    val isMenuExpanded = remember { mutableStateOf(false) }
 
     Scaffold(
         bottomBar = {
@@ -47,6 +50,7 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: Setti
         topBar = {
             TopAppBar(
                 screen = currentScreen.value,
+                isMenuExpanded = isMenuExpanded,
                 onBackPressed = {
                     if (currentScreen.value == ScreenEnum.RANDOM) {
                         factDetailVM.factDetail.value = null
@@ -61,6 +65,7 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: Setti
                     ?: homeVM.selectedCategory.value?.title,
                 factId = factDetailVM.factId
             )
+            DropDownMenu(isMenuExpanded = isMenuExpanded, navController = navController)
         },
         modifier = Modifier.fillMaxSize()
     ) { padding ->
@@ -93,6 +98,12 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: Setti
                 currentScreen.value = ScreenEnum.SETTINGS
                 SettingsView(settingsVM = settingsVM)
             }
+        }
+        if (isMenuExpanded.value) {
+            Surface(
+                color = Color.Black.copy(alpha = 0.6f),
+                modifier = Modifier.fillMaxSize()
+            ) {}
         }
     }
 }

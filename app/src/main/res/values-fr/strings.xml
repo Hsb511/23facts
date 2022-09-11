@@ -7,4 +7,6 @@
     <string name="navigation_random">Aléatoire</string>
     <string name="navigation_search">Recherche</string>
     <string name="navigation_settings">Paramètres</string>
+    <string name="navigation_about">A propos</string>
+    <string name="navigation_achievements">Succès</string>
 </resources>
