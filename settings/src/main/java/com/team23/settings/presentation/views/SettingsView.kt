@@ -2,8 +2,9 @@ package com.team23.settings.presentation.views
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -38,7 +39,7 @@ fun SettingsView(
             style = MaterialTheme.typography.h6,
             modifier = Modifier.padding(8.dp)
         )
-        TriStateToggle(
+        SettingsSectionRadioButton(
             values = listOf(
                 stringResource(id = R.string.settings_forced_dark_mode),
                 stringResource(id = R.string.settings_system_mode),
@@ -48,11 +49,23 @@ fun SettingsView(
             lastSelectedValue = lastSelectedThemeMode,
         )
         Text(
+            text = stringResource(id = R.string.settings_colors),
+            style = MaterialTheme.typography.h6,
+            modifier = Modifier.padding(8.dp)
+        )
+        SettingsSectionRadioButton(
+            values = listOf(
+                stringResource(id = R.string.settings_colors_app),
+                stringResource(id = R.string.settings_colors_custom),
+            ),
+            onValueChanged = {}
+        )
+        Text(
             text = stringResource(id = R.string.settings_language),
             style = MaterialTheme.typography.h6,
             modifier = Modifier.padding(8.dp)
         )
-        TriStateToggle(
+        SettingsSectionRadioButton(
             values = listOf(
                 stringResource(id = R.string.settings_language_english),
                 stringResource(id = R.string.settings_language_system),
@@ -60,6 +73,33 @@ fun SettingsView(
             ),
             onValueChanged = {}
         )
+        Text(
+            text = stringResource(id = R.string.settings_random),
+            style = MaterialTheme.typography.h6,
+            modifier = Modifier.padding(8.dp)
+        )
+        SettingsSectionRadioButton(
+            values = listOf(
+                stringResource(id = R.string.settings_random_pure),
+                stringResource(id = R.string.settings_random_unread),
+            ),
+            onValueChanged = {}
+        )
+        Text(
+            text = stringResource(id = R.string.settings_data),
+            style = MaterialTheme.typography.h6,
+            modifier = Modifier.padding(8.dp)
+        )
+        Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(8.dp, 0.dp)) {
+            Icon(
+                imageVector = Icons.Outlined.Refresh,
+                contentDescription = "reset"
+            )
+            Text(
+                text = stringResource(id = R.string.settings_data_reset),
+                modifier = Modifier.padding(8.dp, 0.dp)
+            )
+        }
     }
 }
 

@@ -4,8 +4,17 @@
     <string name="settings_forced_dark_mode">forced dark mode</string>
     <string name="settings_system_mode">system setting</string>
     <string name="settings_forced_light_mode">forced light mode</string>
+    <string name="settings_colors">Colors</string>
+    <string name="settings_colors_app">Application colors</string>
+    <string name="settings_colors_custom">Your custom colors (Android 12+)</string>
     <string name="settings_language">Language</string>
     <string name="settings_language_english">English</string>
     <string name="settings_language_system">system setting</string>
     <string name="settings_language_french">French</string>
+    <string name="settings_random">Randomness</string>
+    <string name="settings_random_pure">Pure random</string>
+    <string name="settings_random_unread">Random among unread facts</string>
+    <string name="settings_data">Data</string>
+    <string name="settings_data_reset">Reset Data</string>
+    <string name="settings_data_reset_description">This action will mark all the facts as unread, reset the settings and delete all the loaded data</string>
 </resources>

@@ -5,8 +5,17 @@
     <string name="settings_forced_dark_mode">mode sombre forcé</string>
     <string name="settings_system_mode">paramètre du système</string>
     <string name="settings_forced_light_mode">mode clair forcé</string>
+    <string name="settings_colors">Couleurs</string>
+    <string name="settings_colors_app">Couleurs de l\'application</string>
+    <string name="settings_colors_custom">Mes propres couleurs (Android 12+)</string>
     <string name="settings_language">Langue</string>
     <string name="settings_language_english">Anglais</string>
     <string name="settings_language_system">Paramètre du système</string>
     <string name="settings_language_french">Français</string>
+    <string name="settings_random">Aléatoire</string>
+    <string name="settings_random_pure">Aléatoire pure</string>
+    <string name="settings_random_unread">Aléatoire parmi les faits non lus</string>
+    <string name="settings_data">Data</string>
+    <string name="settings_data_reset">Réinitialiser les données</string>
+    <string name="settings_data_reset_description">Si vous confirmez cela va repasser les faits en non lus, réinitiliser les paramètres et supprimer toutes les données chargées</string>
 </resources>
