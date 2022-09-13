@@ -43,8 +43,7 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: Setti
                     factDetailVM.loadFactDetail("-1")
                     navController.navigate("random")
                 },
-                onNavigateSearch = { /*TODO*/ },
-                onNavigateSettings = { navController.navigate("settings") }
+                onNavigateSearch = { /*TODO*/ }
             )
         },
         topBar = {

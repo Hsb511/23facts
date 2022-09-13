@@ -22,7 +22,6 @@ fun BottomAppBar(
     onNavigateHome: () -> Unit,
     onNavigateRandom: () -> Unit,
     onNavigateSearch: () -> Unit,
-    onNavigateSettings: () -> Unit
 ) {
 
 
@@ -82,23 +81,6 @@ fun BottomAppBar(
                 },
                 selected = (pageIndex == ScreenEnum.SEARCH.pageIndex),
                 onClick = { onNavigateSearch() }
-            )
-            BottomNavigationItem(
-                icon = {
-                    NavigationIcon(
-                        imageVector = Icons.Default.Settings,
-                        descriptionResId = R.string.navigation_settings,
-                        selected = pageIndex == ScreenEnum.SETTINGS.pageIndex
-                    )
-                },
-                label = {
-                    NavigationLabel(
-                        textResId = R.string.navigation_settings,
-                        selected = pageIndex == ScreenEnum.SETTINGS.pageIndex,
-                    )
-                },
-                selected = (pageIndex == ScreenEnum.SETTINGS.pageIndex),
-                onClick = { onNavigateSettings() }
             )
         }
     }
