@@ -3,5 +3,6 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">villemin.gerard.free.fr</domain>
         <domain includeSubdomains="true">www.maeckes.nl</domain>
+        <domain includeSubdomains="true">validate.perfdrive.com</domain>
     </domain-config>
 </network-security-config>

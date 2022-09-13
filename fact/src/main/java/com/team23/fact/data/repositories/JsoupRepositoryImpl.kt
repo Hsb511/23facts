@@ -48,17 +48,20 @@ class JsoupRepositoryImpl @Inject constructor() : JsoupRepository {
     private fun String?.isIconInCorrect() = this == null || this.isBlank() || this.endsWith("/.png")
 
     private fun String.getImageBySite(parsedValues: Document) = when {
-        this.contains("wikipedia") -> this.split("://").let {
+        this.contains("wikipedia") || this.contains("curl.se") -> this.split("://").let {
             "${it[0]}://${it[1].split("/")[0]}${
-                parsedValues.select("link[rel^=icon]").firstOrNull()?.attr("href")
+                parsedValues.select("link[rel^=icon]").firstOrNull()?.attr( "href")
             }"
         }
+        this.contains("betterexplained.com") || this.contains("songfacts.com")->
+            parsedValues.select("img")[0].attr("src")
+        this.contains("proofwiki.org") ->
+            "https://proofwiki.org${parsedValues.select("img")[0].attr("src")}"
         this.contains("villemin.gerard.free.fr") ->
             "http://villemin.gerard.free.fr/GVCV_fichiers/image013.jpg"
         this.contains("lucaswillems") ->
             "https://www.lucaswillems.com/img/lcswillems-400x400.png"
-        this.contains("maeckes") ->
-            "http://www.maeckes.nl/clips/logo%20maeckes.gif"
+        this.contains("maeckes") -> "http://www.maeckes.nl/clips/logo%20maeckes.gif"
         else -> null
     }
 }
