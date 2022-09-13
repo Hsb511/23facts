@@ -35,7 +35,8 @@ class JsoupRepositoryImpl @Inject constructor() : JsoupRepository {
                     } else {
                         it
                     }
-                }
+                },
+                language = parsedValues.select("html").attr("lang"),
             )
         }.also {
             return OpenGraphResult()

@@ -54,7 +54,13 @@ class FactDetailVM @AssistedInject constructor(
                                 og.siteName != null -> og.siteName!!
                                 og.title != null && og.title!!.contains(" — Wikipédia") -> "Wikipédia"
                                 else -> it.split("://")[1].split("/")[0]
-                            }.trim().take(31)
+                            }.trim().take(31),
+                            language = when(og.language) {
+                                "fr" -> "\uD83C\uDDEB\uD83C\uDDF7"
+                                "de" -> "\uD83C\uDDE9\uD83C\uDDEA"
+                                "es" -> "\uD83C\uDDEA\uD83C\uDDF8"
+                                else -> "\uD83C\uDDEC\uD83C\uDDE7"
+                            }
                         )
                     }
                 } ?: emptyList()

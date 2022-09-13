@@ -8,4 +8,5 @@ data class OpenGraphResult(
     var siteName: String? = null,
     var type: String? = null,
     var favicon: String? = null,
+    var language: String? = null,
 )

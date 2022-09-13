@@ -1,12 +1,16 @@
 package com.team23.fact.presentation.views
 
-import androidx.compose.foundation.*
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -55,21 +59,32 @@ fun FactDetailLink(
                             .background(color = Color.White)
                     )
                 }
-                Column(modifier = Modifier.padding(8.dp)) {
-                    if (factDetailLinkVO.title != null && factDetailLinkVO.domainName != null) {
-
+                Box(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .fillMaxSize()
+                ) {
+                    Column {
+                        if (factDetailLinkVO.title != null && factDetailLinkVO.domainName != null) {
+                            Text(
+                                text = factDetailLinkVO.title,
+                                style = MaterialTheme.typography.subtitle1
+                            )
+                            Text(
+                                text = factDetailLinkVO.domainName,
+                                style = MaterialTheme.typography.body2
+                            )
+                        } else {
+                            Text(
+                                text = factDetailLinkVO.url,
+                                style = MaterialTheme.typography.body2
+                            )
+                        }
+                    }
+                    if (factDetailLinkVO.language != null) {
                         Text(
-                            text = factDetailLinkVO.title,
-                            style = MaterialTheme.typography.subtitle1
-                        )
-                        Text(
-                            text = factDetailLinkVO.domainName,
-                            style = MaterialTheme.typography.body2
-                        )
-                    } else {
-                        Text(
-                            text = factDetailLinkVO.url,
-                            style = MaterialTheme.typography.body2
+                            text = factDetailLinkVO.language,
+                            modifier = Modifier.align(Alignment.TopEnd)
                         )
                     }
                 }
