@@ -36,7 +36,7 @@ class JsoupRepositoryImpl @Inject constructor() : JsoupRepository {
                         it
                     }
                 },
-                language = parsedValues.select("html").attr("lang"),
+                language = url.getLang(parsedValues)
             )
         }.also {
             return OpenGraphResult()
@@ -65,4 +65,11 @@ class JsoupRepositoryImpl @Inject constructor() : JsoupRepository {
         this.contains("maeckes") -> "http://www.maeckes.nl/clips/logo%20maeckes.gif"
         else -> null
     }
+
+    private fun String.getLang(parsedValues: Document) =
+        if (this.contains("villemin.gerard.free.fr")) {
+            "fr"
+        } else {
+            parsedValues.select("html").attr("lang")
+        }
 }
