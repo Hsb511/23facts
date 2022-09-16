@@ -25,12 +25,9 @@ object RoomDatabaseModule {
             AppDatabase::class.java,
             LOCAL_DB_NAME
         ).build().also { db ->
-            Scripts.categoriesScript.trimIndent().split("\n").forEach {
-                db.openHelper.writableDatabase.execSQL(it)
-            }
-            Scripts.factsScript.trimIndent().split("\n").forEach {
-                db.openHelper.writableDatabase.execSQL(it)
-            }
+            Scripts.categoriesScript.execSQL(db)
+            Scripts.factsScript.execSQL(db)
+            Scripts.achievementScript.execSQL(db)
         }
 
     @Provides
@@ -44,4 +41,10 @@ object RoomDatabaseModule {
 
     @Provides
     fun provideSettingsDao(db: AppDatabase) = db.settingsDao()
+
+    private fun String.execSQL(db: AppDatabase) {
+        this.trimIndent().split("\n").forEach {
+            db.openHelper.writableDatabase.execSQL(it)
+        }
+    }
 }

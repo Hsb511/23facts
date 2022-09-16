@@ -28,7 +28,7 @@ object Scripts {
     """
 
     const val achievementScript = """
-        INSERT OR IGNORE INTO T_ACHIEVEMENT VALUE ('APP_ICON_CLICKED_23_TIMES', 0);
+        INSERT OR IGNORE INTO T_ACHIEVEMENT VALUES ('APP_ICON_CLICKED_23_TIMES', 0);
     """
 
     const val factsScript = """
