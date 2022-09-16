@@ -4,10 +4,10 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "T_ACHIEVEMENTS",
+@Entity(tableName = "T_ACHIEVEMENT",
     indices = [Index("name")])
-data class AchievementsEntity(
+data class AchievementEntity(
     @PrimaryKey
     val name: String,
-    val value: Int,
+    val isFound: Boolean,
 )
