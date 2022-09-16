@@ -33,10 +33,15 @@ object RoomDatabaseModule {
             }
         }
 
+    @Provides
+    fun provideAchievementsDao(db: AppDatabase) = db.achievementsDao()
 
     @Provides
     fun provideCategoryDao(db: AppDatabase) = db.categoryDao()
 
     @Provides
     fun provideFactDao(db: AppDatabase) = db.factDao()
+
+    @Provides
+    fun provideSettingsDao(db: AppDatabase) = db.settingsDao()
 }
