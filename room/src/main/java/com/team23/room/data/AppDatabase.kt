@@ -7,11 +7,13 @@ import com.team23.room.data.daos.AchievementDao
 import com.team23.room.data.daos.CategoryDao
 import com.team23.room.data.daos.FactDao
 import com.team23.room.data.daos.SettingDao
+import com.team23.room.data.entities.AchievementEntity
 import com.team23.room.data.entities.CategoryEntity
 import com.team23.room.data.entities.FactEntity
+import com.team23.room.data.entities.SettingEntity
 
 @Database(
-    entities = [FactEntity::class, CategoryEntity::class],
+    entities = [AchievementEntity::class, FactEntity::class, CategoryEntity::class, SettingEntity::class],
     version = BDD_VERSION
 )
 abstract class AppDatabase : RoomDatabase() {

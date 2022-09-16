@@ -9,6 +9,9 @@ import javax.inject.Inject
 class AchievementRepositoryImpl @Inject constructor(
     private val achievementDao: AchievementDao
 ) : AchievementRepository {
+    override suspend fun findIsFoundByName(name: String): Boolean =
+        achievementDao.findIsFoundByName(name)
+
     override suspend fun loadAll(): List<AchievementModel> = achievementDao.loadAll().toModels()
 
     override suspend fun unlockAchievement(achievementName: String) =

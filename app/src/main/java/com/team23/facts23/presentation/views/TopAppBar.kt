@@ -21,17 +21,20 @@ fun TopAppBar(
     onBackPressed: () -> Unit,
     codeCategory: String?,
     nameCategory: String?,
-    factId: String?
+    factId: String?,
+    onAppIconClicked: () -> Unit,
 ) {
     TopAppBar(
         backgroundColor = MaterialTheme.colors.primary,
         navigationIcon = {
             when (screen) {
-                ScreenEnum.HOME -> Icon(
+                ScreenEnum.HOME ->  Icon(
                     imageVector = Icons.Filled.Face, // TODO
                     contentDescription = "23 facts logo",
                     tint = MaterialTheme.colors.onPrimary,
-                    modifier = Modifier.padding(16.dp, 0.dp, 0.dp, 0.dp)
+                    modifier = Modifier.padding(16.dp, 0.dp, 0.dp, 0.dp).clickable {
+                        onAppIconClicked()
+                    }
                 )
                 ScreenEnum.CATEGORY,
                 ScreenEnum.FACT,

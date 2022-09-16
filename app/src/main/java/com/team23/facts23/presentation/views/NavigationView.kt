@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.team23.achievements.presentation.viewmodels.AchievementVM
 import com.team23.core.domain.ScreenEnum
 import com.team23.fact.presentation.viewmodels.FactDetailVM
 import com.team23.fact.presentation.views.FactDetail
@@ -25,7 +26,7 @@ import com.team23.settings.presentation.views.SettingsView
 
 @ExperimentalFoundationApi
 @Composable
-fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: SettingsVM) {
+fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: SettingsVM, achievementVM: AchievementVM) {
     val navController = rememberNavController()
     val currentScreen: MutableState<ScreenEnum> = remember { mutableStateOf(ScreenEnum.HOME) }
     val lastScreen: MutableState<ScreenEnum> = remember { mutableStateOf(ScreenEnum.HOME) }
@@ -62,7 +63,8 @@ fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: Setti
                     ?: homeVM.selectedCategory.value?.code,
                 nameCategory = factDetailVM.factDetail.value?.category?.ifBlank { null }
                     ?: homeVM.selectedCategory.value?.title,
-                factId = factDetailVM.factId
+                factId = factDetailVM.factId,
+                onAppIconClicked = { achievementVM.onAppIconClicked() }
             )
             DropDownMenu(isMenuExpanded = isMenuExpanded, navController = navController)
         },

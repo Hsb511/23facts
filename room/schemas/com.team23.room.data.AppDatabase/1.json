@@ -2,8 +2,44 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "aac3c8807d72725dc4c32e67a304dc16",
+    "identityHash": "1a3e4bdfa5a3d75c320036f4780cdb33",
     "entities": [
+      {
+        "tableName": "T_ACHIEVEMENT",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `isFound` INTEGER NOT NULL, PRIMARY KEY(`name`))",
+        "fields": [
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isFound",
+            "columnName": "isFound",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "name"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_T_ACHIEVEMENT_name",
+            "unique": false,
+            "columnNames": [
+              "name"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_T_ACHIEVEMENT_name` ON `${TABLE_NAME}` (`name`)"
+          }
+        ],
+        "foreignKeys": []
+      },
       {
         "tableName": "T_FACT",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_fonc` INTEGER NOT NULL, `language` TEXT NOT NULL, `code` TEXT NOT NULL, `title` TEXT NOT NULL, `image` TEXT NOT NULL, `content` TEXT NOT NULL, `links` TEXT NOT NULL, `isNew` INTEGER NOT NULL, PRIMARY KEY(`id_fonc`, `language`), FOREIGN KEY(`code`) REFERENCES `T_CATEGORY`(`code`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
@@ -140,12 +176,54 @@
           }
         ],
         "foreignKeys": []
+      },
+      {
+        "tableName": "T_SETTING",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `value` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_T_SETTING_id",
+            "unique": false,
+            "columnNames": [
+              "id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_T_SETTING_id` ON `${TABLE_NAME}` (`id`)"
+          }
+        ],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'aac3c8807d72725dc4c32e67a304dc16')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1a3e4bdfa5a3d75c320036f4780cdb33')"
     ]
   }
 }

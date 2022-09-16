@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
+import com.team23.achievements.presentation.viewmodels.AchievementVM
 import com.team23.fact.presentation.viewmodels.FactDetailVM
 import com.team23.facts23.presentation.themes.Facts23Theme
 import com.team23.facts23.presentation.views.NavigationView
@@ -28,12 +29,13 @@ class MainActivity : ComponentActivity() {
     }
     private val homeVM: HomeVM by viewModels()
     private val settingsVM: SettingsVM by viewModels()
+    private val achievementVM: AchievementVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Facts23Theme(darkTheme = settingsVM.isForcedDarkMode.value ?: isSystemInDarkTheme()) {
-                NavigationView(factDetailVM, homeVM, settingsVM)
+                NavigationView(factDetailVM, homeVM, settingsVM, achievementVM)
             }
         }
     }
