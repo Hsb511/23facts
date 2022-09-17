@@ -3,12 +3,8 @@ package com.team23.facts23.presentation.views
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
@@ -23,16 +19,35 @@ import com.team23.home.presentation.views.HomeCategories
 import com.team23.home.presentation.views.HomeFacts
 import com.team23.settings.presentation.viewmodels.SettingsVM
 import com.team23.settings.presentation.views.SettingsView
+import kotlinx.coroutines.launch
 
 @ExperimentalFoundationApi
 @Composable
-fun NavigationView(factDetailVM: FactDetailVM, homeVM: HomeVM, settingsVM: SettingsVM, achievementVM: AchievementVM) {
+fun NavigationView(
+    factDetailVM: FactDetailVM,
+    homeVM: HomeVM,
+    settingsVM: SettingsVM,
+    achievementVM: AchievementVM
+) {
     val navController = rememberNavController()
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
     val currentScreen: MutableState<ScreenEnum> = remember { mutableStateOf(ScreenEnum.HOME) }
     val lastScreen: MutableState<ScreenEnum> = remember { mutableStateOf(ScreenEnum.HOME) }
     val isMenuExpanded = remember { mutableStateOf(false) }
 
     Scaffold(
+        snackbarHost = {
+            achievementVM.achievementToDisplay.value?.let {
+                SnackbarHost(
+                    achievement = it,
+                    hostState = snackbarHostState
+                )
+                scope.launch {
+                    snackbarHostState.showSnackbar(it.messageResId.toString())
+                }
+            }
+        },
         bottomBar = {
             BottomAppBar(
                 pageIndex = currentScreen.value.pageIndex,

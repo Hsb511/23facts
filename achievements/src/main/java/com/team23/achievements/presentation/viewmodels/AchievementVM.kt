@@ -1,10 +1,13 @@
 package com.team23.achievements.presentation.viewmodels
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.team23.achievements.domain.models.AchievementEnum
 import com.team23.achievements.domain.usecases.IsSpecificAchievementFoundUseCase
 import com.team23.achievements.domain.usecases.Unlock1IconophileUseCase
+import com.team23.achievements.presentation.viewobjects.AchievementVO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,6 +20,8 @@ class AchievementVM @Inject constructor(
 ) : ViewModel() {
     private var timesAmountAppIconClicked = 0 // TODO STORE IN DATABASE
     var isIconophileDisplayed: Boolean = false
+    val achievementToDisplay: MutableState<AchievementVO?> = mutableStateOf(null)
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
             isSpecificAchievementFoundUseCase(AchievementEnum.APP_ICON_CLICKED_23_TIMES.name).also {
@@ -28,13 +33,15 @@ class AchievementVM @Inject constructor(
 
     fun onAppIconClicked() {
         if (!isIconophileDisplayed) {
-            timesAmountAppIconClicked ++
+            timesAmountAppIconClicked++
             viewModelScope.launch(Dispatchers.IO) {
-                val achievement = unlock1IconophileUseCase.invoke(timesAmountAppIconClicked)
-                achievement?.let {
-                    // TODO SHOW POPUP
-                    println("23")
+                achievementToDisplay.value =
+                    unlock1IconophileUseCase.invoke(timesAmountAppIconClicked)?.let {
                     isIconophileDisplayed = true
+                    AchievementVO(
+                        imageResId = it.achievementEnum.imageResId,
+                        messageResId = it.achievementEnum.popupMessageResId
+                    )
                 }
             }
         }
