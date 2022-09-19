@@ -34,7 +34,7 @@ fun TopAppBar(
         navigationIcon = {
             if (screen == ScreenEnum.HOME) {
                 Image(
-                    painter = painterResource(id = R.drawable.png_23facts_logo),
+                    painter = painterResource(id = R.drawable.png_23facts_logo_transparent),
                     contentDescription = "23 facts logo",
                     modifier = Modifier
                         .height(60.dp)
