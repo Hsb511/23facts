@@ -114,6 +114,10 @@ fun NavigationView(
                 currentScreen.value = ScreenEnum.SETTINGS
                 SettingsView(settingsVM = settingsVM)
             }
+            composable(route = ScreenEnum.ABOUT.route) {
+                currentScreen.value = ScreenEnum.ABOUT
+                AboutView()
+            }
         }
         if (isMenuExpanded.value) {
             Surface(

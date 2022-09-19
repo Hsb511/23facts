@@ -6,5 +6,6 @@ enum class ScreenEnum(val pageIndex: Int, val route: String) {
     FACT(0, "fact/{factId}"),
     RANDOM(1, "random"),
     SEARCH(2, "search"),
-    SETTINGS(3, "settings")
+    SETTINGS(3, "settings"),
+    ABOUT(4, "about")
 }

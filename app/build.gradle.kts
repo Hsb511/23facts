@@ -47,6 +47,7 @@ dependencies {
 
     // Hilt
     implementation("com.google.dagger:hilt-android:${Versions.HILT}")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.2.1")
     kapt("com.google.dagger:hilt-android-compiler:${Versions.HILT}")
 
     // Navigation
