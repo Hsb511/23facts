@@ -3,4 +3,6 @@
     <string name="achievements_unlocked_at">Unlocked on : %s</string>
     <string name="achievements_iconophile">iconophile</string>
     <string name="achievements_iconophile_message">You love that icon don\'t you?</string>
+    <string name="achievements_homebody">homebody</string>
+    <string name="achievements_homebody_message">Home Sweet Home</string>
 </resources>
