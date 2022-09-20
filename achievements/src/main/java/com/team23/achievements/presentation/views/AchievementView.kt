@@ -17,7 +17,7 @@ fun AchievementView(achievementVM: AchievementVM) {
 @Composable
 fun AchievementView(achievements: List<AchievementVO>) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 128.dp)
+        columns = GridCells.Adaptive(minSize = 200.dp)
     ) {
         items(achievements) { achievement ->
             AchievementItem(achievement = achievement)

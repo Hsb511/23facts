@@ -4,5 +4,5 @@ data class AchievementVO(
     val titleResId: Int,
     val imageResId: Int,
     val messageResId: Int,
-    val unlockDate: String?
+    var unlockDate: String?
 )

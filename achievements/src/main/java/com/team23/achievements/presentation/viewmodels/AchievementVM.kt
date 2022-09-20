@@ -9,6 +9,7 @@ import com.team23.achievements.domain.models.AchievementEnum
 import com.team23.achievements.domain.usecases.GetAllAchievementsUseCase
 import com.team23.achievements.domain.usecases.IsSpecificAchievementFoundUseCase
 import com.team23.achievements.domain.usecases.Unlock1IconophileUseCase
+import com.team23.achievements.presentation.mappers.toAchievementStringDate
 import com.team23.achievements.presentation.mappers.toListVO
 import com.team23.achievements.presentation.mappers.toPreviewVO
 import com.team23.achievements.presentation.viewobjects.AchievementPreviewVO
@@ -50,6 +51,9 @@ class AchievementVM @Inject constructor(
                 achievementPreviewToDisplay.value =
                     unlock1IconophileUseCase.invoke(timesAmountAppIconClicked)?.let {
                         isIconophileDisplayed = true
+                        achievements[0].apply {
+                            this.unlockDate = it.unlockDate?.toAchievementStringDate()
+                        }
                         it.toPreviewVO()
                     }
             }

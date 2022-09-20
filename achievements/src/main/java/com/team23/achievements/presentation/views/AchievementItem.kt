@@ -1,9 +1,7 @@
 package com.team23.achievements.presentation.views
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -14,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.team23.achievements.R
@@ -23,32 +22,37 @@ import com.team23.achievements.presentation.viewobjects.AchievementVO
 fun AchievementItem(achievement: AchievementVO) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.size(100.dp)
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
     ) {
         Text(
             text = stringResource(id = achievement.titleResId),
-            style = MaterialTheme.typography.h6
+            style = MaterialTheme.typography.h4
         )
-        if (achievement.unlockDate != null) {
+        val unlockDate = achievement.unlockDate
+        if (unlockDate != null) {
+            Text(
+                text = stringResource(id = R.string.achievements_unlocked_at, unlockDate),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.body2
+            )
             Image(
                 painter = painterResource(id = achievement.imageResId),
                 contentDescription = "achievement image",
-                modifier = Modifier.size(46.dp)
+                modifier = Modifier.size(92.dp).padding(4.dp)
             )
-            Text(text = stringResource(id = achievement.messageResId))
             Text(
-                text = stringResource(
-                    id = R.string.achievements_unlocked_at,
-                    achievement.unlockDate
-                )
+                text = stringResource(id = achievement.messageResId),
+                textAlign = TextAlign.Center,
             )
         } else {
             Icon(
                 imageVector = Icons.Filled.Lock,
                 contentDescription = "achievement locked",
                 tint = MaterialTheme.colors.surface,
-                modifier = Modifier.size(46.dp)
+                modifier = Modifier.size(92.dp).padding(4.dp)
             )
         }
     }
