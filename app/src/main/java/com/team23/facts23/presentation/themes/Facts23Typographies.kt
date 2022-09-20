@@ -65,8 +65,8 @@ val Facts23Typography = Typography(
     ),
     h5 = TextStyle(
         fontFamily = appFontFamily,
-        fontWeight = FontWeight.Normal,
-        fontSize = 18.sp,
+        fontWeight = FontWeight.Light,
+        fontSize = 16.sp,
         letterSpacing = 0.1.sp
     ),
     h6 = TextStyle(

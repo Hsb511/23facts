@@ -116,6 +116,13 @@ fun TopAppBar(
                         color = MaterialTheme.colors.onPrimary
                     )
                 }
+                ScreenEnum.ACHIEVEMENT -> {
+                    Text(
+                        text = stringResource(id = R.string.navigation_achievements),
+                        style = MaterialTheme.typography.h5,
+                        color = MaterialTheme.colors.onPrimary
+                    )
+                }
             }
         },
         actions = {

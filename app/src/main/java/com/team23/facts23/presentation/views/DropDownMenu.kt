@@ -48,7 +48,10 @@ fun DropDownMenu(isMenuExpanded: MutableState<Boolean>, navController: NavHostCo
                 )
             }
         }
-        DropdownMenuItem(onClick = { isMenuExpanded.value = false }) {
+        DropdownMenuItem(onClick = {
+            isMenuExpanded.value = false
+            navController.navigate(ScreenEnum.ACHIEVEMENT.route)
+        }) {
             Row {
                 Icon(imageVector = Icons.Filled.Lock, contentDescription = "achievements")
                 Text(

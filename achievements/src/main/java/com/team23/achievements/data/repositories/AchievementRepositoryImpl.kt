@@ -1,9 +1,10 @@
 package com.team23.achievements.data.repositories
 
-import com.team23.achievements.data.mappers.toModels
+import com.team23.achievements.data.mappers.toListModel
 import com.team23.achievements.domain.models.AchievementModel
 import com.team23.achievements.domain.repositories.AchievementRepository
 import com.team23.room.data.daos.AchievementDao
+import java.util.*
 import javax.inject.Inject
 
 class AchievementRepositoryImpl @Inject constructor(
@@ -12,8 +13,8 @@ class AchievementRepositoryImpl @Inject constructor(
     override suspend fun findIsFoundByName(name: String): Boolean =
         achievementDao.findIsFoundByName(name)
 
-    override suspend fun loadAll(): List<AchievementModel> = achievementDao.loadAll().toModels()
+    override suspend fun loadAll(): List<AchievementModel> = achievementDao.loadAll().toListModel()
 
-    override suspend fun unlockAchievement(achievementName: String) =
-        achievementDao.updateIsFound(achievementName)
+    override suspend fun unlockAchievement(achievementName: String, date: Date) =
+        achievementDao.updateIsFoundAndUnlockDate(achievementName, date)
 }

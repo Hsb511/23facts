@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="achievements_unlocked_at">Unlocked on : %s</string>
     <string name="achievements_iconophile">iconophile</string>
-    <string name="achievements_iconophile_message">Iconophile secret unlocked</string>
+    <string name="achievements_iconophile_message">You love that icon don\'t you?</string>
 </resources>

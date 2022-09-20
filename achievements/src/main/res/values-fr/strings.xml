@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="achievements_unlocked_at">Débloqué le : %s</string>
     <string name="achievements_iconophile">iconophile</string>
+    <string name="achievements_iconophile_message">Tu l\'aimes ce logo n\'est-ce pas ?</string>
 </resources>

@@ -12,10 +12,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.team23.achievements.presentation.viewobjects.AchievementVO
+import com.team23.achievements.presentation.viewobjects.AchievementPreviewVO
 
 @Composable
-fun SnackbarHost(achievement: AchievementVO, hostState: SnackbarHostState) {
+fun SnackbarHost(achievementPreview: AchievementPreviewVO, hostState: SnackbarHostState) {
     SnackbarHost(
         hostState = hostState,
         snackbar = {
@@ -35,7 +35,7 @@ fun SnackbarHost(achievement: AchievementVO, hostState: SnackbarHostState) {
                         )
                 ) {
                     Image(
-                        painter = painterResource(id = achievement.imageResId),
+                        painter = painterResource(id = achievementPreview.imageResId),
                         contentDescription = "achievement image",
                         modifier = Modifier
                             .fillMaxHeight()
@@ -47,7 +47,7 @@ fun SnackbarHost(achievement: AchievementVO, hostState: SnackbarHostState) {
                             )
                     )
                     Text(
-                        text = stringResource(id = achievement.messageResId),
+                        text = stringResource(id = achievementPreview.messageResId),
                         modifier = Modifier.padding(8.dp)
                     )
                 }

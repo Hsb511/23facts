@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.team23.achievements.presentation.viewmodels.AchievementVM
+import com.team23.achievements.presentation.views.AchievementView
 import com.team23.core.domain.ScreenEnum
 import com.team23.fact.presentation.viewmodels.FactDetailVM
 import com.team23.fact.presentation.views.FactDetail
@@ -38,9 +39,9 @@ fun NavigationView(
 
     Scaffold(
         snackbarHost = {
-            achievementVM.achievementToDisplay.value?.let {
+            achievementVM.achievementPreviewToDisplay.value?.let {
                 SnackbarHost(
-                    achievement = it,
+                    achievementPreview = it,
                     hostState = snackbarHostState
                 )
                 scope.launch {
@@ -117,6 +118,10 @@ fun NavigationView(
             composable(route = ScreenEnum.ABOUT.route) {
                 currentScreen.value = ScreenEnum.ABOUT
                 AboutView()
+            }
+            composable(route = ScreenEnum.ACHIEVEMENT.route) {
+                currentScreen.value = ScreenEnum.ACHIEVEMENT
+                AchievementView(achievementVM = achievementVM)
             }
         }
         if (isMenuExpanded.value) {
