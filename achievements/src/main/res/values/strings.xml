@@ -5,4 +5,6 @@
     <string name="achievements_iconophile_message">You love that icon don\'t you?</string>
     <string name="achievements_homebody">homebody</string>
     <string name="achievements_homebody_message">Home Sweet Home</string>
+    <string name="achievements_factomania">factomania</string>
+    <string name="achievements_factomania_message">The more you read, the more you learn</string>
 </resources>

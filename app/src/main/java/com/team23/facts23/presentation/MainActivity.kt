@@ -21,15 +21,16 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var viewModelAssistedFactory: FactDetailVM.Factory
 
+    private val achievementVM: AchievementVM by viewModels()
     private val factDetailVM: FactDetailVM by viewModels {
         FactDetailVM.provideFactory(
             assistedFactory = viewModelAssistedFactory,
-            factId = null
+            factId = null,
+            achievementVM = achievementVM,
         )
     }
     private val homeVM: HomeVM by viewModels()
     private val settingsVM: SettingsVM by viewModels()
-    private val achievementVM: AchievementVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.team23.achievements.domain.usecases.Unlock3FactomaniaUseCase
+import com.team23.achievements.presentation.viewmodels.AchievementVM
 import com.team23.fact.domain.usecases.GetCategoryUseCase
 import com.team23.fact.domain.usecases.GetAndReadFactUseCase
 import com.team23.fact.domain.usecases.GetOpenGraphMetaDataFromUrlUseCase
@@ -20,9 +22,11 @@ import kotlinx.coroutines.withContext
 
 class FactDetailVM @AssistedInject constructor(
     @Assisted var factId: String?,
+    @Assisted private val achievementVM: AchievementVM,
     private val getAndReadFactUseCase: GetAndReadFactUseCase,
     private val getCategoryUseCase: GetCategoryUseCase,
-    private val getOpenGraphMetaDataFromUrlUseCase: GetOpenGraphMetaDataFromUrlUseCase
+    private val getOpenGraphMetaDataFromUrlUseCase: GetOpenGraphMetaDataFromUrlUseCase,
+    private val unlock3FactomaniaUseCase: Unlock3FactomaniaUseCase,
 ) : ViewModel() {
     val factDetail: MutableState<FactDetailVO?> = mutableStateOf(null)
 
@@ -35,6 +39,9 @@ class FactDetailVM @AssistedInject constructor(
         factId = newFactId
         viewModelScope.launch(Dispatchers.IO) {
             val factModel = getAndReadFactUseCase.execute(factId)
+            unlock3FactomaniaUseCase()?.let {
+                achievementVM.achievementPreviewToDisplay.value = it
+            }
             factId = factModel?.id
             val category = getCategoryUseCase.execute(factModel?.category)
             val sources = factModel?.sources
@@ -80,17 +87,18 @@ class FactDetailVM @AssistedInject constructor(
 
     @AssistedFactory
     interface Factory {
-        fun create(factId: String?): FactDetailVM
+        fun create(factId: String?, achievementVM: AchievementVM): FactDetailVM
     }
 
     @Suppress("UNCHECKED_CAST")
     companion object {
         fun provideFactory(
             assistedFactory: Factory,
-            factId: String?
+            factId: String?,
+            achievementVM: AchievementVM,
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
-                return assistedFactory.create(factId) as T
+                return assistedFactory.create(factId, achievementVM) as T
             }
         }
     }

@@ -5,4 +5,6 @@
     <string name="achievements_iconophile_message">Tu l\'aimes ce logo n\'est-ce pas ?</string>
     <string name="achievements_homebody">casanier</string>
     <string name="achievements_homebody_message">Rien ne vaut la douceur du foyer</string>
+    <string name="achievements_factomania">factomanie</string>
+    <string name="achievements_factomania_message">Plus tu lis, plus tu apprends</string>
 </resources>

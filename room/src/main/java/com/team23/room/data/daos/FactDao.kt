@@ -20,4 +20,7 @@ interface FactDao {
 
     @Query("UPDATE T_FACT SET isNew = :isNew WHERE id_fonc = :id")
     fun updateNewById(id: Long, isNew: Boolean = false)
+
+    @Query("SELECT COUNT(*) FROM T_FACT WHERE isNew = 0")
+    fun countReadFacts(): Int
 }
