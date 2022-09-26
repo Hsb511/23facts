@@ -1,11 +1,16 @@
 package com.team23.facts23.presentation
 
+import android.animation.ObjectAnimator
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.animation.AnticipateInterpolator
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.core.animation.doOnEnd
 import com.team23.achievements.presentation.viewmodels.AchievementVM
 import com.team23.fact.presentation.viewmodels.FactDetailVM
 import com.team23.facts23.presentation.themes.Facts23Theme
@@ -37,6 +42,26 @@ class MainActivity : ComponentActivity() {
         setContent {
             Facts23Theme(darkTheme = settingsVM.isForcedDarkMode.value ?: isSystemInDarkTheme()) {
                 NavigationView(factDetailVM, homeVM, settingsVM, achievementVM)
+            }
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            splashScreen.setOnExitAnimationListener { splashScreenView ->
+                // Create your custom animation.
+                val slideUp = ObjectAnimator.ofFloat(
+                    splashScreenView,
+                    View.TRANSLATION_Y,
+                    0f,
+                    -splashScreenView.height.toFloat()
+                )
+                slideUp.interpolator = AnticipateInterpolator(1f)
+                slideUp.duration = 2000L
+
+                // Call SplashScreenView.remove at the end of your custom animation.
+                slideUp.doOnEnd { splashScreenView.remove() }
+
+                // Run your animation.
+                slideUp.start()
             }
         }
     }

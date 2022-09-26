@@ -57,7 +57,7 @@ fun TopAppBar(
                 ScreenEnum.HOME -> {
                     Text(
                         text = stringResource(id = R.string.app_name),
-                        style = MaterialTheme.typography.h5,
+                        style = MaterialTheme.typography.h4,
                         color = MaterialTheme.colors.onPrimary
                     )
                 }
