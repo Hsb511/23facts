@@ -15,13 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.team23.core.domain.ScreenEnum
+import com.team23.core.domain.Screen
 import com.team23.facts23.R
 import com.team23.home.presentation.CategoryCodeBox
 
 @Composable
 fun TopAppBar(
-    screen: ScreenEnum,
+    screen: Screen,
     isMenuExpanded: MutableState<Boolean>,
     onBackPressed: () -> Unit,
     codeCategory: String?,
@@ -32,7 +32,7 @@ fun TopAppBar(
     TopAppBar(
         backgroundColor = MaterialTheme.colors.primary,
         navigationIcon = {
-            if (screen == ScreenEnum.HOME) {
+            if (screen is Screen.Home) {
                 Image(
                     painter = painterResource(id = R.drawable.png_23facts_logo_transparent),
                     contentDescription = "23 facts logo",
@@ -54,14 +54,14 @@ fun TopAppBar(
         },
         title = {
             when (screen) {
-                ScreenEnum.HOME -> {
+                is Screen.Home -> {
                     Text(
                         text = stringResource(id = R.string.app_name),
                         style = MaterialTheme.typography.h4,
                         color = MaterialTheme.colors.onPrimary
                     )
                 }
-                ScreenEnum.CATEGORY -> {
+                is Screen.Category -> {
                     if (codeCategory != null) {
                         CategoryCodeBox(category = codeCategory)
                     }
@@ -74,8 +74,8 @@ fun TopAppBar(
                         )
                     }
                 }
-                ScreenEnum.FACT,
-                ScreenEnum.RANDOM -> {
+                is Screen.Fact,
+                is Screen.Random -> {
                     if (codeCategory != null) {
                         CategoryCodeBox(category = codeCategory)
                     }
@@ -95,30 +95,9 @@ fun TopAppBar(
                         )
                     }
                 }
-                ScreenEnum.SEARCH -> {
+                else -> {
                     Text(
-                        text = stringResource(id = R.string.navigation_search),
-                        style = MaterialTheme.typography.h5,
-                        color = MaterialTheme.colors.onPrimary
-                    )
-                }
-                ScreenEnum.SETTINGS -> {
-                    Text(
-                        text = stringResource(id = R.string.navigation_settings),
-                        style = MaterialTheme.typography.h5,
-                        color = MaterialTheme.colors.onPrimary
-                    )
-                }
-                ScreenEnum.ABOUT -> {
-                    Text(
-                        text = stringResource(id = R.string.navigation_about),
-                        style = MaterialTheme.typography.h5,
-                        color = MaterialTheme.colors.onPrimary
-                    )
-                }
-                ScreenEnum.ACHIEVEMENT -> {
-                    Text(
-                        text = stringResource(id = R.string.navigation_achievements),
+                        text = stringResource(id = screen.title),
                         style = MaterialTheme.typography.h5,
                         color = MaterialTheme.colors.onPrimary
                     )

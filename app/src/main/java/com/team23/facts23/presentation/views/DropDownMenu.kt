@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.team23.core.domain.ScreenEnum
+import com.team23.core.domain.Screen
 import com.team23.facts23.R
 
 @Composable
@@ -26,7 +26,7 @@ fun DropDownMenu(isMenuExpanded: MutableState<Boolean>, navController: NavHostCo
     ) {
         DropdownMenuItem(onClick = {
             isMenuExpanded.value = false
-            navController.navigate(ScreenEnum.SETTINGS.route)
+            navController.navigate(Screen.Settings().route)
         }) {
             Row {
                 Icon(imageVector = Icons.Filled.Settings, contentDescription = "settings")
@@ -38,7 +38,7 @@ fun DropDownMenu(isMenuExpanded: MutableState<Boolean>, navController: NavHostCo
         }
         DropdownMenuItem(onClick = {
             isMenuExpanded.value = false
-            navController.navigate(ScreenEnum.ABOUT.route)
+            navController.navigate(Screen.About().route)
         }) {
             Row {
                 Icon(imageVector = Icons.Filled.Info, contentDescription = "info")
@@ -50,7 +50,7 @@ fun DropDownMenu(isMenuExpanded: MutableState<Boolean>, navController: NavHostCo
         }
         DropdownMenuItem(onClick = {
             isMenuExpanded.value = false
-            navController.navigate(ScreenEnum.ACHIEVEMENT.route)
+            navController.navigate(Screen.Achievement().route)
         }) {
             Row {
                 Icon(imageVector = Icons.Filled.Lock, contentDescription = "achievements")

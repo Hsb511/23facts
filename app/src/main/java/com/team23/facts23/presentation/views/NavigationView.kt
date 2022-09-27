@@ -14,7 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.team23.achievements.presentation.viewmodels.AchievementVM
 import com.team23.achievements.presentation.views.AchievementView
-import com.team23.core.domain.ScreenEnum
+import com.team23.core.domain.Screen
 import com.team23.fact.presentation.viewmodels.FactDetailVM
 import com.team23.fact.presentation.views.FactDetail
 import com.team23.home.presentation.viewmodels.HomeVM
@@ -35,8 +35,8 @@ fun NavigationView(
     val navController = rememberNavController()
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
-    val currentScreen: MutableState<ScreenEnum> = remember { mutableStateOf(ScreenEnum.HOME) }
-    val lastScreen: MutableState<ScreenEnum> = remember { mutableStateOf(ScreenEnum.HOME) }
+    val currentScreen: MutableState<Screen> = remember { mutableStateOf(Screen.Home()) }
+    val lastScreen: MutableState<Screen> = remember { mutableStateOf(Screen.Home()) }
     val isMenuExpanded = remember { mutableStateOf(false) }
 
     Scaffold(
@@ -70,7 +70,7 @@ fun NavigationView(
                 screen = currentScreen.value,
                 isMenuExpanded = isMenuExpanded,
                 onBackPressed = {
-                    if (currentScreen.value == ScreenEnum.RANDOM) {
+                    if (currentScreen.value is Screen.Random) {
                         factDetailVM.factDetail.value = null
                         navController.navigate(lastScreen.value.route)
                     } else {
@@ -90,39 +90,39 @@ fun NavigationView(
     ) { padding ->
         NavHost(
             navController = navController,
-            startDestination = ScreenEnum.HOME.route,
+            startDestination = Screen.Home().route,
             modifier = Modifier.padding(padding)
         ) {
-            composable(route = ScreenEnum.HOME.route) {
-                currentScreen.value = ScreenEnum.HOME
+            composable(route = Screen.Home().route) {
+                currentScreen.value = Screen.Home()
                 HomeCategories(homeVM = homeVM, navController = navController)
             }
-            composable(route = ScreenEnum.CATEGORY.route) {
-                currentScreen.value = ScreenEnum.CATEGORY
+            composable(route = Screen.Category().route) {
+                currentScreen.value = Screen.Category()
                 HomeFacts(homeVM = homeVM, navController = navController)
             }
-            composable(route = ScreenEnum.RANDOM.route) {
-                if (currentScreen.value != ScreenEnum.RANDOM) {
+            composable(route = Screen.Random().route) {
+                if (currentScreen.value != Screen.Random()) {
                     lastScreen.value = currentScreen.value
                 }
-                currentScreen.value = ScreenEnum.RANDOM
+                currentScreen.value = Screen.Random()
                 FactDetail(factDetailVM = factDetailVM)
             }
-            composable(route = ScreenEnum.FACT.route) { backStackEntry ->
-                currentScreen.value = ScreenEnum.FACT
+            composable(route = Screen.Fact().route) { backStackEntry ->
+                currentScreen.value = Screen.Fact()
                 factDetailVM.loadFactDetail(backStackEntry.arguments?.getString("factId"))
                 FactDetail(factDetailVM = factDetailVM)
             }
-            composable(route = ScreenEnum.SETTINGS.route) {
-                currentScreen.value = ScreenEnum.SETTINGS
+            composable(route = Screen.Settings().route) {
+                currentScreen.value = Screen.Settings()
                 SettingsView(settingsVM = settingsVM)
             }
-            composable(route = ScreenEnum.ABOUT.route) {
-                currentScreen.value = ScreenEnum.ABOUT
+            composable(route = Screen.About().route) {
+                currentScreen.value = Screen.About()
                 AboutView()
             }
-            composable(route = ScreenEnum.ACHIEVEMENT.route) {
-                currentScreen.value = ScreenEnum.ACHIEVEMENT
+            composable(route = Screen.Achievement().route) {
+                currentScreen.value = Screen.Achievement()
                 AchievementView(achievementVM = achievementVM)
             }
         }

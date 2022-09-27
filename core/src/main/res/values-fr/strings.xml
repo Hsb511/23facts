@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="navigation_home">Accueil</string>
+    <string name="navigation_categories">Catégories</string>
+    <string name="navigation_facts">Faits</string>
+    <string name="navigation_random">Aléatoire</string>
+    <string name="navigation_search">Recherche</string>
+    <string name="navigation_settings">Paramètres</string>
+    <string name="navigation_about">Infos &amp; Contact</string>
+    <string name="navigation_achievements">Secrets</string>
+</resources>
