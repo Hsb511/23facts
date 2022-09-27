@@ -1,5 +1,6 @@
 package com.team23.facts23.presentation.views
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -10,7 +11,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun NavigationLabel(
-    textResId: Int,
+    @StringRes textResId: Int,
     selected: Boolean
 ) {
     Text(

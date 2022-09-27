@@ -1,5 +1,6 @@
 package com.team23.facts23.presentation.views
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
@@ -13,7 +14,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun NavigationIcon(
     imageVector: ImageVector,
-    descriptionResId: Int,
+    @StringRes descriptionResId: Int,
     selected: Boolean
 ) {
     Icon(
