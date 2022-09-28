@@ -63,6 +63,7 @@ fun AchievementItem(achievement: AchievementVO) {
 fun AchievementItemPreview() {
     AchievementItem(
         achievement = AchievementVO(
+            id = 23,
             titleResId = R.string.achievements_iconophile,
             imageResId = R.drawable.iconophile,
             messageResId = R.string.achievements_iconophile_message,

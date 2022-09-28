@@ -14,10 +14,11 @@ fun List<AchievementModel>.toListVO() = this.map {
 }
 
 private fun AchievementModel.toVO() = AchievementVO(
+    id = this.achievementEnum.ordinal,
     titleResId = this.achievementEnum.nameResId,
     imageResId = this.achievementEnum.imageResId,
     messageResId = this.achievementEnum.popupMessageResId,
     unlockDate = this.unlockDate?.toAchievementStringDate(),
 )
 
-fun Date.toAchievementStringDate() = formatter.format(this)
+fun Date.toAchievementStringDate(): String = formatter.format(this)

@@ -10,9 +10,9 @@ class Unlock1IconophileUseCase @Inject constructor(
 ) {
     suspend fun invoke(clickAmount: Int): AchievementModel? {
         if (clickAmount >= 23) {
-            unlockAchievementUseCase(AchievementEnum.APP_ICON_CLICKED_23_TIMES)
+            unlockAchievementUseCase(AchievementEnum.ACH1_APP_ICON_CLICKED_23_TIMES)
             return AchievementModel(
-                achievementEnum = AchievementEnum.APP_ICON_CLICKED_23_TIMES,
+                achievementEnum = AchievementEnum.ACH1_APP_ICON_CLICKED_23_TIMES,
                 isFound = true,
                 unlockDate = Date()
             )

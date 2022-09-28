@@ -26,7 +26,6 @@ class FactDetailVM @AssistedInject constructor(
     private val getAndReadFactUseCase: GetAndReadFactUseCase,
     private val getCategoryUseCase: GetCategoryUseCase,
     private val getOpenGraphMetaDataFromUrlUseCase: GetOpenGraphMetaDataFromUrlUseCase,
-    private val unlock3FactomaniaUseCase: Unlock3FactomaniaUseCase,
 ) : ViewModel() {
     val factDetail: MutableState<FactDetailVO?> = mutableStateOf(null)
 
@@ -39,9 +38,7 @@ class FactDetailVM @AssistedInject constructor(
         factId = newFactId
         viewModelScope.launch(Dispatchers.IO) {
             val factModel = getAndReadFactUseCase.execute(factId)
-            unlock3FactomaniaUseCase()?.let {
-                achievementVM.achievementPreviewToDisplay.value = it
-            }
+            achievementVM.onFactLoaded()
             factId = factModel?.id
             val category = getCategoryUseCase.execute(factModel?.category)
             val sources = factModel?.sources
