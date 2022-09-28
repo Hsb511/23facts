@@ -16,6 +16,7 @@ import com.team23.fact.presentation.viewmodels.FactDetailVM
 import com.team23.facts23.presentation.themes.Facts23Theme
 import com.team23.facts23.presentation.views.NavigationView
 import com.team23.home.presentation.viewmodels.HomeVM
+import com.team23.search.presentation.viewmodels.SearchVM
 import com.team23.settings.presentation.viewmodels.SettingsVM
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -36,12 +37,13 @@ class MainActivity : ComponentActivity() {
     }
     private val homeVM: HomeVM by viewModels()
     private val settingsVM: SettingsVM by viewModels()
+    private val searchVM: SearchVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Facts23Theme(darkTheme = settingsVM.isForcedDarkMode.value ?: isSystemInDarkTheme()) {
-                NavigationView(factDetailVM, homeVM, settingsVM, achievementVM)
+                NavigationView(factDetailVM, homeVM, settingsVM, achievementVM, searchVM)
             }
         }
 

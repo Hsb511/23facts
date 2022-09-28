@@ -20,6 +20,7 @@ import com.team23.fact.presentation.views.FactDetail
 import com.team23.home.presentation.viewmodels.HomeVM
 import com.team23.home.presentation.views.HomeCategories
 import com.team23.home.presentation.views.HomeFacts
+import com.team23.search.presentation.viewmodels.SearchVM
 import com.team23.search.presentation.views.SearchView
 import com.team23.settings.presentation.viewmodels.SettingsVM
 import com.team23.settings.presentation.views.SettingsView
@@ -31,7 +32,8 @@ fun NavigationView(
     factDetailVM: FactDetailVM,
     homeVM: HomeVM,
     settingsVM: SettingsVM,
-    achievementVM: AchievementVM
+    achievementVM: AchievementVM,
+    searchVM: SearchVM,
 ) {
     val navController = rememberNavController()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -130,7 +132,7 @@ fun NavigationView(
             }
             composable(route = Screen.Search().route) {
                 currentScreen.value = Screen.Search()
-                SearchView()
+                SearchView(searchVM = searchVM)
             }
         }
         if (isMenuExpanded.value) {
