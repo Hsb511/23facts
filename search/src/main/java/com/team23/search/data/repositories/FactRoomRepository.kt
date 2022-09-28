@@ -9,6 +9,6 @@ import javax.inject.Inject
 class FactRoomRepository @Inject constructor(
     private val factDao: FactDao
 ) : FactRepository {
-    override suspend fun searchFacts(searchText: String): List<FactPreview> =
-        factDao.loadBySearchText(searchText).toModels()
+    override suspend fun searchFacts(searchText: String, language: String): List<FactPreview> =
+        factDao.loadBySearchTextAndLanguage(searchText, language).toModels()
 }

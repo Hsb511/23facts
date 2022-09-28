@@ -21,9 +21,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
@@ -34,7 +35,7 @@ import com.team23.search.presentation.viewobjects.FactPreviewVO
 fun SearchView(searchVM: SearchVM) {
     SearchView(
         searchText = searchVM.searchText,
-        onSearchChanged = { "" },
+        onSearchChanged = { value -> searchVM.onTextChanged(value) },
         foundFacts = searchVM.facts,
         onFactClicked = {}
     )
@@ -42,15 +43,17 @@ fun SearchView(searchVM: SearchVM) {
 
 @Composable
 fun SearchView(
-    searchText: MutableState<TextFieldValue>,
-    onSearchChanged: (value: TextFieldValue) -> String,
+    searchText: MutableState<String>,
+    onSearchChanged: (value: String) -> Unit,
     foundFacts: List<FactPreviewVO>,
     onFactClicked: (FactPreviewVO) -> Unit = {}
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         TextField(
             value = searchText.value,
-            onValueChange = { onSearchChanged(it) },
+            onValueChange = {
+                onSearchChanged(it)
+                searchText.value = it },
             shape = MaterialTheme.shapes.large,
             modifier = Modifier
                 .fillMaxWidth()
@@ -67,7 +70,6 @@ fun SearchView(
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
-                        .padding(4.dp)
                         .background(
                             color = MaterialTheme.colors.surface,
                             shape = MaterialTheme.shapes.large
@@ -119,7 +121,9 @@ fun SearchView(
                             text = it.text,
                             style = MaterialTheme.typography.body2,
                             color = MaterialTheme.colors.onSurface,
+                            lineHeight = 13.sp,
                             maxLines = 3,
+                            overflow = TextOverflow.Ellipsis,
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(8.dp, 0.dp)
@@ -136,8 +140,8 @@ fun SearchView(
 @Composable
 fun SearchPreview() {
     SearchView(
-        searchText = remember { mutableStateOf(TextFieldValue("mathémati")) },
-        onSearchChanged = { "" },
+        searchText = remember { mutableStateOf("mathémati") },
+        onSearchChanged = { },
         foundFacts = listOf(
             FactPreviewVO(
                 imageUrl = "https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
