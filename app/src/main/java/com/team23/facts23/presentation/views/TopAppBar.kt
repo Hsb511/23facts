@@ -68,7 +68,7 @@ fun TopAppBar(
                     if (nameCategory != null) {
                         Text(
                             text = nameCategory,
-                            style = MaterialTheme.typography.h5,
+                            style = MaterialTheme.typography.h6,
                             color = MaterialTheme.colors.onPrimary,
                             modifier = Modifier.padding(4.dp, 0.dp, 8.dp, 0.dp)
                         )
@@ -82,7 +82,7 @@ fun TopAppBar(
                     if (nameCategory != null) {
                         Text(
                             text = nameCategory,
-                            style = MaterialTheme.typography.h5,
+                            style = MaterialTheme.typography.h6,
                             color = MaterialTheme.colors.onPrimary,
                             modifier = Modifier.padding(4.dp, 0.dp, 8.dp, 0.dp)
                         )
@@ -90,7 +90,7 @@ fun TopAppBar(
                     if (factId != null) {
                         Text(
                             text = "#$factId",
-                            style = MaterialTheme.typography.h5,
+                            style = MaterialTheme.typography.h6,
                             color = MaterialTheme.colors.onPrimary,
                         )
                     }

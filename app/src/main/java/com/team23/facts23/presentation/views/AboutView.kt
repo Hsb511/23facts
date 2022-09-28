@@ -39,14 +39,14 @@ fun AboutView() {
         )
         Text(
             text = stringResource(id = R.string.about_app_title),
-            style = MaterialTheme.typography.h6
+            style = MaterialTheme.typography.h5
         )
         Text(
             text = stringResource(id = R.string.about_app_description),
         )
         Text(
             text = stringResource(id = R.string.about_contact_title),
-            style = MaterialTheme.typography.h6
+            style = MaterialTheme.typography.h5
         )
         Text(
             text = stringResource(id = R.string.about_contact_description),

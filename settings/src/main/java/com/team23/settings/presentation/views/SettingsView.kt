@@ -36,7 +36,7 @@ fun SettingsView(
     Column {
         Text(
             text = stringResource(id = R.string.settings_theme_mode),
-            style = MaterialTheme.typography.h6,
+            style = MaterialTheme.typography.h5,
             modifier = Modifier.padding(8.dp)
         )
         SettingsSectionRadioButton(
@@ -50,7 +50,7 @@ fun SettingsView(
         )
         Text(
             text = stringResource(id = R.string.settings_colors),
-            style = MaterialTheme.typography.h6,
+            style = MaterialTheme.typography.h5,
             modifier = Modifier.padding(8.dp)
         )
         SettingsSectionRadioButton(
@@ -62,7 +62,7 @@ fun SettingsView(
         )
         Text(
             text = stringResource(id = R.string.settings_language),
-            style = MaterialTheme.typography.h6,
+            style = MaterialTheme.typography.h5,
             modifier = Modifier.padding(8.dp)
         )
         SettingsSectionRadioButton(
@@ -75,7 +75,7 @@ fun SettingsView(
         )
         Text(
             text = stringResource(id = R.string.settings_random),
-            style = MaterialTheme.typography.h6,
+            style = MaterialTheme.typography.h5,
             modifier = Modifier.padding(8.dp)
         )
         SettingsSectionRadioButton(
@@ -87,7 +87,7 @@ fun SettingsView(
         )
         Text(
             text = stringResource(id = R.string.settings_data),
-            style = MaterialTheme.typography.h6,
+            style = MaterialTheme.typography.h5,
             modifier = Modifier.padding(8.dp)
         )
         Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(8.dp, 0.dp)) {

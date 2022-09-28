@@ -6,7 +6,6 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.team23.facts23.R
 
@@ -64,16 +63,16 @@ val Facts23Typography = Typography(
         letterSpacing = 0.25.sp
     ),
     h5 = TextStyle(
-        fontFamily = appFontFamily,
-        fontWeight = FontWeight.Light,
-        fontSize = 16.sp,
-        letterSpacing = 0.1.sp
-    ),
-    h6 = TextStyle(
         fontFamily = titleFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 20.sp,
         letterSpacing = 0.15.sp
+    ),
+    h6 = TextStyle(
+        fontFamily = appFontFamily,
+        fontWeight = FontWeight.Light,
+        fontSize = 16.sp,
+        letterSpacing = 0.1.sp
     ),
     subtitle1 = TextStyle(
         fontFamily = appFontFamily,
