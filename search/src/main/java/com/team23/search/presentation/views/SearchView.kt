@@ -57,7 +57,12 @@ fun SearchView(
                 .padding(8.dp)
         )
 
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp)
+        ) {
             items(foundFacts) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,

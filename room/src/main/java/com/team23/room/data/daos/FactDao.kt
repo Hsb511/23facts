@@ -9,6 +9,9 @@ interface FactDao {
     @Query("SELECT * FROM T_FACT")
     fun loadAll(): List<FactEntity>
 
+    @Query("SELECT * FROM T_FACT WHERE content LIKE '%' || :searchText || '%' OR title LIKE '%' || :searchText || '%' OR links LIKE '%' || :searchText || '%'")
+    fun loadBySearchText(searchText: String): List<FactEntity>
+
     @Query("SELECT * FROM T_FACT WHERE id_fonc = :id AND language = :language")
     fun findByIdAndLanguage(id: Long, language: String): FactEntity?
 

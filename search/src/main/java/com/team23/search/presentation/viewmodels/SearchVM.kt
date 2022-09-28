@@ -5,12 +5,15 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.ViewModel
+import com.team23.search.domain.usecases.SearchFactsUseCase
 import com.team23.search.presentation.viewobjects.FactPreviewVO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchVM @Inject constructor() : ViewModel() {
+class SearchVM @Inject constructor(
+    private val searchFactsUseCase: SearchFactsUseCase
+) : ViewModel() {
     val searchText: MutableState<TextFieldValue> = mutableStateOf(TextFieldValue(""))
     val facts = mutableStateListOf<FactPreviewVO>()
 
