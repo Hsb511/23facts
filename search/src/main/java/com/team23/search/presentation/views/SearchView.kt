@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
@@ -32,12 +33,12 @@ import com.team23.search.presentation.viewmodels.SearchVM
 import com.team23.search.presentation.viewobjects.FactPreviewVO
 
 @Composable
-fun SearchView(searchVM: SearchVM) {
+fun SearchView(searchVM: SearchVM, navController: NavHostController) {
     SearchView(
         searchText = searchVM.searchText,
         onSearchChanged = { value -> searchVM.onTextChanged(value) },
         foundFacts = searchVM.facts,
-        onFactClicked = {}
+        onFactClicked = { factId -> navController.navigate("fact/$factId") }
     )
 }
 
@@ -46,7 +47,7 @@ fun SearchView(
     searchText: MutableState<String>,
     onSearchChanged: (value: String) -> Unit,
     foundFacts: List<FactPreviewVO>,
-    onFactClicked: (FactPreviewVO) -> Unit = {}
+    onFactClicked: (Long) -> Unit = {}
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         TextField(
@@ -77,7 +78,7 @@ fun SearchView(
                         )
                         .fillMaxWidth()
                         .height(69.dp)
-                        .clickable { onFactClicked(it) }
+                        .clickable { onFactClicked(it.id) }
                 ) {
                     Image(
                         painter = rememberAsyncImagePainter(
@@ -145,11 +146,13 @@ fun SearchPreview() {
         onSearchChanged = { },
         foundFacts = listOf(
             FactPreviewVO(
+                id = 23L,
                 imageUrl = "https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
                 title = "Le Paradoxe des Anniversaires",
                 text = "Dans une pièce où se trouvent 23 personnes, il y a une chance sur deux qu''au moins deux"
             ),
             FactPreviewVO(
+                id = 46L,
                 imageUrl = "https://miro.medium.com/max/1400/1*ahy12g2hFP21x7YolyQ_Ug.jpeg",
                 title = "Les problèmes de Hilbert",
                 text = "Le 8 août 1900, à l''occasion du second Congrès International des mathématiciens à la Sorbonne"

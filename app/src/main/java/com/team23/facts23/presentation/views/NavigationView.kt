@@ -132,7 +132,7 @@ fun NavigationView(
             }
             composable(route = Screen.Search().route) {
                 currentScreen.value = Screen.Search()
-                SearchView(searchVM = searchVM)
+                SearchView(searchVM = searchVM, navController = navController)
             }
         }
         if (isMenuExpanded.value) {

@@ -34,6 +34,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0-alpha01")
     debugImplementation("androidx.customview:customview:1.2.0-alpha01")
     debugImplementation("androidx.customview:customview-poolingcontainer:1.0.0")
+    implementation("androidx.navigation:navigation-compose:2.5.1")
     implementation("io.coil-kt:coil-compose:${Versions.COIL}")
     implementation("io.coil-kt:coil-svg:${Versions.COIL}")
 

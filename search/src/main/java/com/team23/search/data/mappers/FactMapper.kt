@@ -6,6 +6,7 @@ import com.team23.search.domain.models.FactPreview
 fun List<FactEntity>.toModels() = this.map { it.toModel() }
 
 fun FactEntity.toModel() = FactPreview(
+    id = this.id_fonc,
     imageUrl = this.image,
     title = this.title,
     text = this.content
