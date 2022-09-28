@@ -56,6 +56,7 @@ dependencies {
     implementation(project(":settings"))
     implementation(project(":core"))
     implementation(project(":achievements"))
+    implementation(project(":search"))
     implementation("androidx.navigation:navigation-compose:2.5.1")
 
     implementation("androidx.core:core-ktx:${Versions.ANDROID_CORE}")

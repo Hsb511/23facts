@@ -20,6 +20,7 @@ import com.team23.fact.presentation.views.FactDetail
 import com.team23.home.presentation.viewmodels.HomeVM
 import com.team23.home.presentation.views.HomeCategories
 import com.team23.home.presentation.views.HomeFacts
+import com.team23.search.presentation.views.SearchView
 import com.team23.settings.presentation.viewmodels.SettingsVM
 import com.team23.settings.presentation.views.SettingsView
 import kotlinx.coroutines.launch
@@ -56,13 +57,15 @@ fun NavigationView(
                 pageIndex = currentScreen.value.pageIndex,
                 onNavigateHome = {
                     factDetailVM.factDetail.value = null
-                    navController.navigate("home")
+                    navController.navigate(Screen.Home().route)
                 },
                 onNavigateRandom = {
                     factDetailVM.loadFactDetail("-1")
-                    navController.navigate("random")
+                    navController.navigate(Screen.Random().route)
                 },
-                onNavigateSearch = { /*TODO*/ }
+                onNavigateSearch = {
+                    navController.navigate(Screen.Search().route)
+                }
             )
         },
         topBar = {
@@ -124,6 +127,10 @@ fun NavigationView(
             composable(route = Screen.Achievement().route) {
                 currentScreen.value = Screen.Achievement()
                 AchievementView(achievementVM = achievementVM)
+            }
+            composable(route = Screen.Search().route) {
+                currentScreen.value = Screen.Search()
+                SearchView()
             }
         }
         if (isMenuExpanded.value) {
