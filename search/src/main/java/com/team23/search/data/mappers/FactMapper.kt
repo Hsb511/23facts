@@ -7,6 +7,7 @@ fun List<FactEntity>.toModels() = this.map { it.toModel() }
 
 fun FactEntity.toModel() = FactPreview(
     id = this.id_fonc,
+    category = this.code,
     imageUrl = this.image,
     title = this.title,
     text = this.content

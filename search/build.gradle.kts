@@ -46,6 +46,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
     implementation(project(":room"))
+    implementation(project(":home"))
 
     implementation("androidx.core:core-ktx:${Versions.ANDROID_CORE}")
     implementation("androidx.appcompat:appcompat:1.5.0")
