@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="search_textfield_placeholder">Type a text to search facts</string>
+</resources>

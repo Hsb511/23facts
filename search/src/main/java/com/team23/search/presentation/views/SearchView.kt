@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -20,6 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -28,6 +29,7 @@ import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
+import com.team23.search.R
 import com.team23.search.presentation.mappers.toAnnotatedString
 import com.team23.search.presentation.viewmodels.SearchVM
 import com.team23.search.presentation.viewobjects.FactPreviewVO
@@ -50,13 +52,26 @@ fun SearchView(
     onFactClicked: (Long) -> Unit = {}
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
-        TextField(
+        OutlinedTextField(
             value = searchText.value,
             onValueChange = {
                 onSearchChanged(it)
                 searchText.value = it
             },
+            placeholder = { Text(text = stringResource(id = R.string.search_textfield_placeholder)) },
             shape = MaterialTheme.shapes.large,
+            colors = TextFieldDefaults.textFieldColors(
+                cursorColor = MaterialTheme.colors.primaryVariant,
+                focusedIndicatorColor = MaterialTheme.colors.primaryVariant,
+                unfocusedIndicatorColor = MaterialTheme.colors.primary,
+                trailingIconColor = MaterialTheme.colors.primaryVariant,
+            ),
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Filled.Search,
+                    contentDescription = "search icon",
+                )
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)

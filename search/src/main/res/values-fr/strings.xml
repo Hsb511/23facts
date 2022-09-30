@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_textfield_placeholder">Taper un texte pour rechercher des faits</string>
+</resources>

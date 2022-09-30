@@ -4,6 +4,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 
 @Composable
@@ -16,7 +17,8 @@ fun String.toAnnotatedString(searchText: String) = buildAnnotatedString {
         if (index != indicesToKeep.size - 1) {
             withStyle(
                 style = SpanStyle(
-                    color = MaterialTheme.colors.secondaryVariant
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colors.secondary
                 )
             ) {
                 append(newString.substring(0, searchText.length))
