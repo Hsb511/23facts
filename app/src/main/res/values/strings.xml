@@ -12,5 +12,7 @@
     <string name="about_app_title">The app</string>
     <string name="about_app_description">This application available only on Android is still under development. It allows you to search and read facts about the number 23 or in which this number occurs. This application has only an entertaining and cultivating aim.</string>
     <string name="about_contact_title">Contact</string>
-    <string name="about_contact_description">For any kind of information or any suggestion on adding or modifying a fact feel free to contact me at this address hsb511.hs@gmail.com</string>
+    <string name="about_contact_description">For any kind of information or any suggestion on adding or modifying a fact feel free to contact me at this address: </string>
+    <string name="about_contact_mail" translatable="false">hsb511.hs@gmail.com</string>
+    <string name="about_version">Version</string>
 </resources>

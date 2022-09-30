@@ -17,6 +17,7 @@ import com.team23.achievements.presentation.views.AchievementView
 import com.team23.core.domain.Screen
 import com.team23.fact.presentation.viewmodels.FactDetailVM
 import com.team23.fact.presentation.views.FactDetail
+import com.team23.facts23.presentation.viewmodels.AboutVM
 import com.team23.home.presentation.viewmodels.HomeVM
 import com.team23.home.presentation.views.HomeCategories
 import com.team23.home.presentation.views.HomeFacts
@@ -34,6 +35,7 @@ fun NavigationView(
     settingsVM: SettingsVM,
     achievementVM: AchievementVM,
     searchVM: SearchVM,
+    aboutVM: AboutVM
 ) {
     val navController = rememberNavController()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -124,7 +126,7 @@ fun NavigationView(
             }
             composable(route = Screen.About().route) {
                 currentScreen.value = Screen.About()
-                AboutView()
+                AboutView(aboutVM = aboutVM)
             }
             composable(route = Screen.Achievement().route) {
                 currentScreen.value = Screen.Achievement()
