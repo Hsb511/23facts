@@ -73,7 +73,7 @@ fun AboutView(buildVersion: String, onEmailClicked: (String) -> Unit) {
         )
         val annotatedText = buildAnnotatedString {
             withStyle(
-                style = spanStyle
+                style = spanStyle.copy(color = MaterialTheme.colors.onBackground)
             ) {
                 append("${stringResource(id = R.string.about_contact_description)} ")
             }

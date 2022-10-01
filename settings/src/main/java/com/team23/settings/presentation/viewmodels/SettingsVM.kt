@@ -3,24 +3,42 @@ package com.team23.settings.presentation.viewmodels
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.CreationExtras
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 
-@HiltViewModel
-class SettingsVM @Inject constructor() : ViewModel() {
+class SettingsVM @AssistedInject constructor(
+    @Assisted val changeStatusAndNavigationColors: () -> Unit,
+) : ViewModel() {
     /**
      * True: Forced dark mode
      * False: Forced light mode
      * null: System setting
      */
-    val isForcedDarkMode: MutableState<Boolean?> = mutableStateOf(null)
+    // TODO GET VALUE FROM DB
+    val isDarkMode: MutableState<Boolean> = mutableStateOf(false)
+    val themeModeSelectedValue: MutableState<Int> = mutableStateOf(1)
 
-    fun onThemeModeChanged(selectedPosition: Int) {
-        when(selectedPosition) {
-            0 -> isForcedDarkMode.value = true
-            1 -> isForcedDarkMode.value = null
-            2 -> isForcedDarkMode.value = false
-            else -> isForcedDarkMode.value = null
+    fun onThemeModeChanged() {
+        changeStatusAndNavigationColors()
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(changeStatusAndNavigationColors: () -> Unit): SettingsVM
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    companion object {
+        fun provideFactory(
+            assistedFactory: Factory,
+            changeStatusAndNavigationColors: () -> Unit,
+        ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
+                return assistedFactory.create(changeStatusAndNavigationColors) as T
+            }
         }
     }
 }

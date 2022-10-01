@@ -1,8 +1,12 @@
 package com.team23.settings.presentation.views
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.runtime.Composable
@@ -15,17 +19,19 @@ import com.team23.settings.presentation.viewmodels.SettingsVM
 
 @Composable
 fun SettingsView(settingsVM: SettingsVM) {
+    val isSystemInDarkTheme = isSystemInDarkTheme()
     SettingsView(
-        lastSelectedThemeMode = when (settingsVM.isForcedDarkMode.value) {
-            true -> 0
-            null -> 1
-            false -> 2
-        },
-        onThemeModeChanged = { selectedPosition ->
-            settingsVM.onThemeModeChanged(
-                selectedPosition
-            )
-        })
+        lastSelectedThemeMode = 1,
+        onThemeModeChanged = {
+            settingsVM.themeModeSelectedValue.value = it
+            settingsVM.isDarkMode.value = when (settingsVM.themeModeSelectedValue.value) {
+                0 -> true
+                2 -> false
+                else -> isSystemInDarkTheme
+            }
+            settingsVM.onThemeModeChanged()
+        }
+    )
 }
 
 @Composable
