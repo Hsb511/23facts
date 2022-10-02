@@ -77,11 +77,18 @@ fun NavigationView(
                 screen = currentScreen.value,
                 isMenuExpanded = isMenuExpanded,
                 onBackPressed = {
-                    if (currentScreen.value is Screen.Random) {
-                        factDetailVM.factDetail.value = null
-                        navController.navigate(lastScreen.value.route)
-                    } else {
-                        navController.popBackStack()
+                    when (currentScreen.value) {
+                        is Screen.Random -> {
+                            factDetailVM.factDetail.value = null
+                            navController.navigate(lastScreen.value.route)
+                        }
+                        is Screen.Category -> {
+                            factDetailVM.factDetail.value = null
+                            navController.popBackStack()
+                        }
+                        else -> {
+                            navController.popBackStack()
+                        }
                     }
                 },
                 codeCategory = factDetailVM.factDetail.value?.codeCategory?.ifBlank { null }
