@@ -25,6 +25,10 @@ class SettingsVM @AssistedInject constructor(
         changeStatusAndNavigationColors()
     }
 
+    fun onLanguageChanged(value : Int) {
+        // TODO
+    }
+
     @AssistedFactory
     interface Factory {
         fun create(changeStatusAndNavigationColors: () -> Unit): SettingsVM

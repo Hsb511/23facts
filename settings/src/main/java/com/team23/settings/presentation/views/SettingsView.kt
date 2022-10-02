@@ -30,6 +30,9 @@ fun SettingsView(settingsVM: SettingsVM) {
                 else -> isSystemInDarkTheme
             }
             settingsVM.onThemeModeChanged()
+        },
+        onLanguageChanged = {
+            settingsVM.onLanguageChanged(it)
         }
     )
 }
@@ -37,7 +40,8 @@ fun SettingsView(settingsVM: SettingsVM) {
 @Composable
 fun SettingsView(
     lastSelectedThemeMode: Int = 1,
-    onThemeModeChanged: (Int) -> Unit = {}
+    onThemeModeChanged: (Int) -> Unit = {},
+    onLanguageChanged: (Int) -> Unit = {},
 ) {
     Column {
         Text(
@@ -77,7 +81,7 @@ fun SettingsView(
                 stringResource(id = R.string.settings_language_system),
                 stringResource(id = R.string.settings_language_french),
             ),
-            onValueChanged = {}
+            onValueChanged = onLanguageChanged
         )
         Text(
             text = stringResource(id = R.string.settings_random),
