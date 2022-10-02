@@ -57,6 +57,7 @@ fun SettingsView(
             ),
             onValueChanged = onThemeModeChanged,
             lastSelectedValue = lastSelectedThemeMode,
+            disabled = false,
         )
         Text(
             text = stringResource(id = R.string.settings_colors),
@@ -100,7 +101,7 @@ fun SettingsView(
             style = MaterialTheme.typography.h5,
             modifier = Modifier.padding(8.dp)
         )
-        Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(8.dp, 0.dp)) {
+        Button(onClick = { /*TODO*/ }, enabled = false,  modifier = Modifier.padding(8.dp, 0.dp)) {
             Icon(
                 imageVector = Icons.Outlined.Refresh,
                 contentDescription = "reset"

@@ -1,6 +1,7 @@
 package com.team23.settings.presentation.views
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -11,7 +12,8 @@ import androidx.compose.ui.tooling.preview.Preview
 fun SettingsSectionRadioButton(
     values: List<String>,
     onValueChanged: (Int) -> Unit,
-    lastSelectedValue: Int = 1
+    lastSelectedValue: Int = 1,
+    disabled: Boolean = true,
 ) {
     var selectedPosition by remember { mutableStateOf(-1) }
     values.forEach {
@@ -26,12 +28,18 @@ fun SettingsSectionRadioButton(
             }
             RadioButton(
                 selected = isValueSelected,
+                enabled = !disabled,
                 onClick = {
                     onValueChanged(currentPosition)
                     selectedPosition = currentPosition
                 })
             Text(
-                text = it
+                text = it,
+                color = if (disabled) {
+                    MaterialTheme.colors.onSurface
+                } else {
+                    MaterialTheme.colors.onBackground
+                }
             )
         }
     }
