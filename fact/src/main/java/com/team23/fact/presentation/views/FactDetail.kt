@@ -3,9 +3,7 @@ package com.team23.fact.presentation.views
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -86,78 +84,75 @@ fun FactDetail(
                         .size(115.dp)
                 )
             } else {
-                Column(
+                LazyColumn(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    Text(
-                        text = factDetailVO.title,
-                        style = MaterialTheme.typography.h4,
-                        color = MaterialTheme.colors.onBackground,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .fillMaxWidth()
-                    )
-                    if (factDetailVO.imageUrl != null) {
-                        Image(
-                            painter = if (factDetailVO.imageUrl.endsWith(".svg")) {
-                                rememberAsyncImagePainter(
-                                    model = ImageRequest.Builder(LocalContext.current)
-                                        .decoderFactory(SvgDecoder.Factory())
-                                        .data(factDetailVO.imageUrl)
-                                        .build()
-                                )
-                            } else {
-                                rememberAsyncImagePainter(factDetailVO.imageUrl)
-                            },
-                            contentDescription = stringResource(id = R.string.fact_image_description),
+                    item {
+                        Text(
+                            text = factDetailVO.title,
+                            style = MaterialTheme.typography.h4,
+                            color = MaterialTheme.colors.onBackground,
+                            textAlign = TextAlign.Center,
                             modifier = Modifier
-                                .widthIn(0.dp, 300.dp)
-                                .heightIn(100.dp, 200.dp)
-                                .clip(MaterialTheme.shapes.medium)
                                 .padding(8.dp)
-                                .background(
-                                    color = Color.White,
-                                    shape = MaterialTheme.shapes.medium
-                                )
-                        )
-                    } else if (factDetailVO.imageBitmap != null) {
-                        Image(
-                            bitmap = factDetailVO.imageBitmap,
-                            contentDescription = stringResource(id = R.string.fact_image_description),
-                            modifier = Modifier
-                                .widthIn(0.dp, 300.dp)
-                                .heightIn(0.dp, 200.dp)
-                                .clip(MaterialTheme.shapes.medium)
-                                .padding(8.dp)
-                                .background(
-                                    color = Color.White,
-                                    shape = MaterialTheme.shapes.medium
-                                )
+                                .fillMaxWidth()
                         )
                     }
-                    LazyColumn(
-                        horizontalAlignment = Alignment.Start,
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .fillMaxHeight()
-                    ) {
-                        item {
-                            Text(
-                                text = factDetailVO.description,
-                                style = MaterialTheme.typography.body1,
-                                color = MaterialTheme.colors.onBackground,
-                                modifier = Modifier.padding(8.dp, 0.dp, 8.dp, 16.dp)
+                    item {
+                        if (factDetailVO.imageUrl != null) {
+                            Image(
+                                painter = if (factDetailVO.imageUrl.endsWith(".svg")) {
+                                    rememberAsyncImagePainter(
+                                        model = ImageRequest.Builder(LocalContext.current)
+                                            .decoderFactory(SvgDecoder.Factory())
+                                            .data(factDetailVO.imageUrl)
+                                            .build()
+                                    )
+                                } else {
+                                    rememberAsyncImagePainter(factDetailVO.imageUrl)
+                                },
+                                contentDescription = stringResource(id = R.string.fact_image_description),
+                                modifier = Modifier
+                                    .widthIn(0.dp, 300.dp)
+                                    .heightIn(100.dp, 200.dp)
+                                    .clip(MaterialTheme.shapes.medium)
+                                    .padding(8.dp)
+                                    .background(
+                                        color = Color.White,
+                                        shape = MaterialTheme.shapes.medium
+                                    )
+                            )
+                        } else if (factDetailVO.imageBitmap != null) {
+                            Image(
+                                bitmap = factDetailVO.imageBitmap,
+                                contentDescription = stringResource(id = R.string.fact_image_description),
+                                modifier = Modifier
+                                    .widthIn(0.dp, 300.dp)
+                                    .heightIn(0.dp, 200.dp)
+                                    .clip(MaterialTheme.shapes.medium)
+                                    .padding(8.dp)
+                                    .background(
+                                        color = Color.White,
+                                        shape = MaterialTheme.shapes.medium
+                                    )
                             )
                         }
-                        items(factDetailVO.sources) {
-                            FactDetailLink(
-                                factDetailLinkVO = it,
-                                onLinkClicked = { url -> onClickLink(url) },
-                                onLinkSaved = { url -> onLongClickLink(url) }
-                            )
-                        }
+                    }
+                    item {
+                        Text(
+                            text = factDetailVO.description,
+                            style = MaterialTheme.typography.body1,
+                            color = MaterialTheme.colors.onBackground,
+                            modifier = Modifier.padding(8.dp, 0.dp, 8.dp, 16.dp)
+                        )
+                    }
+                    items(factDetailVO.sources) {
+                        FactDetailLink(
+                            factDetailLinkVO = it,
+                            onLinkClicked = { url -> onClickLink(url) },
+                            onLinkSaved = { url -> onLongClickLink(url) },
+                        )
                     }
                 }
             }
