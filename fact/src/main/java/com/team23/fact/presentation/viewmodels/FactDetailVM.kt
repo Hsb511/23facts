@@ -34,12 +34,11 @@ class FactDetailVM @AssistedInject constructor(
     }
 
     fun loadFactDetail(newFactId: String?) {
+        factId = null
         factDetail.value = null
-        factId = newFactId
         viewModelScope.launch(Dispatchers.IO) {
-            val factModel = getAndReadFactUseCase.execute(factId)
+            val factModel = getAndReadFactUseCase.execute(newFactId)
             achievementVM.onFactLoaded()
-            factId = factModel?.id
             val category = getCategoryUseCase.execute(factModel?.category)
             val sources = factModel?.sources
                 ?.split(";")
@@ -78,6 +77,7 @@ class FactDetailVM @AssistedInject constructor(
                     description = factModel?.description?.replace("\\n", "\n") ?: "",
                     sources = sources
                 )
+                factId = factModel?.id
             }
         }
     }

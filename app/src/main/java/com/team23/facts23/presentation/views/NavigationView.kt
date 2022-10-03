@@ -120,6 +120,7 @@ fun NavigationView(
                     lastScreen.value = currentScreen.value
                 }
                 currentScreen.value = Screen.Random()
+                homeVM.selectedCategory.value = null
                 FactDetail(factDetailVM = factDetailVM)
             }
             composable(route = Screen.Fact().route) { backStackEntry ->
