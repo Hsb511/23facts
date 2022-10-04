@@ -4,6 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
+import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
@@ -46,14 +47,18 @@ fun NavigationView(
 
     Scaffold(
         snackbarHost = {
-            achievementVM.achievementPreviewToDisplay.value?.let {
+            achievementVM.achievementPreviewToDisplay.value?.let { achievement ->
                 SnackbarHost(
-                    achievementPreview = it,
                     hostState = snackbarHostState,
-                    navController = navController,
+                    snackbar = {
+                        Snackbar(
+                            achievementPreview = achievement,
+                            navController = navController,
+                        )
+                    }
                 )
                 scope.launch {
-                    snackbarHostState.showSnackbar(it.messageResId.toString())
+                    snackbarHostState.showSnackbar(achievement.messageResId.toString())
                 }
             }
         },
