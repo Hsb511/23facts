@@ -49,7 +49,8 @@ fun NavigationView(
             achievementVM.achievementPreviewToDisplay.value?.let {
                 SnackbarHost(
                     achievementPreview = it,
-                    hostState = snackbarHostState
+                    hostState = snackbarHostState,
+                    navController = navController,
                 )
                 scope.launch {
                     snackbarHostState.showSnackbar(it.messageResId.toString())
