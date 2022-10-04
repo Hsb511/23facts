@@ -17,7 +17,7 @@ import androidx.navigation.NavHostController
 import com.team23.core.domain.Screen
 
 @Composable
-fun DropDownMenu(isMenuExpanded: MutableState<Boolean>, navController: NavHostController) {
+fun DropDownMenu(isMenuExpanded: MutableState<Boolean>, onNavigate: (Screen) -> Unit) {
     DropdownMenu(
         expanded = isMenuExpanded.value,
         onDismissRequest = { isMenuExpanded.value = false },
@@ -27,7 +27,7 @@ fun DropDownMenu(isMenuExpanded: MutableState<Boolean>, navController: NavHostCo
         listOf(Screen.Settings(), Screen.Achievement(), Screen.About()).forEach { screen ->
             DropdownMenuItem(onClick = {
                 isMenuExpanded.value = false
-                navController.navigate(screen.route)
+                onNavigate(screen)
             }) {
                 Row {
                     Icon(

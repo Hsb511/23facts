@@ -16,21 +16,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.team23.achievements.R
 import com.team23.achievements.presentation.viewobjects.AchievementPreviewVO
-import com.team23.core.domain.Screen
-
-@Composable
-fun Snackbar(
-    achievementPreview: AchievementPreviewVO,
-    navController: NavHostController
-) {
-    Snackbar(
-        achievementPreview = achievementPreview,
-        onSnackbarClicked = { navController.navigate(Screen.Achievement().route) }
-    )
-}
 
 @Composable
 fun Snackbar(

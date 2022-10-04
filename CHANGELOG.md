@@ -5,3 +5,5 @@ Feature:
 Fix:
  - Topbar title when fact selected and going back to the screen category
  - Topbar title when random is clicked
+Tech:
+ - Refactoring all the :app module with a clean mainView and navHost

@@ -14,14 +14,20 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
+import androidx.navigation.compose.rememberNavController
 import com.team23.achievements.presentation.viewmodels.AchievementVM
+import com.team23.core.domain.Screen
 import com.team23.fact.presentation.viewmodels.FactDetailVM
 import com.team23.facts23.R
 import com.team23.facts23.presentation.themes.Facts23Theme
 import com.team23.facts23.presentation.viewmodels.AboutVM
-import com.team23.facts23.presentation.views.NavigationView
+import com.team23.facts23.presentation.views.MainView
+import com.team23.facts23.presentation.views.NavHost
 import com.team23.home.presentation.viewmodels.HomeVM
 import com.team23.search.presentation.viewmodels.SearchVM
 import com.team23.settings.presentation.viewmodels.SettingsVM
@@ -69,8 +75,35 @@ class MainActivity : ComponentActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         changeStatusAndNavigationColors()
         setContent {
+            val navController = rememberNavController()
+            val currentScreen: MutableState<Screen> = remember { mutableStateOf(Screen.Home()) }
+            val lastScreen: MutableState<Screen> = remember { mutableStateOf(Screen.Home()) }
+            val isMenuExpanded = remember { mutableStateOf(false) }
+
             Facts23Theme(darkTheme = settingsVM.isDarkMode.value) {
-                NavigationView(factDetailVM, homeVM, settingsVM, achievementVM, searchVM, aboutVM)
+                MainView(
+                    factDetailVM = factDetailVM,
+                    homeVM = homeVM,
+                    achievementVM = achievementVM,
+                    navController = navController,
+                    currentScreen = currentScreen.value,
+                    lastScreen = lastScreen.value,
+                    isMenuExpanded = isMenuExpanded
+                ) { padding ->
+                    NavHost(
+                        factDetailVM = factDetailVM,
+                        homeVM = homeVM,
+                        settingsVM = settingsVM,
+                        achievementVM = achievementVM,
+                        searchVM = searchVM,
+                        aboutVM = aboutVM,
+                        navController = navController,
+                        currentScreen = currentScreen,
+                        lastScreen = lastScreen,
+                        isMenuExpanded = isMenuExpanded.value,
+                        padding = padding,
+                    )
+                }
             }
         }
 
