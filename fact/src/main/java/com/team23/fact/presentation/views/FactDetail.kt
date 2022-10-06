@@ -3,7 +3,9 @@ package com.team23.fact.presentation.views
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
-import androidx.compose.foundation.*
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -40,6 +42,7 @@ fun FactDetail(factDetailVM: FactDetailVM) {
     val toastMessage = stringResource(R.string.fact_link_url_saved)
     FactDetail(
         factDetailVO = factDetailVM.factDetail.value,
+        factSources = factDetailVM.factSources,
         onShareFact = { /* TODO */ },
         onClickLink = { url ->
             startActivity(context, Intent(Intent.ACTION_VIEW, Uri.parse(url)), null)
@@ -55,6 +58,7 @@ fun FactDetail(factDetailVM: FactDetailVM) {
 @Composable
 fun FactDetail(
     factDetailVO: FactDetailVO?,
+    factSources: List<FactDetailLinkVO?>,
     onShareFact: () -> Unit = {},
     onClickLink: (url: String) -> Unit = {},
     onLongClickLink: (url: String) -> Unit = {},
@@ -147,12 +151,23 @@ fun FactDetail(
                             modifier = Modifier.padding(8.dp, 0.dp, 8.dp, 16.dp)
                         )
                     }
-                    items(factDetailVO.sources) {
-                        FactDetailLink(
-                            factDetailLinkVO = it,
-                            onLinkClicked = { url -> onClickLink(url) },
-                            onLinkSaved = { url -> onLongClickLink(url) },
-                        )
+                    if (factSources.contains(null)) {
+                        item {
+                            CircularProgressIndicator(
+                                strokeWidth = 11.5.dp,
+                                modifier = Modifier
+                                    .align(Alignment.Center)
+                                    .size(115.dp)
+                            )
+                        }
+                    } else {
+                        items(factSources.filterNotNull()) {
+                            FactDetailLink(
+                                factDetailLinkVO = it,
+                                onLinkClicked = { url -> onClickLink(url) },
+                                onLinkSaved = { url -> onLongClickLink(url) },
+                            )
+                        }
                     }
                 }
             }
@@ -172,18 +187,18 @@ fun FactDetailPreview() {
             category = "Mathematics",
             imageUrl = "https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
             description = "The birthday paradox is that, counterintuitively, the probability of a shared birthday exceeds 50% in a group of only 23 people.",
-            sources = listOf(
-                FactDetailLinkVO(
-                    url = "https://pudding.cool/2018/04/birthday-paradox/",
-                    title = "The Birthday paradox",
-                    domainName = "pudding.cool"
-                ),
-                FactDetailLinkVO(
-                    url = "https://betterexplained.com/articles/understanding-the-birthday-paradox/",
-                    title = "The Birthday paradox",
-                    domainName = "betterexplained.com"
-                ),
-            )
+        ),
+        factSources = listOf(
+            FactDetailLinkVO(
+                url = "https://pudding.cool/2018/04/birthday-paradox/",
+                title = "The Birthday paradox",
+                domainName = "pudding.cool"
+            ),
+            FactDetailLinkVO(
+                url = "https://betterexplained.com/articles/understanding-the-birthday-paradox/",
+                title = "The Birthday paradox",
+                domainName = "betterexplained.com"
+            ),
         )
     )
 }

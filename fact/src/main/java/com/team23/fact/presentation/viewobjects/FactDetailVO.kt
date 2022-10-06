@@ -10,5 +10,4 @@ data class FactDetailVO(
     val imageUrl: String? = null,
     val imageBitmap: ImageBitmap? = null,
     val description: String = "",
-    val sources: List<FactDetailLinkVO> = emptyList()
 )

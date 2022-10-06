@@ -1,15 +1,16 @@
 package com.team23.fact.presentation.viewmodels
 
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.team23.achievements.domain.usecases.Unlock3FactomaniaUseCase
 import com.team23.achievements.presentation.viewmodels.AchievementVM
-import com.team23.fact.domain.usecases.GetCategoryUseCase
 import com.team23.fact.domain.usecases.GetAndReadFactUseCase
+import com.team23.fact.domain.usecases.GetCategoryUseCase
 import com.team23.fact.domain.usecases.GetOpenGraphMetaDataFromUrlUseCase
 import com.team23.fact.presentation.viewobjects.FactDetailLinkVO
 import com.team23.fact.presentation.viewobjects.FactDetailVO
@@ -28,59 +29,70 @@ class FactDetailVM @AssistedInject constructor(
     private val getOpenGraphMetaDataFromUrlUseCase: GetOpenGraphMetaDataFromUrlUseCase,
 ) : ViewModel() {
     val factDetail: MutableState<FactDetailVO?> = mutableStateOf(null)
-
-    init {
-        loadFactDetail(factId)
-    }
+    val factSources: SnapshotStateList<FactDetailLinkVO?> = mutableStateListOf(null)
 
     fun loadFactDetail(newFactId: String?) {
-        factId = null
-        factDetail.value = null
-        viewModelScope.launch(Dispatchers.IO) {
-            val factModel = getAndReadFactUseCase.execute(newFactId)
-            achievementVM.onFactLoaded()
-            val category = getCategoryUseCase.execute(factModel?.category)
-            val sources = factModel?.sources
-                ?.split(";")
-                ?.filter { it.isNotBlank() }
-                ?.map {
-                    getOpenGraphMetaDataFromUrlUseCase.execute(it).let { og ->
-                        FactDetailLinkVO(
-                            url = it,
-                            image = og.image?.ifBlank { null } ?: og.favicon,
-                            title = if (og.title != null && og.title!!.contains(" — Wikipédia")) {
-                                og.title!!.split(" — Wikipédia")[0]
-                            } else {
-                                og.title ?: factDetail.value?.title?: ""
-                            }.trim().take(31),
-                            domainName = when {
-                                og.siteName != null -> og.siteName!!
-                                og.title != null && og.title!!.contains(" — Wikipédia") -> "Wikipédia"
-                                else -> it.split("://")[1].split("/")[0]
-                            }.trim().take(31),
-                            language = when(og.language) {
-                                "fr" -> "\uD83C\uDDEB\uD83C\uDDF7"
-                                "de" -> "\uD83C\uDDE9\uD83C\uDDEA"
-                                "es" -> "\uD83C\uDDEA\uD83C\uDDF8"
-                                else -> "\uD83C\uDDEC\uD83C\uDDE7"
-                            }
-                        )
-                    }
-                } ?: emptyList()
-            withContext(Dispatchers.Main) {
-                factDetail.value = FactDetailVO(
-                    id = "#${factModel?.id}",
-                    title = factModel?.title ?: "",
-                    category = category,
-                    codeCategory = factModel?.category,
-                    imageUrl = factModel?.image,
-                    description = factModel?.description?.replace("\\n", "\n") ?: "",
-                    sources = sources
-                )
-                factId = factModel?.id
+        if (factId != newFactId) {
+            resetData()
+            viewModelScope.launch(Dispatchers.IO) {
+                val factModel = getAndReadFactUseCase.execute(newFactId)
+                achievementVM.onFactLoaded()
+                val category = getCategoryUseCase.execute(factModel?.category)
+                withContext(Dispatchers.Main) {
+                    factDetail.value = FactDetailVO(
+                        id = "#${factModel?.id}",
+                        title = factModel?.title ?: "",
+                        category = category,
+                        codeCategory = factModel?.category,
+                        imageUrl = factModel?.image,
+                        description = factModel?.description?.replace("\\n", "\n") ?: "",
+                    )
+                    factId = factModel?.id
+                }
+                val sources = loadSources(factModel?.sources)
+                withContext(Dispatchers.Main) {
+                    factSources.clear()
+                    factSources.addAll(sources)
+                }
             }
         }
     }
+
+    private fun resetData() {
+        factId = null
+        factDetail.value = null
+        factSources.clear()
+        factSources.add(null)
+    }
+
+    private suspend fun loadSources(rawSources: String?): List<FactDetailLinkVO> =
+        rawSources
+            ?.split(";")
+            ?.filter { it.isNotBlank() }
+            ?.map {
+                getOpenGraphMetaDataFromUrlUseCase.execute(it).let { og ->
+                    FactDetailLinkVO(
+                        url = it,
+                        image = og.image?.ifBlank { null } ?: og.favicon,
+                        title = if (og.title != null && og.title!!.contains(" — Wikipédia")) {
+                            og.title!!.split(" — Wikipédia")[0]
+                        } else {
+                            og.title ?: factDetail.value?.title ?: ""
+                        }.trim().take(31),
+                        domainName = when {
+                            og.siteName != null -> og.siteName!!
+                            og.title != null && og.title!!.contains(" — Wikipédia") -> "Wikipédia"
+                            else -> it.split("://")[1].split("/")[0]
+                        }.trim().take(31),
+                        language = when (og.language) {
+                            "fr" -> "\uD83C\uDDEB\uD83C\uDDF7"
+                            "de" -> "\uD83C\uDDE9\uD83C\uDDEA"
+                            "es" -> "\uD83C\uDDEA\uD83C\uDDF8"
+                            else -> "\uD83C\uDDEC\uD83C\uDDE7"
+                        }
+                    )
+                }
+            } ?: emptyList()
 
     @AssistedFactory
     interface Factory {
