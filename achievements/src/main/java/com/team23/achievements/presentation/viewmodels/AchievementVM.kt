@@ -70,4 +70,11 @@ class AchievementVM @Inject constructor(
             }
         }
     }
+
+    fun onResetAchievements() {
+        timesAmountAppIconClicked = 0
+        achievements.forEach {
+            it.unlockDate = null
+        }
+    }
 }

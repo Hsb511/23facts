@@ -15,4 +15,7 @@ interface AchievementDao {
 
     @Query("UPDATE T_ACHIEVEMENT SET isFound = 1, unlockedDate = :date WHERE name = :achievementName")
     fun updateIsFoundAndUnlockDate(achievementName: String, date: Date)
+
+    @Query("UPDATE T_ACHIEVEMENT SET isFound = 0, unlockedDate = NULL")
+    fun resetData()
 }

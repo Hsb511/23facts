@@ -26,4 +26,7 @@ interface FactDao {
 
     @Query("SELECT COUNT(*) FROM T_FACT WHERE isNew = 0")
     fun countReadFacts(): Int
+
+    @Query("UPDATE T_FACT SET isNew = 1")
+    fun resetData()
 }

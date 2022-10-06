@@ -59,7 +59,8 @@ class MainActivity : ComponentActivity() {
     private val settingsVM: SettingsVM by viewModels {
         SettingsVM.provideFactory(
             assistedFactory = settingsVMAssistedFactory,
-            changeStatusAndNavigationColors = { changeStatusAndNavigationColors() }
+            changeStatusAndNavigationColors = { changeStatusAndNavigationColors() },
+            resetAchievementData = { achievementVM.onResetAchievements() }
         )
     }
     private val searchVM: SearchVM by viewModels()
