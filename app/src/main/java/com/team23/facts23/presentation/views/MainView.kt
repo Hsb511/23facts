@@ -29,7 +29,7 @@ fun MainView(
     content: @Composable (PaddingValues) -> Unit,
 ) {
     MainView(
-        achievementPreview = achievementVM.achievementPreviewToDisplay.value,
+        achievementPreview = achievementVM.achievementPreviewToDisplay,
         onSnackbarClicked = { navController.navigate(Screen.Achievement().route) },
         onNavigateHome = {
             factDetailVM.factDetail.value = null
@@ -72,7 +72,7 @@ fun MainView(
 
 @Composable
 fun MainView(
-    achievementPreview: AchievementPreviewVO?,
+    achievementPreview: MutableState<AchievementPreviewVO?>,
     onSnackbarClicked: () -> Unit,
     onNavigateHome: () -> Unit,
     onNavigateRandom: () -> Unit,
@@ -91,7 +91,7 @@ fun MainView(
     val scope = rememberCoroutineScope()
     Scaffold(
         snackbarHost = {
-            achievementPreview?.let { achievement ->
+            achievementPreview.value?.let { achievement ->
                 SnackbarHost(
                     hostState = snackbarHostState,
                     snackbar = {
@@ -103,6 +103,7 @@ fun MainView(
                 )
                 scope.launch {
                     snackbarHostState.showSnackbar(achievement.messageResId.toString())
+                    achievementPreview.value = null
                 }
             }
         },
@@ -136,11 +137,13 @@ fun MainView(
 @Composable
 @Preview(showSystemUi = true)
 fun MainPreview() {
-    MainView(
-        achievementPreview = AchievementPreviewVO(
+    val achievementPreview: MutableState<AchievementPreviewVO?> = remember {
+        mutableStateOf(AchievementPreviewVO(
             imageResId = R.drawable.iconophile,
             messageResId = R.string.achievements_iconophile_message
-        ),
+        ))}
+    MainView(
+        achievementPreview = achievementPreview,
         onSnackbarClicked = {},
         onNavigateHome = {},
         onNavigateRandom = {},
