@@ -1,5 +1,6 @@
 package com.team23.facts23.presentation.views
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,6 +27,8 @@ fun Snackbar(
 ) {
     Surface(
         elevation = 10.dp,
+        shape = MaterialTheme.shapes.large,
+        border = BorderStroke(1.dp, MaterialTheme.colors.primary),
         modifier = Modifier
             .padding(8.dp)
             .clip(shape = MaterialTheme.shapes.large)

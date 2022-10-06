@@ -2,6 +2,7 @@ Version 0.0.3 :
 
 Feature:
  - On secret snackbar clicked, navigate to secrets view
+ - Add a border to secret snackbar to entice user look and click it
 Improvement:
  - Fact loading: Loading fact details, then sources for better display with less waiting time
 Fix:
