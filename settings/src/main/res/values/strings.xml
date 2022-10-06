@@ -17,4 +17,6 @@
     <string name="settings_data">Data</string>
     <string name="settings_data_reset">Reset Data</string>
     <string name="settings_data_reset_description">This action will mark all the facts as unread, reset the settings and delete all the loaded data</string>
+    <string name="settings_data_reset_confirm">Confirm</string>
+    <string name="settings_data_reset_dismiss">Dismiss</string>
 </resources>

@@ -18,4 +18,6 @@
     <string name="settings_data">Data</string>
     <string name="settings_data_reset">Réinitialiser les données</string>
     <string name="settings_data_reset_description">Si vous confirmez cela va repasser les faits en non lus, réinitiliser les paramètres et supprimer toutes les données chargées</string>
+    <string name="settings_data_reset_confirm">Confirmer</string>
+    <string name="settings_data_reset_dismiss">Annuler</string>
 </resources>

@@ -29,6 +29,10 @@ class SettingsVM @AssistedInject constructor(
         // TODO
     }
 
+    fun onResetData() {
+
+    }
+
     @AssistedFactory
     interface Factory {
         fun create(changeStatusAndNavigationColors: () -> Unit): SettingsVM
