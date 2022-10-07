@@ -1,6 +1,7 @@
 Version 0.0.3 :
 
 Feature:
+ - 3 NEW 23 FACTS
  - Settings: Reset Data
  - On secret snackbar clicked, navigate to secrets view
  - Add a border to secret snackbar to entice user look and click it
