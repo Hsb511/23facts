@@ -9,13 +9,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import com.team23.achievements.R
 import com.team23.achievements.presentation.viewmodels.AchievementVM
 import com.team23.achievements.presentation.viewobjects.AchievementPreviewVO
 import com.team23.core.domain.Screen
 import com.team23.fact.presentation.viewmodels.FactDetailVM
 import com.team23.home.presentation.viewmodels.HomeVM
 import kotlinx.coroutines.launch
-import com.team23.achievements.R
 
 @Composable
 fun MainView(
@@ -138,10 +138,13 @@ fun MainView(
 @Preview(showSystemUi = true)
 fun MainPreview() {
     val achievementPreview: MutableState<AchievementPreviewVO?> = remember {
-        mutableStateOf(AchievementPreviewVO(
-            imageResId = R.drawable.iconophile,
-            messageResId = R.string.achievements_iconophile_message
-        ))}
+        mutableStateOf(
+             AchievementPreviewVO(
+                imageResId = R.drawable.iconophile,
+                messageResId = R.string.achievements_iconophile_message
+            )
+        )
+    }
     MainView(
         achievementPreview = achievementPreview,
         onSnackbarClicked = {},
@@ -153,7 +156,7 @@ fun MainPreview() {
         nameCategory = "Mathematics",
         factId = "23",
         onAppIconClicked = {},
-        currentScreen = Screen.Home(),
+        currentScreen = Screen.Fact(),
         isMenuExpanded = remember { mutableStateOf(false) },
         onNavigate = {},
         content = {},

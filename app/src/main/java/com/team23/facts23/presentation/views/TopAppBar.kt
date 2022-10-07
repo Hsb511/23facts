@@ -63,7 +63,7 @@ fun TopAppBar(
                 }
                 is Screen.Category -> {
                     if (codeCategory != null) {
-                        CategoryCodeBox(category = codeCategory)
+                        CategoryCodeBox(category = codeCategory, inTopBar = true)
                     }
                     if (nameCategory != null) {
                         Text(
@@ -77,7 +77,7 @@ fun TopAppBar(
                 is Screen.Fact,
                 is Screen.Random -> {
                     if (codeCategory != null) {
-                        CategoryCodeBox(category = codeCategory)
+                        CategoryCodeBox(category = codeCategory, inTopBar = true)
                     }
                     if (nameCategory != null) {
                         Text(

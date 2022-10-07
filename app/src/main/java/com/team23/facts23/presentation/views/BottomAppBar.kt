@@ -52,7 +52,8 @@ fun BottomAppBar(
                             else -> {}
                         }
                     },
-                    modifier = Modifier.background(color = MaterialTheme.colors.surface.copy(alpha = 0.8f))
+                    modifier = Modifier
+                        .background(color = MaterialTheme.colors.surface.copy(alpha = 0.8f))
                 )
             }
         }

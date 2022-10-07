@@ -1,10 +1,7 @@
 package com.team23.home.presentation
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -19,10 +16,15 @@ import com.team23.home.presentation.extensions.getBackgroundColor
 import com.team23.home.presentation.extensions.getTextColor
 
 @Composable
-fun CategoryCodeBox(category: String, sizeChanger: Float = 1f) {
+fun CategoryCodeBox(category: String, inTopBar: Boolean = false, sizeChanger: Float = 1f) {
+    val padding = if (inTopBar) {
+        PaddingValues(0.dp, 4.dp, 4.dp, 4.dp)
+    } else {
+        PaddingValues(4.dp)
+    }
     Box(
         modifier = Modifier
-            .padding(4.dp)
+            .padding(padding)
             .size((sizeChanger * 42).dp)
             .background(
                 color = category.getBackgroundColor(),
