@@ -9,7 +9,7 @@ interface FactDao {
     @Query("SELECT * FROM T_FACT")
     fun loadAll(): List<FactEntity>
 
-    @Query("SELECT * FROM T_FACT WHERE language = :language AND (content LIKE '%' || :searchText || '%' OR title LIKE '%' || :searchText || '%' OR links LIKE '%' || :searchText || '%')")
+    @Query("SELECT * FROM T_FACT WHERE language = :language AND (content LIKE '%' || :searchText || '%' OR title LIKE '%' || :searchText || '%')")
     fun loadBySearchTextAndLanguage(searchText: String, language: String): List<FactEntity>
 
     @Query("SELECT * FROM T_FACT WHERE id_fonc = :id AND language = :language")

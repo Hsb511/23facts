@@ -93,7 +93,7 @@ fun SearchView(
                             shape = MaterialTheme.shapes.large
                         )
                         .fillMaxWidth()
-                        .height(69.dp)
+                        .height(76.dp)
                         .clickable { onFactClicked(fact.id) }
                 ) {
                     Image(
@@ -110,7 +110,7 @@ fun SearchView(
                         contentDescription = "fact image",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .size(69.dp)
+                            .size(76.dp)
                             .background(
                                 color = Color.White,
                                 shape = MaterialTheme.shapes.large.copy(
@@ -140,7 +140,7 @@ fun SearchView(
                                 text = fact.text.toAnnotatedString(searchText = searchText.value),
                                 style = MaterialTheme.typography.body2,
                                 color = MaterialTheme.colors.onSurface,
-                                lineHeight = 13.sp,
+                                lineHeight = 14.sp,
                                 maxLines = 3,
                                 overflow = TextOverflow.Ellipsis,
                                 modifier = Modifier
