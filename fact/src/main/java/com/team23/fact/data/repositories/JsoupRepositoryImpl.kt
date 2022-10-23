@@ -67,7 +67,7 @@ class JsoupRepositoryImpl @Inject constructor() : JsoupRepository {
     }
 
     private fun String.getLang(parsedValues: Document) =
-        if (this.contains("villemin.gerard.free.fr")) {
+        if (this.contains(".fr") || this.contains("maeckes.nl")) {
             "fr"
         } else {
             parsedValues.select("html").attr("lang")
