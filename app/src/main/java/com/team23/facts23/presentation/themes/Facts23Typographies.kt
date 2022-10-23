@@ -70,9 +70,10 @@ val Facts23Typography = Typography(
     ),
     h6 = TextStyle(
         fontFamily = appFontFamily,
-        fontWeight = FontWeight.Light,
-        fontSize = 16.sp,
-        letterSpacing = 0.1.sp
+        fontWeight = FontWeight.Medium,
+        fontSize = 17.sp,
+        letterSpacing = 0.1.sp,
+        lineHeight = 16.sp,
     ),
     subtitle1 = TextStyle(
         fontFamily = appFontFamily,

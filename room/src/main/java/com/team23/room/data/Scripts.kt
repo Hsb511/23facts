@@ -2,29 +2,29 @@ package com.team23.room.data
 
 object Scripts {
     const val categoriesScript = """
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('MA', 'Mathematics', 'Mathématique');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('PC', 'Physics & Chemistry', 'Physique Chimie');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('BG', 'Biology & Geology', 'Biologie & Géologie');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('LA', 'Language & Argot', 'Langue & Argot');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('CS', 'Computer Science', 'Informatique');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('VG', 'Video & Board Games', 'Jeux vidéo et de société');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('MU', 'Music', 'Musique');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('MS', 'Movie & Series', 'Film & Séries');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('AL', 'Art & Litterature', 'Art & Littérature');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('GF', 'Gastronomy & Food', 'Gastronomie & Aliments');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('HI', 'History', 'Histoire');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('GE', 'Geography', 'Géographie');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('FE', 'Finance & Economics', 'Finance & Economie');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('IB', 'Industry & Business', 'Industrie & Commerce');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('AT', 'Automotive & Transportation', 'Automobile & Transport');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('AM', 'Military & Aviation', 'Militaire & aviation');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('SH', 'Sport & Hobbies', 'Sport & Activités');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('RN', 'Records & News', 'Recors & Faits divers');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('RM', 'Religion & Mythology', 'Religion & mythologie');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('BD', 'Famous Birth & Death', 'Naissance & Mort célèbres');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('PL', 'Politics & Law', 'Politique & Droit');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('SM', 'Social Media', 'Réseau social');
-        INSERT OR IGNORE INTO T_CATEGORY VALUES ('OT', 'Others', 'Autres');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('MA', 'Mathematics', 'Mathématique', 'Mathematics', 'Mathématique');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('PC', 'Physics & Chemistry', 'Physique Chimie', 'Phy. & Chem.', 'Physique Chimie');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('BG', 'Biology & Geology', 'Biologie & Géologie', 'Bio. & Geology', 'Bio. & Géologie');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('LA', 'Language & Argot', 'Langue & Argot', 'Language & Argot', 'Langue & Argot');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('CS', 'Computer Science', 'Informatique', 'Computer Science', 'Informatique');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('VG', 'Video & Board Games', 'Jeux vidéo & de société', 'Vid. & Bd Games', 'Jeux vidéo & soc.');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('MU', 'Music', 'Musique', 'Music', 'Musique');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('MS', 'Movie & Series', 'Film & Séries', 'Movie & Series', 'Film & Séries');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('AL', 'Art & Litterature', 'Art & Littérature', 'Art & Litterature', 'Art & Littérature');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('GF', 'Gastronomy & Food', 'Gastronomie & Aliments', 'Gastrono. & Food', 'Gastrono. & Alim.');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('HI', 'History', 'Histoire', 'History', 'Histoire');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('GE', 'Geography', 'Géographie', 'Geography', 'Géographie');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('FE', 'Finance & Economics', 'Finance & Economie', 'Finance & Eco.', 'Finance & Eco.');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('IB', 'Industry & Business', 'Industrie & Business', 'Indus. & Business', 'Indus. & Business');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('AT', 'Automotive & Transportation', 'Automobile & Transport', 'Auto. & Transport', 'Auto. & Transport');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('AM', 'Military & Aviation', 'Militaire & aviation', 'Military & Aviation', 'Militaire & aviation');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('SH', 'Sport & Hobbies', 'Sport & Activités', 'Sport & Hobbies', 'Sport & Activités');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('RN', 'Records & News', 'Recors & Faits divers', 'Records & News', 'Recors & Faits d.');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('RM', 'Religion & Mythology', 'Religion & mythologie', 'Religion & Mytho.', 'Religion & mytho.');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('BD', 'Famous Birth & Death', 'Naissance & Mort célèbres', 'Birth & Death', 'Naissance & Mort');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('PL', 'Politics & Law', 'Politique & Droit', 'Politics & Law', 'Politique & Droit');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('SM', 'Social Media', 'Réseau social', 'Social Media', 'Réseau social');
+        INSERT OR IGNORE INTO T_CATEGORY VALUES ('OT', 'Others', 'Autres', 'Others', 'Autres');
     """
 
     const val achievementScript = """

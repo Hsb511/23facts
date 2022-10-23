@@ -11,7 +11,9 @@ class CategoryRoomRepository @Inject constructor(
     override suspend fun getCategoryNameByCode(code: String) = categoryDao.findByCode(code)?.let {
         CategoryModel(
             nameEn = it.name_en,
-            nameFr = it.name_fr
+            nameFr = it.name_fr,
+            shortNameEn = it.short_name_en,
+            shortNameFr = it.short_name_fr,
         )
-    }?: CategoryModel("", "")
+    }?: CategoryModel("", "", "", "")
 }

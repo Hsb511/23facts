@@ -73,11 +73,11 @@ fun HomeCategories(
 fun HomeCategoriesPreview() {
     HomeCategories(
         categories = listOf(
-            CategoryVO("MA", "Mathematics"),
-            CategoryVO("PC", "Physics & Chemistry"),
-            CategoryVO("BG", "Biology & Geology"),
-            CategoryVO("CS", "Computer Science"),
-            CategoryVO("VG", "Video Games")
+            CategoryVO("MA", "Mathematics", "Mathematics"),
+            CategoryVO("PC", "Physics & Chemistry", "Physics & Chemistry"),
+            CategoryVO("BG", "Biology & Geology", "Biology & Geology"),
+            CategoryVO("CS", "Computer Science", "Computer Science"),
+            CategoryVO("VG", "Video Games", "Video Games")
         ),
         onCategoryClicked = {}
     )

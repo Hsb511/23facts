@@ -30,6 +30,7 @@ import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.team23.fact.R
 import com.team23.fact.presentation.viewmodels.FactDetailVM
+import com.team23.fact.presentation.viewobjects.CategoryVO
 import com.team23.fact.presentation.viewobjects.FactDetailLinkVO
 import com.team23.fact.presentation.viewobjects.FactDetailVO
 
@@ -184,7 +185,11 @@ fun FactDetailPreview() {
         FactDetailVO(
             id = "#46",
             title = "The Birthday Paradox",
-            category = "Mathematics",
+            category = CategoryVO(
+                code = "MA",
+                name = "Mathematics",
+                shortName = "Mathematics",
+            ) ,
             imageUrl = "https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
             description = "The birthday paradox is that, counterintuitively, the probability of a shared birthday exceeds 50% in a group of only 23 people.",
         ),

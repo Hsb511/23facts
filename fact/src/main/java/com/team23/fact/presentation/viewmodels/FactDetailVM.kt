@@ -10,8 +10,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.team23.achievements.presentation.viewmodels.AchievementVM
 import com.team23.fact.domain.usecases.GetAndReadFactUseCase
-import com.team23.fact.domain.usecases.GetCategoryUseCase
+import com.team23.fact.domain.usecases.GetCategoryNameUseCase
+import com.team23.fact.domain.usecases.GetCategoryShortNameUseCase
 import com.team23.fact.domain.usecases.GetOpenGraphMetaDataFromUrlUseCase
+import com.team23.fact.presentation.viewobjects.CategoryVO
 import com.team23.fact.presentation.viewobjects.FactDetailLinkVO
 import com.team23.fact.presentation.viewobjects.FactDetailVO
 import dagger.assisted.Assisted
@@ -25,7 +27,8 @@ class FactDetailVM @AssistedInject constructor(
     @Assisted var factId: String?,
     @Assisted private val achievementVM: AchievementVM,
     private val getAndReadFactUseCase: GetAndReadFactUseCase,
-    private val getCategoryUseCase: GetCategoryUseCase,
+    private val getCategoryNameUseCase: GetCategoryNameUseCase,
+    private val getCategoryShortNameUseCase: GetCategoryShortNameUseCase,
     private val getOpenGraphMetaDataFromUrlUseCase: GetOpenGraphMetaDataFromUrlUseCase,
 ) : ViewModel() {
     val factDetail: MutableState<FactDetailVO?> = mutableStateOf(null)
@@ -37,13 +40,17 @@ class FactDetailVM @AssistedInject constructor(
             viewModelScope.launch(Dispatchers.IO) {
                 val factModel = getAndReadFactUseCase.execute(newFactId)
                 achievementVM.onFactLoaded()
-                val category = getCategoryUseCase.execute(factModel?.category)
+                val category = getCategoryNameUseCase(factModel?.category)
+                val categoryShort = getCategoryShortNameUseCase(factModel?.category)
                 withContext(Dispatchers.Main) {
                     factDetail.value = FactDetailVO(
                         id = "#${factModel?.id}",
                         title = factModel?.title ?: "",
-                        category = category,
-                        codeCategory = factModel?.category,
+                        category = CategoryVO(
+                            code = factModel?.category,
+                            name = category,
+                            shortName = categoryShort,
+                        ),
                         imageUrl = factModel?.image,
                         description = factModel?.description?.replace("\\n", "\n") ?: "",
                     )

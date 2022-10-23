@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "fce052b92246fafa6779aad30c821230",
+    "identityHash": "76179056bda4ad01b895233c625831ad",
     "entities": [
       {
         "tableName": "T_ACHIEVEMENT",
@@ -143,7 +143,7 @@
       },
       {
         "tableName": "T_CATEGORY",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`code` TEXT NOT NULL, `name_en` TEXT NOT NULL, `name_fr` TEXT NOT NULL, PRIMARY KEY(`code`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`code` TEXT NOT NULL, `name_en` TEXT NOT NULL, `name_fr` TEXT NOT NULL, `short_name_en` TEXT NOT NULL, `short_name_fr` TEXT NOT NULL, PRIMARY KEY(`code`))",
         "fields": [
           {
             "fieldPath": "code",
@@ -160,6 +160,18 @@
           {
             "fieldPath": "name_fr",
             "columnName": "name_fr",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "short_name_en",
+            "columnName": "short_name_en",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "short_name_fr",
+            "columnName": "short_name_fr",
             "affinity": "TEXT",
             "notNull": true
           }
@@ -229,7 +241,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fce052b92246fafa6779aad30c821230')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '76179056bda4ad01b895233c625831ad')"
     ]
   }
 }

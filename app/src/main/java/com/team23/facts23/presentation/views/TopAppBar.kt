@@ -2,8 +2,7 @@ package com.team23.facts23.presentation.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -11,9 +10,11 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.team23.core.domain.Screen
 import com.team23.facts23.R
@@ -26,6 +27,7 @@ fun TopAppBar(
     onBackPressed: () -> Unit,
     codeCategory: String?,
     nameCategory: String?,
+    shortNameCategory: String?,
     factId: String?,
     onAppIconClicked: () -> Unit,
 ) {
@@ -79,9 +81,9 @@ fun TopAppBar(
                     if (codeCategory != null) {
                         CategoryCodeBox(category = codeCategory, inTopBar = true)
                     }
-                    if (nameCategory != null) {
+                    if (shortNameCategory != null) {
                         Text(
-                            text = nameCategory,
+                            text = shortNameCategory,
                             style = MaterialTheme.typography.h6,
                             color = MaterialTheme.colors.onPrimary,
                             modifier = Modifier.padding(4.dp, 0.dp, 8.dp, 0.dp)

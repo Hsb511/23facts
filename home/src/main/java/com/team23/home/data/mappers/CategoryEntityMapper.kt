@@ -6,5 +6,7 @@ import com.team23.room.data.entities.CategoryEntity
 fun CategoryEntity.toModel() = CategoryModel(
     code = this.code,
     titleEn = this.name_en,
-    titleFr = this.name_fr
+    titleFr = this.name_fr,
+    shortTitleEn = this.short_name_en,
+    shortTitleFr = this.short_name_fr,
 )

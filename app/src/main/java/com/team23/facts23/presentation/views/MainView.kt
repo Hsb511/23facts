@@ -57,10 +57,12 @@ fun MainView(
                 }
             }
         },
-        codeCategory = factDetailVM.factDetail.value?.codeCategory?.ifBlank { null }
+        codeCategory = factDetailVM.factDetail.value?.category?.code?.ifBlank { null }
             ?: homeVM.selectedCategory.value?.code,
-        nameCategory = factDetailVM.factDetail.value?.category?.ifBlank { null }
+        nameCategory = factDetailVM.factDetail.value?.category?.name?.ifBlank { null }
             ?: homeVM.selectedCategory.value?.title,
+        shortNameCategory = factDetailVM.factDetail.value?.category?.shortName?.ifBlank { null }
+            ?: homeVM.selectedCategory.value?.shortTitle,
         factId = factDetailVM.factId,
         onAppIconClicked = { achievementVM.onAppIconClicked() },
         currentScreen = currentScreen,
@@ -80,6 +82,7 @@ fun MainView(
     onBackPressed: () -> Unit,
     codeCategory: String?,
     nameCategory: String?,
+    shortNameCategory: String?,
     factId: String?,
     onAppIconClicked: () -> Unit,
     currentScreen: Screen,
@@ -122,6 +125,7 @@ fun MainView(
                 onBackPressed = { onBackPressed() },
                 codeCategory = codeCategory,
                 nameCategory = nameCategory,
+                shortNameCategory = shortNameCategory,
                 factId = factId,
                 onAppIconClicked = { onAppIconClicked() }
             )
@@ -139,7 +143,7 @@ fun MainView(
 fun MainPreview() {
     val achievementPreview: MutableState<AchievementPreviewVO?> = remember {
         mutableStateOf(
-             AchievementPreviewVO(
+            AchievementPreviewVO(
                 imageResId = R.drawable.iconophile,
                 messageResId = R.string.achievements_iconophile_message
             )
@@ -154,6 +158,7 @@ fun MainPreview() {
         onBackPressed = {},
         codeCategory = "MA",
         nameCategory = "Mathematics",
+        shortNameCategory = "Mathematics",
         factId = "23",
         onAppIconClicked = {},
         currentScreen = Screen.Fact(),

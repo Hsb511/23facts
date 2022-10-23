@@ -8,14 +8,19 @@ import javax.inject.Inject
 class GetAllCategoriesUseCase @Inject constructor(
     private val categoryRepository: CategoryRepository
 ) {
-    suspend fun execute() = categoryRepository.loadCategories().map {
+    suspend fun execute(): List<CategoryVO> = categoryRepository.loadCategories().map {
         CategoryVO(
             code = it.code,
             title = if (Locale.current.language == "fr") {
                 it.titleFr
             } else {
                 it.titleEn
-            }
+            },
+            shortTitle = if (Locale.current.language == "fr") {
+                it.shortTitleFr
+            } else {
+                it.shortTitleEn
+            },
         )
 
     }

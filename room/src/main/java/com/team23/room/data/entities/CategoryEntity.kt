@@ -11,4 +11,6 @@ data class CategoryEntity(
     val code: String,
     val name_en: String,
     val name_fr: String,
+    val short_name_en: String,
+    val short_name_fr: String,
 )

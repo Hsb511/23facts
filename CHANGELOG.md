@@ -2,6 +2,8 @@ Version 0.0.4 :
 
 Feature:
  - On search the text preview is now centered on the string searched.
+Improvement:
+ - Improving the fact top bar title with short names for categories with long name
 Fix:
  - The search included previously the URL text, but the results where incoherent. The search is now only on title and fact text.
  - Some link preview didn't show the correct language. Now if the URL contains .fr the language is french otherwise the language from the page.
