@@ -1,6 +1,7 @@
 Version 0.0.4 :
 
 Feature:
+ - 5 NEW 23 FACTS
  - On search the text preview is now centered on the string searched.
 Improvement:
  - Improving the fact top bar title with short names for categories with long name
