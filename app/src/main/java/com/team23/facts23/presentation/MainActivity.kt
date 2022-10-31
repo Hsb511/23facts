@@ -143,7 +143,8 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun changeStatusAndNavigationColors() {
-        if (settingsVM.isDarkMode.value) {
+        val isDarkMode = settingsVM.isDarkMode.value ?: resources.configuration.uiMode == UI_MODE_NIGHT_YES
+        if (isDarkMode) {
             resources.configuration.uiMode = UI_MODE_NIGHT_YES
             window.statusBarColor = ContextCompat.getColor(this, R.color.prussian_blue)
             window.navigationBarColor = ContextCompat.getColor(this, R.color.eerie_black)

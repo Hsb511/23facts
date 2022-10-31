@@ -7,11 +7,7 @@
     <string name="settings_forced_light_mode">mode clair forcé</string>
     <string name="settings_colors">Couleurs</string>
     <string name="settings_colors_app">Couleurs de l\'application</string>
-    <string name="settings_colors_custom">Mes propres couleurs (Android 12+)</string>
-    <string name="settings_language">Langue</string>
-    <string name="settings_language_english">Anglais</string>
-    <string name="settings_language_system">Paramètre du système</string>
-    <string name="settings_language_french">Français</string>
+    <string name="settings_colors_custom">Mes propres couleurs</string>
     <string name="settings_random">Aléatoire</string>
     <string name="settings_random_pure">Aléatoire pure</string>
     <string name="settings_random_unread">Aléatoire parmi les faits non lus</string>
