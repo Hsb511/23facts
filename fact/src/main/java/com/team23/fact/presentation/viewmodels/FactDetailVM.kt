@@ -25,6 +25,7 @@ import kotlinx.coroutines.withContext
 
 class FactDetailVM @AssistedInject constructor(
     @Assisted var factId: String?,
+    @Assisted val launchFactSharingIntent: (String) -> Unit,
     @Assisted private val achievementVM: AchievementVM,
     private val getAndReadFactUseCase: GetAndReadFactUseCase,
     private val getCategoryNameUseCase: GetCategoryNameUseCase,
@@ -62,6 +63,12 @@ class FactDetailVM @AssistedInject constructor(
                     factSources.addAll(sources)
                 }
             }
+        }
+    }
+
+    fun onShareFact() {
+        factId?.let {
+            launchFactSharingIntent(it)
         }
     }
 
@@ -103,7 +110,11 @@ class FactDetailVM @AssistedInject constructor(
 
     @AssistedFactory
     interface Factory {
-        fun create(factId: String?, achievementVM: AchievementVM): FactDetailVM
+        fun create(
+            factId: String?,
+            launchFactSharingIntent: (String) -> Unit,
+            achievementVM: AchievementVM
+        ): FactDetailVM
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -111,10 +122,11 @@ class FactDetailVM @AssistedInject constructor(
         fun provideFactory(
             assistedFactory: Factory,
             factId: String?,
+            launchFactSharingIntent: (String) -> Unit,
             achievementVM: AchievementVM,
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
-                return assistedFactory.create(factId, achievementVM) as T
+                return assistedFactory.create(factId, launchFactSharingIntent, achievementVM) as T
             }
         }
     }

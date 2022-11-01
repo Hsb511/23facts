@@ -2,6 +2,7 @@ Version 0.0.4 :
 
 Feature:
  - 5 NEW 23 FACTS
+ - Fact sharing : Click on floating button on fact screen and send to your friend. Your friend will click on the link and be redirected to its browser and then can open the app top left 
  - On search the text preview is now centered on the string searched.
 Improvement:
  - Improving the fact top bar title with short names for categories with long name

@@ -2,7 +2,8 @@ package com.team23.facts23.presentation
 
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.content.res.Configuration.*
+import android.content.res.Configuration.UI_MODE_NIGHT_MASK
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +14,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -51,6 +53,7 @@ class MainActivity : ComponentActivity() {
         FactDetailVM.provideFactory(
             assistedFactory = factVMAssistedFactory,
             factId = null,
+            launchFactSharingIntent = { factId -> launchFactSharingIntent(factId) },
             achievementVM = achievementVM,
         )
     }
@@ -80,6 +83,13 @@ class MainActivity : ComponentActivity() {
             val lastScreen: MutableState<Screen> = remember { mutableStateOf(Screen.Home()) }
             val isMenuExpanded = remember { mutableStateOf(false) }
 
+            LaunchedEffect(intent) {
+                val factId = intent.data.toString().split("/").lastOrNull()
+                if (intent.action == Intent.ACTION_VIEW && !factId.isNullOrBlank()) {
+                    navController.navigate("fact/$factId")
+                }
+            }
+
             Facts23Theme(darkTheme = settingsVM.isDarkMode.value) {
                 MainView(
                     factDetailVM = factDetailVM,
@@ -107,6 +117,10 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+        handleSplashScreen()
+    }
+
+    private fun handleSplashScreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             splashScreen.setOnExitAnimationListener { splashScreenView ->
                 // Create your custom animation.
@@ -129,20 +143,30 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun launchEmailIntent(email: String) {
-        val mIntent = Intent(Intent.ACTION_SEND)
-        mIntent.data = Uri.parse("mailto:")
-        mIntent.type = "text/plain"
-        mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
-        mIntent.putExtra(Intent.EXTRA_SUBJECT, "23facts")
+        val mIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            data = Uri.parse("mailto:")
+            type = "text/plain"
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+            putExtra(Intent.EXTRA_SUBJECT, "23facts")
+        }
 
-        try {
-            startActivity(Intent.createChooser(mIntent, "Choose Email Client..."))
-        } catch (e: Exception) { }
+        startActivity(Intent.createChooser(mIntent, "Choose Email Client..."))
+    }
+
+    private fun launchFactSharingIntent(factId: String) {
+        val mIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, "https://23facts.fr/open/$factId")
+        }
+
+        startActivity(Intent.createChooser(mIntent, null))
     }
 
     private fun changeStatusAndNavigationColors() {
-        val isDarkMode = settingsVM.isDarkMode.value ?:
-            (resources.configuration.uiMode and UI_MODE_NIGHT_MASK == UI_MODE_NIGHT_YES)
+        val isDarkMode = settingsVM.isDarkMode.value
+            ?: (resources.configuration.uiMode and UI_MODE_NIGHT_MASK == UI_MODE_NIGHT_YES)
         if (isDarkMode) {
             window.statusBarColor = ContextCompat.getColor(this, R.color.prussian_blue)
             window.navigationBarColor = ContextCompat.getColor(this, R.color.eerie_black)

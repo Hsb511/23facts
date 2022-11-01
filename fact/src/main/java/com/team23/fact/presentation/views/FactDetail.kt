@@ -44,7 +44,7 @@ fun FactDetail(factDetailVM: FactDetailVM) {
     FactDetail(
         factDetailVO = factDetailVM.factDetail.value,
         factSources = factDetailVM.factSources,
-        onShareFact = { /* TODO */ },
+        onShareFact = { factDetailVM.onShareFact() },
         onClickLink = { url ->
             startActivity(context, Intent(Intent.ACTION_VIEW, Uri.parse(url)), null)
         },
