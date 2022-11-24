@@ -1,3 +1,8 @@
+Version 0.0.5 :
+
+Feature:
+ - Change settings randomness
+
 Version 0.0.4 :
 
 Feature:

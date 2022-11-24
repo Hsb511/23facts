@@ -81,93 +81,104 @@ fun FactDetail(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            if (factDetailVO == null) {
-                CircularProgressIndicator(
-                    strokeWidth = 11.5.dp,
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .size(115.dp)
-                )
-            } else {
-                LazyColumn(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    item {
-                        Text(
-                            text = factDetailVO.title,
-                            style = MaterialTheme.typography.h4,
-                            color = MaterialTheme.colors.onBackground,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier
-                                .padding(8.dp)
-                                .fillMaxWidth()
-                        )
-                    }
-                    item {
-                        if (factDetailVO.imageUrl != null) {
-                            Image(
-                                painter = if (factDetailVO.imageUrl.endsWith(".svg")) {
-                                    rememberAsyncImagePainter(
-                                        model = ImageRequest.Builder(LocalContext.current)
-                                            .decoderFactory(SvgDecoder.Factory())
-                                            .data(factDetailVO.imageUrl)
-                                            .build()
-                                    )
-                                } else {
-                                    rememberAsyncImagePainter(factDetailVO.imageUrl)
-                                },
-                                contentDescription = stringResource(id = R.string.fact_image_description),
-                                modifier = Modifier
-                                    .widthIn(0.dp, 300.dp)
-                                    .heightIn(100.dp, 200.dp)
-                                    .clip(MaterialTheme.shapes.medium)
-                                    .padding(8.dp)
-                                    .background(
-                                        color = Color.White,
-                                        shape = MaterialTheme.shapes.medium
-                                    )
-                            )
-                        } else if (factDetailVO.imageBitmap != null) {
-                            Image(
-                                bitmap = factDetailVO.imageBitmap,
-                                contentDescription = stringResource(id = R.string.fact_image_description),
-                                modifier = Modifier
-                                    .widthIn(0.dp, 300.dp)
-                                    .heightIn(0.dp, 200.dp)
-                                    .clip(MaterialTheme.shapes.medium)
-                                    .padding(8.dp)
-                                    .background(
-                                        color = Color.White,
-                                        shape = MaterialTheme.shapes.medium
-                                    )
-                            )
-                        }
-                    }
-                    item {
-                        Text(
-                            text = factDetailVO.description,
-                            style = MaterialTheme.typography.body1,
-                            color = MaterialTheme.colors.onBackground,
-                            modifier = Modifier.padding(8.dp, 0.dp, 8.dp, 16.dp)
-                        )
-                    }
-                    if (factSources.contains(null)) {
+            when {
+                factDetailVO == null -> {
+                    CircularProgressIndicator(
+                        strokeWidth = 11.5.dp,
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .size(115.dp)
+                    )
+                }
+                factDetailVO.id == "#null" -> {
+                    Text(
+                        text = stringResource(id = R.string.fact_all_facts_read),
+                        style = MaterialTheme.typography.h5,
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                    )
+                }
+                else -> {
+                    LazyColumn(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.fillMaxSize()
+                    ) {
                         item {
-                            CircularProgressIndicator(
-                                strokeWidth = 11.5.dp,
+                            Text(
+                                text = factDetailVO.title,
+                                style = MaterialTheme.typography.h4,
+                                color = MaterialTheme.colors.onBackground,
+                                textAlign = TextAlign.Center,
                                 modifier = Modifier
-                                    .align(Alignment.Center)
-                                    .size(115.dp)
+                                    .padding(8.dp)
+                                    .fillMaxWidth()
                             )
                         }
-                    } else {
-                        items(factSources.filterNotNull()) {
-                            FactDetailLink(
-                                factDetailLinkVO = it,
-                                onLinkClicked = { url -> onClickLink(url) },
-                                onLinkSaved = { url -> onLongClickLink(url) },
+                        item {
+                            if (factDetailVO.imageUrl != null) {
+                                Image(
+                                    painter = if (factDetailVO.imageUrl.endsWith(".svg")) {
+                                        rememberAsyncImagePainter(
+                                            model = ImageRequest.Builder(LocalContext.current)
+                                                .decoderFactory(SvgDecoder.Factory())
+                                                .data(factDetailVO.imageUrl)
+                                                .build()
+                                        )
+                                    } else {
+                                        rememberAsyncImagePainter(factDetailVO.imageUrl)
+                                    },
+                                    contentDescription = stringResource(id = R.string.fact_image_description),
+                                    modifier = Modifier
+                                        .widthIn(0.dp, 300.dp)
+                                        .heightIn(100.dp, 200.dp)
+                                        .clip(MaterialTheme.shapes.medium)
+                                        .padding(8.dp)
+                                        .background(
+                                            color = Color.White,
+                                            shape = MaterialTheme.shapes.medium
+                                        )
+                                )
+                            } else if (factDetailVO.imageBitmap != null) {
+                                Image(
+                                    bitmap = factDetailVO.imageBitmap,
+                                    contentDescription = stringResource(id = R.string.fact_image_description),
+                                    modifier = Modifier
+                                        .widthIn(0.dp, 300.dp)
+                                        .heightIn(0.dp, 200.dp)
+                                        .clip(MaterialTheme.shapes.medium)
+                                        .padding(8.dp)
+                                        .background(
+                                            color = Color.White,
+                                            shape = MaterialTheme.shapes.medium
+                                        )
+                                )
+                            }
+                        }
+                        item {
+                            Text(
+                                text = factDetailVO.description,
+                                style = MaterialTheme.typography.body1,
+                                color = MaterialTheme.colors.onBackground,
+                                modifier = Modifier.padding(8.dp, 0.dp, 8.dp, 16.dp)
                             )
+                        }
+                        if (factSources.contains(null)) {
+                            item {
+                                CircularProgressIndicator(
+                                    strokeWidth = 11.5.dp,
+                                    modifier = Modifier
+                                        .align(Alignment.Center)
+                                        .size(115.dp)
+                                )
+                            }
+                        } else {
+                            items(factSources.filterNotNull()) {
+                                FactDetailLink(
+                                    factDetailLinkVO = it,
+                                    onLinkClicked = { url -> onClickLink(url) },
+                                    onLinkSaved = { url -> onLongClickLink(url) },
+                                )
+                            }
                         }
                     }
                 }
@@ -189,7 +200,7 @@ fun FactDetailPreview() {
                 code = "MA",
                 name = "Mathematics",
                 shortName = "Mathematics",
-            ) ,
+            ),
             imageUrl = "https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
             description = "The birthday paradox is that, counterintuitively, the probability of a shared birthday exceeds 50% in a group of only 23 people.",
         ),

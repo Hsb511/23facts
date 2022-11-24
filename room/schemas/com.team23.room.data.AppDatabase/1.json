@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "76179056bda4ad01b895233c625831ad",
+    "identityHash": "66b82b7114a706e3b6c8a535b4c06793",
     "entities": [
       {
         "tableName": "T_ACHIEVEMENT",
@@ -197,7 +197,7 @@
       },
       {
         "tableName": "T_SETTING",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `value` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `value` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -214,7 +214,7 @@
           {
             "fieldPath": "value",
             "columnName": "value",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           }
         ],
@@ -241,7 +241,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '76179056bda4ad01b895233c625831ad')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '66b82b7114a706e3b6c8a535b4c06793')"
     ]
   }
 }

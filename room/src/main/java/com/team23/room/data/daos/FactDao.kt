@@ -21,6 +21,9 @@ interface FactDao {
     @Query("SELECT * FROM T_FACT WHERE language = :language ORDER BY RANDOM() LIMIT 1")
     fun findRandomByLanguage(language: String): FactEntity?
 
+    @Query("SELECT * FROM T_FACT WHERE language = :language AND isNew = 1 ORDER BY RANDOM() LIMIT 1")
+    fun findRandomUnreadByLanguage(language: String): FactEntity?
+
     @Query("UPDATE T_FACT SET isNew = :isNew WHERE id_fonc = :id")
     fun updateNewById(id: Long, isNew: Boolean = false)
 

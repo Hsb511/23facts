@@ -10,5 +10,5 @@ data class SettingEntity(
     @PrimaryKey
     val id: Long,
     val name: String,
-    val value: Int,
+    val value: String,
 )

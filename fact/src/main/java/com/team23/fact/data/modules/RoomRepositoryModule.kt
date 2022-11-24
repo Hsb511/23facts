@@ -2,8 +2,10 @@ package com.team23.fact.data.modules
 
 import com.team23.fact.data.repositories.CategoryRoomRepository
 import com.team23.fact.data.repositories.FactRoomRepository
+import com.team23.fact.data.repositories.SettingsRoomRepository
 import com.team23.fact.domain.repositories.CategoryRepository
 import com.team23.fact.domain.repositories.FactRepository
+import com.team23.fact.domain.repositories.SettingsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -17,5 +19,8 @@ abstract class RoomRepositoryModule {
 
     @Binds
     abstract fun bindFactRepository(factRoomRepository: FactRoomRepository): FactRepository
+
+    @Binds
+    abstract fun bindSettingsRepository(settingsRoomRepository: SettingsRoomRepository): SettingsRepository
 
 }

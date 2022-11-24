@@ -15,6 +15,9 @@ class FactRoomRepository @Inject constructor(
     override suspend fun getRandomFact(language: String) =
         factDao.findRandomByLanguage(language)?.toModel()
 
+    override suspend fun getRandomAmongUnreadFact(language: String) =
+        factDao.findRandomUnreadByLanguage(language)?.toModel()
+
     override suspend fun setNewToFalseById(id: Long) {
         factDao.updateNewById(id)
     }
