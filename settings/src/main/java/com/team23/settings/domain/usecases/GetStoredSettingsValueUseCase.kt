@@ -8,11 +8,11 @@ class GetStoredSettingsValueUseCase @Inject constructor(
     private val settingsRepository: SettingRepository
 ) {
     suspend operator fun invoke(): List<Int> =
-        settingsRepository.getAllStoredValues().mapIndexed { index, value ->
-            when (index) {
-                0 -> 1
-                1 -> 0
-                else -> RandomnessType.values().map { it.name }.indexOf(value)
+        settingsRepository.getAllStoredValues().map { setting ->
+            when (setting.id) {
+                0L -> 1
+                1L -> 0
+                else -> RandomnessType.values().map { it.name }.indexOf(setting.value)
             }
         }
 }

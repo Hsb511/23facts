@@ -100,7 +100,7 @@ fun SettingsViewPreview() {
                     R.string.settings_forced_light_mode,
                 ),
                 onValueChanged = { },
-                lastSelectedValue = 1,
+                selectedValue = remember { mutableStateOf(1)},
             ),
             SettingsSingleChoiceVO(
                 titleId = R.string.settings_colors,
@@ -109,7 +109,7 @@ fun SettingsViewPreview() {
                     R.string.settings_colors_custom,
                 ),
                 onValueChanged = { },
-                lastSelectedValue = 0,
+                selectedValue = remember { mutableStateOf(0)},
             ),
             SettingsSingleChoiceVO(
                 titleId = R.string.settings_random,
@@ -118,7 +118,7 @@ fun SettingsViewPreview() {
                     R.string.settings_random_unread,
                 ),
                 onValueChanged = { },
-                lastSelectedValue = 0,
+                selectedValue = remember { mutableStateOf(0)},
             )
         ),
         onResetData = {},

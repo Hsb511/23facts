@@ -18,7 +18,6 @@ fun SettingsSingleChoiceSection(
     singleChoiceVO: SettingsSingleChoiceVO
 ) {
     if (singleChoiceVO.displayed) {
-        var selectedPosition by remember { mutableStateOf(-1) }
         Text(
             text = stringResource(id = singleChoiceVO.titleId),
             style = MaterialTheme.typography.h5,
@@ -29,17 +28,11 @@ fun SettingsSingleChoiceSection(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 val currentPosition = singleChoiceVO.values.indexOf(valueId)
-                val isValueSelected = if (selectedPosition == -1) {
-                    singleChoiceVO.lastSelectedValue == currentPosition
-                } else {
-                    selectedPosition == currentPosition
-                }
                 RadioButton(
-                    selected = isValueSelected,
+                    selected = singleChoiceVO.selectedValue.value == currentPosition,
                     enabled = !singleChoiceVO.disabled,
                     onClick = {
                         singleChoiceVO.onValueChanged(currentPosition)
-                        selectedPosition = currentPosition
                     })
                 Text(
                     text = stringResource(id = valueId),
@@ -62,7 +55,7 @@ fun SettingsSingleChoiceSectionPreview() {
             titleId = R.string.settings_theme_mode,
             values = listOf(R.string.settings_forced_dark_mode, R.string.settings_system_mode, R.string.settings_forced_light_mode),
             onValueChanged = {},
-            lastSelectedValue = 1,
+            selectedValue = remember { mutableStateOf(1) },
             disabled = false
         )
     )

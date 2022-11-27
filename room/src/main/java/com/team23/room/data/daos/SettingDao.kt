@@ -14,6 +14,6 @@ interface SettingDao {
     @Query("SELECT value FROM T_SETTING WHERE name = :name")
     fun findValueByName(name: String): String?
 
-    @Query("SELECT value FROM T_SETTING ORDER BY id")
-    fun findAllValuesOrderedById(): List<String>
+    @Query("SELECT * FROM T_SETTING ORDER BY id")
+    fun findAllValuesOrderedById(): List<SettingEntity>
 }

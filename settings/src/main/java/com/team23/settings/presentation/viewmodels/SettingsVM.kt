@@ -28,6 +28,7 @@ class SettingsVM @AssistedInject constructor(
     private val setRandomnessUseCase: SetRandomnessUseCase,
 ) : ViewModel() {
     val isDarkMode: MutableState<Boolean?> = mutableStateOf(null)
+    private val storedThemeSetting: MutableState<Int> = mutableStateOf(1)
     private val storedRandomnessType: MutableState<Int> = mutableStateOf(0)
     private val themeModeSelectedValue: MutableState<Int> = mutableStateOf(1)
     val settingsSingleChoiceList = mutableStateListOf<SettingsSingleChoiceVO>()
@@ -35,7 +36,11 @@ class SettingsVM @AssistedInject constructor(
     init {
         viewModelScope.launch(Dispatchers.IO) {
             with(getStoredSettingsValueUseCase()) {
-                storedRandomnessType.value = this[0]
+                storedRandomnessType.value = if (this.isEmpty()) {
+                    0
+                } else {
+                    this[0]
+                }
             }
         }
         settingsSingleChoiceList.addAll(
@@ -56,7 +61,7 @@ class SettingsVM @AssistedInject constructor(
                         }
                         changeStatusAndNavigationColors()
                     },
-                    lastSelectedValue = 1,
+                    selectedValue = storedThemeSetting,
                 ),
                 SettingsSingleChoiceVO(
                     titleId = R.string.settings_colors,
@@ -66,7 +71,7 @@ class SettingsVM @AssistedInject constructor(
                     ),
                     // TODO HANDLE MATERIAL YOU COLOR
                     onValueChanged = { },
-                    lastSelectedValue = 0,
+                    selectedValue = mutableStateOf(0),
                     disabled = true,
                     displayed = Build.VERSION.SDK_INT >= 31,
                 ),
@@ -76,9 +81,10 @@ class SettingsVM @AssistedInject constructor(
                     onValueChanged = {
                         viewModelScope.launch(Dispatchers.IO) {
                             setRandomnessUseCase(RandomnessType.values()[it])
+                            storedRandomnessType.value = it
                         }
                      },
-                    lastSelectedValue = storedRandomnessType.value,
+                    selectedValue = storedRandomnessType,
                 )
             )
         )
