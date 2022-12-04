@@ -26,7 +26,8 @@ object RoomDatabaseModule {
             LOCAL_DB_NAME
         ).build().also { db ->
             Scripts.categoriesScript.execSQL(db)
-            Scripts.factsScript.execSQL(db)
+            Scripts.factsScript1.execSQL(db)
+            Scripts.factsScript2.execSQL(db)
             Scripts.achievementScript.execSQL(db)
         }
 

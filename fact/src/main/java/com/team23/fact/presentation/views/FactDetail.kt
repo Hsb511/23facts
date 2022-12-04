@@ -96,6 +96,7 @@ fun FactDetail(
                         style = MaterialTheme.typography.h5,
                         modifier = Modifier
                             .align(Alignment.Center)
+                            .padding(16.dp)
                     )
                 }
                 else -> {

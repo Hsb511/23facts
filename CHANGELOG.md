@@ -1,7 +1,10 @@
 Version 0.0.5 :
 
 Feature:
+ - 3 NEW 23 FACTS
  - Change settings randomness
+Improvement:
+ - Storing settings values
 
 Version 0.0.4 :
 

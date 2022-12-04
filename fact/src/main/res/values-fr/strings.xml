@@ -8,5 +8,5 @@
     <string name="fact_icon_favorite">icone de favoir</string>
     <string name="fact_link_image_description">apperçu d\'URL</string>
     <string name="fact_link_url_saved">L\'URL a été sauvegardé dans votre presse papier</string>
-    <string name="fact_all_facts_read">Vous n\'avez plus de nouveaux faits à lire.\n\nPour revoir des faits en aléatoire, vous pouvez changer les paramètres \'aléatoire : - Cliquer sur l\icône ☰ en haut à droite \n Cliquer sur "⚙ Paramètres"</string>
+    <string name="fact_all_facts_read">Vous n\'avez plus de nouveaux faits à lire.\n\nPour revoir des faits en aléatoire, vous pouvez changer les paramètres d\'aléatoire :\n - Cliquer sur l\icône ☰ en haut à droite \n - Cliquer sur "⚙ Paramètres"</string>
 </resources>
