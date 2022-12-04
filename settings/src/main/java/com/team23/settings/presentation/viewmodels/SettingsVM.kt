@@ -10,9 +10,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.team23.settings.R
 import com.team23.settings.domain.models.RandomnessType
+import com.team23.settings.domain.models.ThemeMode
 import com.team23.settings.domain.usecases.GetStoredSettingsValueUseCase
 import com.team23.settings.domain.usecases.ResetDatabaseUseCase
-import com.team23.settings.domain.usecases.SetRandomnessUseCase
+import com.team23.settings.domain.usecases.StoreRandomnessUseCase
 import com.team23.settings.presentation.viewobjects.SettingsSingleChoiceVO
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -25,43 +26,35 @@ class SettingsVM @AssistedInject constructor(
     @Assisted("resetAchievementData") val resetAchievementData: () -> Unit,
     private val getStoredSettingsValueUseCase: GetStoredSettingsValueUseCase,
     private val resetDatabaseUseCase: ResetDatabaseUseCase,
-    private val setRandomnessUseCase: SetRandomnessUseCase,
+    private val storeRandomnessUseCase: StoreRandomnessUseCase,
 ) : ViewModel() {
     val isDarkMode: MutableState<Boolean?> = mutableStateOf(null)
-    private val storedThemeSetting: MutableState<Int> = mutableStateOf(1)
+    private val storedThemeMode: MutableState<Int> = mutableStateOf(1)
     private val storedRandomnessType: MutableState<Int> = mutableStateOf(0)
-    private val themeModeSelectedValue: MutableState<Int> = mutableStateOf(1)
     val settingsSingleChoiceList = mutableStateListOf<SettingsSingleChoiceVO>()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
             with(getStoredSettingsValueUseCase()) {
-                storedRandomnessType.value = if (this.isEmpty()) {
-                    0
-                } else {
-                    this[0]
-                }
+                storedThemeMode.value = this[0]
+                storedRandomnessType.value = this[2]
             }
         }
         settingsSingleChoiceList.addAll(
             listOf(
                 SettingsSingleChoiceVO(
                     titleId = R.string.settings_theme_mode,
-                    values = listOf(
-                        R.string.settings_forced_dark_mode,
-                        R.string.settings_system_mode,
-                        R.string.settings_forced_light_mode,
-                    ),
+                    values = ThemeMode.values().map { it.displayName },
                     onValueChanged = {
-                        themeModeSelectedValue.value = it
-                        isDarkMode.value = when (themeModeSelectedValue.value) {
+                        storedThemeMode.value = it
+                        isDarkMode.value = when (storedThemeMode.value) {
                             0 -> true
                             2 -> false
                             else -> null
                         }
                         changeStatusAndNavigationColors()
                     },
-                    selectedValue = storedThemeSetting,
+                    selectedValue = storedThemeMode,
                 ),
                 SettingsSingleChoiceVO(
                     titleId = R.string.settings_colors,
@@ -80,7 +73,7 @@ class SettingsVM @AssistedInject constructor(
                     values = RandomnessType.values().map { it.displayName },
                     onValueChanged = {
                         viewModelScope.launch(Dispatchers.IO) {
-                            setRandomnessUseCase(RandomnessType.values()[it])
+                            storeRandomnessUseCase(RandomnessType.values()[it])
                             storedRandomnessType.value = it
                         }
                      },

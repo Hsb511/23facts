@@ -7,5 +7,5 @@
     <string name="fact_icon_favorite">favorite icon</string>
     <string name="fact_link_image_description">link preview</string>
     <string name="fact_link_url_saved">The link has been saved in your clipboard</string>
-    <string name="fact_all_facts_read">You\'ve read all the facts</string>
+    <string name="fact_all_facts_read">You\'ve read all the new facts.\n\nTo see random facts again, you can change the randomness settings: - Click on the icon top right ☰ \n - Click on "⚙ Settings"</string>
 </resources>

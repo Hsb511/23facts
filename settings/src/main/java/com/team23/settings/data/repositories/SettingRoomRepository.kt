@@ -12,16 +12,20 @@ class SettingRoomRepository @Inject constructor(
     private val settingDao: SettingDao,
     private val settingsMapper: SettingsMapper,
 ) : SettingRepository {
-    override suspend fun updateRandomSetting(newValue: String) {
-        settingDao.insertOrUpdateSetting(
-            SettingEntity(
-                id = SettingsName.RANDOMNESS.ordinal.toLong(),
-                name = SettingsName.RANDOMNESS.name,
-                value = newValue
-            )
-        )
+    override suspend fun insertOrUpdateRandomness(newValue: String) {
+        settingDao.insertOrUpdateSetting(createSettingEntity(SettingsName.RANDOMNESS, newValue))
+    }
+
+    override suspend fun insertOrUpdateThemeMode(newValue: String) {
+        settingDao.insertOrUpdateSetting(createSettingEntity(SettingsName.THEME, newValue))
     }
 
     override suspend fun getAllStoredValues(): List<SettingsModel> =
         settingsMapper.toDomainModels(settingDao.findAllValuesOrderedById())
+
+    private fun createSettingEntity(setting: SettingsName, value: String) = SettingEntity(
+        id = setting.ordinal.toLong(),
+        name = setting.name,
+        value = value
+    )
 }

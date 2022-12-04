@@ -7,12 +7,17 @@ import javax.inject.Inject
 class GetStoredSettingsValueUseCase @Inject constructor(
     private val settingsRepository: SettingRepository
 ) {
-    suspend operator fun invoke(): List<Int> =
-        settingsRepository.getAllStoredValues().map { setting ->
-            when (setting.id) {
-                0L -> 1
-                1L -> 0
-                else -> RandomnessType.values().map { it.name }.indexOf(setting.value)
-            }
-        }
+    suspend operator fun invoke(): List<Int> {
+        val allStoredValues = settingsRepository.getAllStoredValues()
+        val themeSettingValue = allStoredValues.firstOrNull { it.id == 0L }?.value?.toIntOrNull() ?: 1
+        val colorSettingValue = allStoredValues.firstOrNull { it.id == 1L }?.value?.toIntOrNull() ?: 0
+        val randomnessSettingValue = allStoredValues.firstOrNull { it.id == 2L }?.value?.let {
+            RandomnessType.values().map { randomType -> randomType.name }.indexOf(it)
+        } ?: 0
+
+        return listOf(
+            themeSettingValue, colorSettingValue, randomnessSettingValue
+        )
+    }
+
 }
