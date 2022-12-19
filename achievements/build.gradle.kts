@@ -37,6 +37,7 @@ dependencies {
 
 
     implementation(project(":room"))
+    implementation(project(":domain"))
 
     implementation("androidx.core:core-ktx:${Versions.ANDROID_CORE}")
     implementation("androidx.appcompat:appcompat:1.5.1")

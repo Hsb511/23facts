@@ -1,13 +1,13 @@
 package com.team23.achievements.data.repositories
 
 import com.team23.achievements.data.mappers.toListModel
-import com.team23.achievements.domain.models.AchievementModel
-import com.team23.achievements.domain.repositories.AchievementRepository
+import com.team23.achievements.models.AchievementModel
+import com.team23.achievements.repositories.AchievementRepository
 import com.team23.room.data.daos.AchievementDao
 import java.util.*
 import javax.inject.Inject
 
-class AchievementRepositoryImpl @Inject constructor(
+internal class AchievementRepositoryImpl @Inject constructor(
     private val achievementDao: AchievementDao
 ) : AchievementRepository {
     override suspend fun findIsFoundByName(name: String): Boolean =

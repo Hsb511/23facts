@@ -5,16 +5,16 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.team23.achievements.domain.models.AchievementEnum.*
-import com.team23.achievements.domain.usecases.GetAllAchievementsUseCase
-import com.team23.achievements.domain.usecases.Unlock1IconophileUseCase
-import com.team23.achievements.domain.usecases.Unlock3FactomaniaUseCase
 import com.team23.achievements.presentation.mappers.toAchievementStringDate
 import com.team23.achievements.presentation.mappers.toListVO
 import com.team23.achievements.presentation.mappers.toPreviewVO
+import com.team23.achievements.presentation.viewobjects.AchievementEnum
 import com.team23.achievements.presentation.viewobjects.AchievementPreviewVO
 import com.team23.achievements.presentation.viewobjects.AchievementVO
 import com.team23.achievements.presentation.viewobjects.isLocked
+import com.team23.achievements.usecases.GetAllAchievementsUseCase
+import com.team23.achievements.usecases.Unlock1IconophileUseCase
+import com.team23.achievements.usecases.Unlock3FactomaniaUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,12 +44,12 @@ class AchievementVM @Inject constructor(
     }
 
     fun onAppIconClicked() {
-        if (ACH1_APP_ICON_CLICKED_23_TIMES.isLocked(achievements)) {
+        if (AchievementEnum.ACH1_APP_ICON_CLICKED_23_TIMES.isLocked(achievements)) {
             timesAmountAppIconClicked++
             viewModelScope.launch(Dispatchers.IO) {
                 achievementPreviewToDisplay.value =
-                    unlock1IconophileUseCase.invoke(timesAmountAppIconClicked)?.let {
-                        achievements[ACH1_APP_ICON_CLICKED_23_TIMES.ordinal].apply {
+                    unlock1IconophileUseCase.invoke(timesAmountAppIconClicked, AchievementEnum.ACH1_APP_ICON_CLICKED_23_TIMES.name)?.let {
+                        achievements[AchievementEnum.ACH1_APP_ICON_CLICKED_23_TIMES.ordinal].apply {
                             this.unlockDate = it.unlockDate?.toAchievementStringDate()
                         }
                         it.toPreviewVO()
@@ -59,10 +59,10 @@ class AchievementVM @Inject constructor(
     }
 
     fun onFactLoaded() {
-        if (ACH3_AMOUNT_FACTS_READ_23.isLocked(achievements)) {
+        if (AchievementEnum.ACH3_AMOUNT_FACTS_READ_23.isLocked(achievements)) {
             viewModelScope.launch(Dispatchers.IO) {
-                achievementPreviewToDisplay.value = unlock3FactomaniaUseCase()?.let {
-                    achievements[ACH3_AMOUNT_FACTS_READ_23.ordinal].apply {
+                achievementPreviewToDisplay.value = unlock3FactomaniaUseCase(AchievementEnum.ACH3_AMOUNT_FACTS_READ_23.name)?.let {
+                    achievements[AchievementEnum.ACH3_AMOUNT_FACTS_READ_23.ordinal].apply {
                         this.unlockDate = it.unlockDate?.toAchievementStringDate()
                     }
                     it.toPreviewVO()

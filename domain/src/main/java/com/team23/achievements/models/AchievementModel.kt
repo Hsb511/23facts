@@ -1,9 +1,9 @@
-package com.team23.achievements.domain.models
+package com.team23.achievements.models
 
 import java.util.Date
 
 data class AchievementModel(
-    val achievementEnum: AchievementEnum,
+    val name: String,
     val isFound: Boolean,
     val unlockDate: Date?,
 )

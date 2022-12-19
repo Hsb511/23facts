@@ -5,6 +5,8 @@ Feature:
  - Change settings randomness
 Improvement:
  - Storing settings values
+Tech:
+ - domain layer in a :domain module
 
 Version 0.0.4 :
 

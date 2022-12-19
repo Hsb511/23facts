@@ -1,8 +1,7 @@
-package com.team23.achievements.domain.usecases
+package com.team23.achievements.usecases
 
-import com.team23.achievements.domain.models.AchievementEnum
-import com.team23.achievements.domain.models.AchievementModel
-import java.util.*
+import com.team23.achievements.models.AchievementModel
+import java.util.Date
 import javax.inject.Inject
 
 class Unlock1IconophileUseCase @Inject constructor(
@@ -12,11 +11,11 @@ class Unlock1IconophileUseCase @Inject constructor(
         private const val CLICK_AMOUNT_TO_UNLOCK_SECRET = 23
     }
 
-    suspend fun invoke(clickAmount: Int): AchievementModel? {
+    suspend fun invoke(clickAmount: Int, achievementName: String): AchievementModel? {
         if (clickAmount >= CLICK_AMOUNT_TO_UNLOCK_SECRET) {
-            unlockAchievementUseCase(AchievementEnum.ACH1_APP_ICON_CLICKED_23_TIMES)
+            unlockAchievementUseCase(achievementName)
             return AchievementModel(
-                achievementEnum = AchievementEnum.ACH1_APP_ICON_CLICKED_23_TIMES,
+                name = achievementName,
                 isFound = true,
                 unlockDate = Date()
             )

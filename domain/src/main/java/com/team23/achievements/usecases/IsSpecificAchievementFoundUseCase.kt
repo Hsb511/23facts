@@ -1,6 +1,6 @@
-package com.team23.achievements.domain.usecases
+package com.team23.achievements.usecases
 
-import com.team23.achievements.domain.repositories.AchievementRepository
+import com.team23.achievements.repositories.AchievementRepository
 import javax.inject.Inject
 
 class IsSpecificAchievementFoundUseCase @Inject constructor(

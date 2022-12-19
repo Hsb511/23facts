@@ -1,7 +1,7 @@
-package com.team23.achievements.domain.repositories
+package com.team23.achievements.repositories
 
-import com.team23.achievements.domain.models.AchievementModel
-import java.util.*
+import com.team23.achievements.models.AchievementModel
+import java.util.Date
 
 interface AchievementRepository {
     suspend fun findIsFoundByName(name: String): Boolean
