@@ -15,7 +15,7 @@ class Unlock3FactomaniaUseCase @Inject constructor(
         private const val LANGUAGE_AMOUNT = 2
     }
 
-    suspend operator fun invoke(achievementName: String): AchievementModel? {
+    suspend operator fun invoke(achievementName: String): AchievementModel? = runCatching {
         if (factRepository.countReadFacts() >= FACTS_AMOUNT_TO_UNLOCK_SECRET * LANGUAGE_AMOUNT) {
             unlockAchievementUseCase(achievementName)
             return AchievementModel(
@@ -25,5 +25,5 @@ class Unlock3FactomaniaUseCase @Inject constructor(
             )
         }
         return null
-    }
+    }.getOrNull()
 }
