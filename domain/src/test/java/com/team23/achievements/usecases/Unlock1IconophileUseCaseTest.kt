@@ -1,7 +1,5 @@
-package com.team23.domain.achievements
+package com.team23.achievements.usecases
 
-import com.team23.achievements.usecases.Unlock1IconophileUseCase
-import com.team23.achievements.usecases.UnlockAchievementUseCase
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

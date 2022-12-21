@@ -1,8 +1,6 @@
-package com.team23.domain.achievements
+package com.team23.achievements.usecases
 
 import com.team23.achievements.repositories.FactRepository
-import com.team23.achievements.usecases.Unlock3FactomaniaUseCase
-import com.team23.achievements.usecases.UnlockAchievementUseCase
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

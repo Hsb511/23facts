@@ -5,7 +5,6 @@ import com.team23.achievements.repositories.FactRepository
 import java.util.Date
 import javax.inject.Inject
 
-
 class Unlock3FactomaniaUseCase @Inject constructor(
     private val unlockAchievementUseCase: UnlockAchievementUseCase,
     private val factRepository: FactRepository,
