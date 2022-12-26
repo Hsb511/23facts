@@ -1,5 +1,5 @@
 package com.team23.achievements.repositories
 
-interface FactRepository {
+interface FactAchievementRepository {
     suspend fun countReadFacts(): Int
 }

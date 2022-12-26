@@ -3,10 +3,10 @@ package com.team23.search.presentation.viewmodels
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.intl.Locale
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.team23.search.domain.usecases.SearchFactsUseCase
+import com.team23.search.usecases.SearchFactsUseCase
 import com.team23.search.presentation.mappers.toVO
 import com.team23.search.presentation.viewobjects.FactPreviewVO
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,7 +26,7 @@ class SearchVM @Inject constructor(
         if (newText != searchText.value) {
             facts.clear()
             viewModelScope.launch(Dispatchers.IO) {
-                searchFactsUseCase(newText).also { factPreviews ->
+                searchFactsUseCase(newText, Locale.current.language).also { factPreviews ->
                     withContext(Dispatchers.Main) {
                         factPreviews.forEach {
                             facts.add(it.toVO())

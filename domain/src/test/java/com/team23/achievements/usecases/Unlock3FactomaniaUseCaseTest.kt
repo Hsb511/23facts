@@ -1,6 +1,6 @@
 package com.team23.achievements.usecases
 
-import com.team23.achievements.repositories.FactRepository
+import com.team23.search.repositories.FactSearchRepository
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -17,14 +17,14 @@ class Unlock3FactomaniaUseCaseTest {
     private val unlockAchievementUseCase = mockk<UnlockAchievementUseCase> {
         coEvery { this@mockk.invoke(any()) } returns Unit
     }
-    private val factRepository = mockk<FactRepository>()
-    private val unlock3FactomaniaUseCase = Unlock3FactomaniaUseCase(unlockAchievementUseCase, factRepository)
+    private val factSearchRepository = mockk<FactSearchRepository>()
+    private val unlock3FactomaniaUseCase = Unlock3FactomaniaUseCase(unlockAchievementUseCase, factSearchRepository)
 
     @Test
     fun `Given 0 facts read, When unlock3FactomaniaUseCase is invoked, Then returns null`() =
         runBlocking {
             // Given
-            coEvery { factRepository.countReadFacts() } returns 0
+            coEvery { factSearchRepository.countReadFacts() } returns 0
 
             // When
             val result = unlock3FactomaniaUseCase.invoke(ACHIEVEMENT_3_NAME)
@@ -38,7 +38,7 @@ class Unlock3FactomaniaUseCaseTest {
     fun `Given 44 facts read, When unlock3FactomaniaUseCase is invoked, Then returns null`() =
         runBlocking {
             // Given
-            coEvery { factRepository.countReadFacts() } returns 44
+            coEvery { factSearchRepository.countReadFacts() } returns 44
 
             // When
             val result = unlock3FactomaniaUseCase.invoke(ACHIEVEMENT_3_NAME)
@@ -52,7 +52,7 @@ class Unlock3FactomaniaUseCaseTest {
     fun `Given 46 facts read, When unlock3FactomaniaUseCase is invoked, Then returns achievement`() =
         runBlocking {
             // Given
-            coEvery { factRepository.countReadFacts() } returns 46
+            coEvery { factSearchRepository.countReadFacts() } returns 46
 
             // When
             val result = unlock3FactomaniaUseCase.invoke(ACHIEVEMENT_3_NAME)
@@ -67,7 +67,7 @@ class Unlock3FactomaniaUseCaseTest {
     fun `Given factRepository throws an error, When unlock3FactomaniaUseCase is invoked, Then returns null`() =
         runBlocking {
             // Given
-            coEvery { factRepository.countReadFacts() } throws NullPointerException()
+            coEvery { factSearchRepository.countReadFacts() } throws NullPointerException()
 
             // When
             val result = unlock3FactomaniaUseCase.invoke(ACHIEVEMENT_3_NAME)

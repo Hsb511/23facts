@@ -1,13 +1,13 @@
 package com.team23.achievements.usecases
 
 import com.team23.achievements.models.AchievementModel
-import com.team23.achievements.repositories.FactRepository
+import com.team23.achievements.repositories.FactAchievementRepository
 import java.util.Date
 import javax.inject.Inject
 
 class Unlock3FactomaniaUseCase @Inject constructor(
     private val unlockAchievementUseCase: UnlockAchievementUseCase,
-    private val factRepository: FactRepository,
+    private val factAchievementRepository: FactAchievementRepository,
 ) {
     companion object {
         private const val FACTS_AMOUNT_TO_UNLOCK_SECRET = 23
@@ -15,7 +15,7 @@ class Unlock3FactomaniaUseCase @Inject constructor(
     }
 
     suspend operator fun invoke(achievementName: String): AchievementModel? = runCatching {
-        if (factRepository.countReadFacts() >= FACTS_AMOUNT_TO_UNLOCK_SECRET * LANGUAGE_AMOUNT) {
+        if (factAchievementRepository.countReadFacts() >= FACTS_AMOUNT_TO_UNLOCK_SECRET * LANGUAGE_AMOUNT) {
             unlockAchievementUseCase(achievementName)
             return AchievementModel(
                 name = achievementName,

@@ -1,4 +1,4 @@
-package com.team23.search.domain.models
+package com.team23.search.models
 
 data class FactPreview(
     val id: Long,

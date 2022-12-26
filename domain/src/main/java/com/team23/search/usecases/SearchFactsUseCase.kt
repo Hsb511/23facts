@@ -1,12 +1,11 @@
-package com.team23.search.domain.usecases
+package com.team23.search.usecases
 
-import androidx.compose.ui.text.intl.Locale
-import com.team23.search.domain.models.FactPreview
-import com.team23.search.domain.repositories.FactRepository
+import com.team23.search.models.FactPreview
+import com.team23.search.repositories.FactSearchRepository
 import javax.inject.Inject
 
 class SearchFactsUseCase @Inject constructor(
-    private val factRepository: FactRepository
+    private val factSearchRepository: FactSearchRepository
 ) {
     companion object {
         private const val MINIMUM_CHARACTER_FOR_SEARCH = 1
@@ -14,12 +13,11 @@ class SearchFactsUseCase @Inject constructor(
         private const val MAXIMUM_TEXT_LENGTH = 35 * LINE_AMOUNT
     }
 
-    suspend operator fun invoke(searchText: String): List<FactPreview> =
+    suspend operator fun invoke(searchText: String, currentLanguage: String): List<FactPreview> =
         if (searchText.length <= MINIMUM_CHARACTER_FOR_SEARCH) {
             emptyList()
         } else {
-            // TODO REORDER THE LIST BY : FIRST IN TITLE, FIRST IN CONTENT, FIRST IN LINKS
-            val factPreviews = factRepository.searchFacts(searchText, Locale.current.language)
+            val factPreviews = factSearchRepository.searchFacts(searchText, currentLanguage)
             factPreviews.forEach { factPreview ->
                 if (factPreview.text.contains(searchText)) {
                     val splitText = factPreview.text.split(searchText).toMutableList()

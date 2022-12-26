@@ -45,6 +45,7 @@ dependencies {
     implementation("org.jsoup:jsoup:1.13.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
+    implementation(project(":domain"))
     implementation(project(":room"))
     implementation(project(":home"))
 

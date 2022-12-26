@@ -1,6 +1,6 @@
 package com.team23.search.presentation.mappers
 
-import com.team23.search.domain.models.FactPreview
+import com.team23.search.models.FactPreview
 import com.team23.search.presentation.viewobjects.FactPreviewVO
 
 fun FactPreview.toVO() = FactPreviewVO(
