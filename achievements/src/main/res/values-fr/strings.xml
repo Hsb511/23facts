@@ -7,4 +7,6 @@
     <string name="achievements_homebody_message">Rien ne vaut la douceur du foyer</string>
     <string name="achievements_factomania">factomane</string>
     <string name="achievements_factomania_message">Plus tu lis, plus tu apprends</string>
+    <string name="achievements_versatile">versatile</string>
+    <string name="achievements_versatile_message">Change les paramètres avant d\'en être obligé</string>
 </resources>

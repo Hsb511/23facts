@@ -1,5 +1,7 @@
 Version 1.0.2 :
 
+Feature:
+ - 1 new achievement: Achievement 4 versatile
 Fix:
  - Database migration
 

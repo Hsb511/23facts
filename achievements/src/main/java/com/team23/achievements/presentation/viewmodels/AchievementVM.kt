@@ -15,6 +15,7 @@ import com.team23.achievements.presentation.viewobjects.isLocked
 import com.team23.achievements.usecases.GetAllAchievementsUseCase
 import com.team23.achievements.usecases.Unlock1IconophileUseCase
 import com.team23.achievements.usecases.Unlock3FactomaniaUseCase
+import com.team23.achievements.usecases.Unlock4VersatileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,6 +27,7 @@ class AchievementVM @Inject constructor(
     private val getAllAchievementsUseCase: GetAllAchievementsUseCase,
     private val unlock1IconophileUseCase: Unlock1IconophileUseCase,
     private val unlock3FactomaniaUseCase: Unlock3FactomaniaUseCase,
+    private val unlock4VersatileUseCase: Unlock4VersatileUseCase,
 ) : ViewModel() {
     val achievements by lazy {
         mutableStateListOf<AchievementVO>()
@@ -63,6 +65,19 @@ class AchievementVM @Inject constructor(
             viewModelScope.launch(Dispatchers.IO) {
                 achievementPreviewToDisplay.value = unlock3FactomaniaUseCase(AchievementEnum.ACH3_AMOUNT_FACTS_READ_23.name)?.let {
                     achievements[AchievementEnum.ACH3_AMOUNT_FACTS_READ_23.ordinal].apply {
+                        this.unlockDate = it.unlockDate?.toAchievementStringDate()
+                    }
+                    it.toPreviewVO()
+                }
+            }
+        }
+    }
+
+    fun onSettingsChanged(settingsChangedAmount: Int) {
+        if (AchievementEnum.ACH4_SETTINGS_CHANGED_23_TIMES.isLocked(achievements)) {
+            viewModelScope.launch(Dispatchers.IO) {
+                achievementPreviewToDisplay.value = unlock4VersatileUseCase.invoke(settingsChangedAmount, AchievementEnum.ACH4_SETTINGS_CHANGED_23_TIMES.name)?.let {
+                    achievements[AchievementEnum.ACH4_SETTINGS_CHANGED_23_TIMES.ordinal].apply {
                         this.unlockDate = it.unlockDate?.toAchievementStringDate()
                     }
                     it.toPreviewVO()

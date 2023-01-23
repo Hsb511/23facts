@@ -7,4 +7,6 @@
     <string name="achievements_homebody_message">Home Sweet Home</string>
     <string name="achievements_factomania">factomania</string>
     <string name="achievements_factomania_message">The more you read, the more you learn</string>
+    <string name="achievements_versatile">versatile</string>
+    <string name="achievements_versatile_message">Change the settings before you have to</string>
 </resources>

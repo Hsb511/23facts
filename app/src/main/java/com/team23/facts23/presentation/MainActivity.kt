@@ -62,7 +62,8 @@ class MainActivity : ComponentActivity() {
         SettingsVM.provideFactory(
             assistedFactory = settingsVMAssistedFactory,
             changeStatusAndNavigationColors = { changeStatusAndNavigationColors() },
-            resetAchievementData = { achievementVM.onResetAchievements() }
+            resetAchievementData = { achievementVM.onResetAchievements() },
+            onSettingsChanged = { changedAmount -> achievementVM.onSettingsChanged(changedAmount) }
         )
     }
     private val searchVM: SearchVM by viewModels()

@@ -24,6 +24,7 @@ import kotlinx.coroutines.launch
 class SettingsVM @AssistedInject constructor(
     @Assisted("changeStatusAndNavigationColors") val changeStatusAndNavigationColors: () -> Unit,
     @Assisted("resetAchievementData") val resetAchievementData: () -> Unit,
+    @Assisted("onSettingsChanged") val onSettingsChanged: (Int) -> Unit,
     private val getStoredSettingsValueUseCase: GetStoredSettingsValueUseCase,
     private val resetDatabaseUseCase: ResetDatabaseUseCase,
     private val storeRandomnessUseCase: StoreRandomnessUseCase,
@@ -32,6 +33,7 @@ class SettingsVM @AssistedInject constructor(
     private val storedThemeMode: MutableState<Int> = mutableStateOf(1)
     private val storedRandomnessType: MutableState<Int> = mutableStateOf(0)
     val settingsSingleChoiceList = mutableStateListOf<SettingsSingleChoiceVO>()
+    private var settingsClickedTimes = 0
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -53,6 +55,7 @@ class SettingsVM @AssistedInject constructor(
                             else -> null
                         }
                         changeStatusAndNavigationColors()
+                        incrementSettingsClickedTimes()
                     },
                     selectedValue = storedThemeMode,
                 ),
@@ -63,7 +66,9 @@ class SettingsVM @AssistedInject constructor(
                         R.string.settings_colors_custom,
                     ),
                     // TODO HANDLE MATERIAL YOU COLOR
-                    onValueChanged = { },
+                    onValueChanged = {
+                        incrementSettingsClickedTimes()
+                    },
                     selectedValue = mutableStateOf(0),
                     disabled = true,
                     displayed = Build.VERSION.SDK_INT >= 31,
@@ -75,6 +80,7 @@ class SettingsVM @AssistedInject constructor(
                         viewModelScope.launch(Dispatchers.IO) {
                             storeRandomnessUseCase(RandomnessType.values()[it])
                             storedRandomnessType.value = it
+                            incrementSettingsClickedTimes()
                         }
                      },
                     selectedValue = storedRandomnessType,
@@ -91,11 +97,17 @@ class SettingsVM @AssistedInject constructor(
         }
     }
 
+    private fun incrementSettingsClickedTimes() {
+        settingsClickedTimes += 1
+        onSettingsChanged(settingsClickedTimes)
+    }
+
     @AssistedFactory
     interface Factory {
         fun create(
             @Assisted("changeStatusAndNavigationColors") changeStatusAndNavigationColors: () -> Unit,
-            @Assisted("resetAchievementData") resetAchievementData: () -> Unit
+            @Assisted("resetAchievementData") resetAchievementData: () -> Unit,
+            @Assisted("onSettingsChanged") onSettingsChanged: (Int) -> Unit,
         ): SettingsVM
     }
 
@@ -105,11 +117,13 @@ class SettingsVM @AssistedInject constructor(
             assistedFactory: Factory,
             changeStatusAndNavigationColors: () -> Unit,
             resetAchievementData: () -> Unit,
+            onSettingsChanged: (Int) -> Unit,
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
                 return assistedFactory.create(
                     changeStatusAndNavigationColors,
-                    resetAchievementData
+                    resetAchievementData,
+                    onSettingsChanged,
                 ) as T
             }
         }
