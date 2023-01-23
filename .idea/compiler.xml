@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel target="1.8">
+      <module name="23facts.buildSrc" target="11" />
+      <module name="23facts.buildSrc.main" target="11" />
+      <module name="23facts.buildSrc.test" target="11" />
+      <module name="facts23.achievements" target="11" />
+      <module name="facts23.app" target="11" />
+      <module name="facts23.core" target="11" />
+      <module name="facts23.fact" target="11" />
+      <module name="facts23.home" target="11" />
+      <module name="facts23.room" target="11" />
+      <module name="facts23.search" target="11" />
+      <module name="facts23.settings" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

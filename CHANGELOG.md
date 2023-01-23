@@ -1,3 +1,13 @@
+Version 1.0.1 :
+
+Feature:
+ - 4 NEW 23 FACTS
+ - 11 UPDATED 23 FACTS with translations and fixing typos
+
+Version 1.0.0 :
+
+Release
+
 Version 0.0.5 :
 
 Feature:

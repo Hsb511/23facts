@@ -3,6 +3,7 @@ package com.team23.room.data.modules
 import android.content.Context
 import androidx.room.Room
 import com.team23.room.data.AppDatabase
+import com.team23.room.data.AppDatabase.Companion.migrationFrom1To2
 import com.team23.room.data.Scripts
 import dagger.Module
 import dagger.Provides
@@ -19,12 +20,12 @@ object RoomDatabaseModule {
     @Provides
     fun provide23FactsDatabase(
         @ApplicationContext context: Context,
-    ): AppDatabase =
-        appDatabase ?: Room.databaseBuilder(
-            context,
-            AppDatabase::class.java,
-            LOCAL_DB_NAME
-        ).build().also { db ->
+    ): AppDatabase = appDatabase ?:
+        Room.databaseBuilder(context, AppDatabase::class.java, LOCAL_DB_NAME)
+        .addMigrations(
+            migrationFrom1To2,
+        )
+        .build().also { db ->
             Scripts.categoriesScript.execSQL(db)
             Scripts.factsScript1.execSQL(db)
             Scripts.factsScript2.execSQL(db)
