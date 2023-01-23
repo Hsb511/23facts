@@ -28,16 +28,15 @@ abstract class AppDatabase : RoomDatabase() {
         val migrationFrom1To2 = object: Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 val cursor = database.query("SELECT DISTINCT id_fonc FROM T_FACT WHERE isNew = 0")
-                val readFactId: MutableList<Long> = mutableListOf()
+                val readFactIds: MutableList<Long> = mutableListOf()
                 while (cursor.moveToNext()) {
-                    readFactId.add(cursor.getLong(0))
+                    readFactIds.add(cursor.getLong(0))
                 }
-                println("23facts all read facts: $readFactId")
                 database.delete("T_FACT", null, null)
                 database.execSQL(Scripts.factsScript1)
                 database.execSQL(Scripts.factsScript2)
-                readFactId.forEach { factId ->
-                    database.execSQL("UPDATE T_FACT SET isNew = 0 WHERE id_fonc = :factId")
+                readFactIds.forEach { factId ->
+                    database.execSQL("UPDATE T_FACT SET isNew = 0 WHERE id_fonc = $factId")
                 }
             }
         }

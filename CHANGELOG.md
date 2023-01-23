@@ -1,3 +1,8 @@
+Version 1.0.2 :
+
+Fix:
+ - Database migration
+
 Version 1.0.1 :
 
 Feature:
