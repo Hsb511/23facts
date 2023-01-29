@@ -15,4 +15,7 @@
     <string name="about_contact_description">For any kind of information or any suggestion on adding or modifying a fact feel free to contact me at this address: </string>
     <string name="about_contact_mail" translatable="false">hsb511.hs@gmail.com</string>
     <string name="about_version">Version</string>
+    <string name="about_privacy_policy">Privacy policy</string>
+    <string name="about_privacy_policy_read">Read our</string>
+    <string name="about_privacy_policy_link" translatable="false">https://github.com/Hsb511/23facts/blob/main/PRIVACY_POLICY.md</string>
 </resources>

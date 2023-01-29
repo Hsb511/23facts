@@ -1,5 +1,6 @@
 package com.team23.facts23.presentation.views
 
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
@@ -25,18 +26,39 @@ import com.team23.facts23.presentation.viewmodels.AboutVM
 fun AboutView(aboutVM: AboutVM) {
     AboutView(
         buildVersion = aboutVM.buildVersion.value,
-        onEmailClicked = { email -> aboutVM.launchEmailIntent(email) }
+        onEmailClicked = { email -> aboutVM.launchEmailIntent(email) },
+        onPrivacyPolicyClicked = { policy -> aboutVM.onPrivacyPolicyClicked(policy) }
     )
 }
 
 @Composable
-fun AboutView(buildVersion: String, onEmailClicked: (String) -> Unit) {
+fun AboutView(
+    buildVersion: String,
+    onEmailClicked: (String) -> Unit,
+    onPrivacyPolicyClicked: (Uri) -> Unit,
+) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
     ) {
+        AboutViewAppSection()
+        AboutViewContactSection(onEmailClicked)
+        AboutViewPrivacySection(onPrivacyPolicyClicked)
+        AboutViewVersionSection(buildVersion)
+    }
+}
+
+@Composable
+@Preview(showSystemUi = true)
+fun AboutViewPreview() {
+    AboutView(buildVersion = "2.3.0", onEmailClicked = { }, onPrivacyPolicyClicked = { })
+}
+
+@Composable
+private fun AboutViewAppSection() {
+    Column {
         Text(
             text = stringResource(id = R.string.app_name),
             style = MaterialTheme.typography.h4,
@@ -54,48 +76,56 @@ fun AboutView(buildVersion: String, onEmailClicked: (String) -> Unit) {
         Text(
             text = stringResource(id = R.string.about_app_title),
             style = MaterialTheme.typography.h5,
-            modifier = Modifier.padding(0.dp, 8.dp, 0.dp, 0.dp),
+            modifier = Modifier.padding(0.dp, 8.dp),
         )
         Text(
             text = stringResource(id = R.string.about_app_description),
         )
+    }
+}
+
+@Composable
+private fun AboutViewContactSection(onEmailClicked: (String) -> Unit) {
+    val mailTag = "mail"
+    val spanStyle = SpanStyle(
+        fontSize = MaterialTheme.typography.body1.fontSize,
+        fontFamily = MaterialTheme.typography.body1.fontFamily,
+        fontStyle = MaterialTheme.typography.body1.fontStyle,
+        fontWeight = MaterialTheme.typography.body1.fontWeight,
+        letterSpacing = MaterialTheme.typography.body1.letterSpacing,
+    )
+    val annotatedText = buildAnnotatedString {
+        withStyle(
+            style = spanStyle.copy(color = MaterialTheme.colors.onBackground)
+        ) {
+            append("${stringResource(id = R.string.about_contact_description)} ")
+        }
+        pushStringAnnotation(
+            tag = mailTag,
+            annotation = stringResource(id = R.string.about_contact_mail)
+        )
+        withStyle(
+            style = spanStyle.copy(
+                color = MaterialTheme.colors.secondary,
+                textDecoration = TextDecoration.Underline
+            )
+        ) {
+            append(stringResource(id = R.string.about_contact_mail))
+        }
+        pop()
+    }
+
+    Column {
         Text(
             text = stringResource(id = R.string.about_contact_title),
             style = MaterialTheme.typography.h5,
-            modifier = Modifier.padding(0.dp, 8.dp, 0.dp, 0.dp),
+            modifier = Modifier.padding(0.dp, 8.dp),
         )
-        val spanStyle = SpanStyle(
-            fontSize = MaterialTheme.typography.body1.fontSize,
-            fontFamily = MaterialTheme.typography.body1.fontFamily,
-            fontStyle = MaterialTheme.typography.body1.fontStyle,
-            fontWeight = MaterialTheme.typography.body1.fontWeight,
-            letterSpacing = MaterialTheme.typography.body1.letterSpacing,
-        )
-        val annotatedText = buildAnnotatedString {
-            withStyle(
-                style = spanStyle.copy(color = MaterialTheme.colors.onBackground)
-            ) {
-                append("${stringResource(id = R.string.about_contact_description)} ")
-            }
-            pushStringAnnotation(
-                tag = "mail",
-                annotation = stringResource(id = R.string.about_contact_mail)
-            )
-            withStyle(
-                style = spanStyle.copy(
-                    color = MaterialTheme.colors.secondary,
-                    textDecoration = TextDecoration.Underline
-                )
-            ) {
-                append(stringResource(id = R.string.about_contact_mail))
-            }
-            pop()
-        }
         ClickableText(
             text = annotatedText,
             onClick = { offset ->
                 annotatedText.getStringAnnotations(
-                    tag = "mail",
+                    tag = mailTag,
                     start = offset,
                     end = offset
                 ).let {
@@ -105,19 +135,71 @@ fun AboutView(buildVersion: String, onEmailClicked: (String) -> Unit) {
                 }
             }
         )
-        Text(
-            text = stringResource(id = R.string.about_version),
-            style = MaterialTheme.typography.h5,
-            modifier = Modifier.padding(0.dp, 8.dp, 0.dp, 0.dp),
+    }
+}
+
+@Composable
+private fun AboutViewPrivacySection(onPrivacyPolicyClicked: (Uri) -> Unit) {
+    val privacyPolicyTag = "policy"
+    val spanStyle = SpanStyle(
+        fontSize = MaterialTheme.typography.body1.fontSize,
+        fontFamily = MaterialTheme.typography.body1.fontFamily,
+        fontStyle = MaterialTheme.typography.body1.fontStyle,
+        fontWeight = MaterialTheme.typography.body1.fontWeight,
+        letterSpacing = MaterialTheme.typography.body1.letterSpacing,
+    )
+    val annotatedText = buildAnnotatedString {
+        withStyle(
+            style = spanStyle.copy(color = MaterialTheme.colors.onBackground)
+        ) {
+            append("${stringResource(id = R.string.about_privacy_policy_read)} ")
+        }
+        pushStringAnnotation(
+            tag = privacyPolicyTag,
+            annotation = stringResource(id = R.string.about_privacy_policy_link)
         )
+        withStyle(
+            style = spanStyle.copy(
+                color = MaterialTheme.colors.secondary,
+                textDecoration = TextDecoration.Underline
+            )
+        ) {
+            append(stringResource(id = R.string.about_privacy_policy).lowercase())
+        }
+        pop()
+    }
+
+    Column {
         Text(
-            text = buildVersion,
+            text = stringResource(id = R.string.about_privacy_policy),
+            style = MaterialTheme.typography.h5,
+            modifier = Modifier.padding(0.dp, 8.dp),
+        )
+        ClickableText(
+            text = annotatedText,
+            onClick = { offset ->
+                annotatedText.getStringAnnotations(
+                    tag = privacyPolicyTag,
+                    start = offset,
+                    end = offset
+                ).let {
+                    if (it.isNotEmpty()) {
+                        onPrivacyPolicyClicked(Uri.parse(it[0].item))
+                    }
+                }
+            }
         )
     }
 }
 
 @Composable
-@Preview(showSystemUi = true)
-fun AboutViewPreview() {
-    AboutView(buildVersion = "2.3.0", onEmailClicked = { })
+private fun AboutViewVersionSection(buildVersion: String) {
+    Text(
+        text = stringResource(id = R.string.about_version),
+        style = MaterialTheme.typography.h5,
+        modifier = Modifier.padding(0.dp, 8.dp),
+    )
+    Text(
+        text = buildVersion,
+    )
 }

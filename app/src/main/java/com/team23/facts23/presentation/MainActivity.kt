@@ -71,6 +71,7 @@ class MainActivity : ComponentActivity() {
         AboutVM.provideFactory(
             assistedFactory = aboutVMAssistedFactory,
             launchEmailIntent = { email -> launchEmailIntent(email) },
+            onPrivacyPolicyClicked = { policy -> launchBrowserUrlIntent(policy) }
         )
     }
 
@@ -153,6 +154,14 @@ class MainActivity : ComponentActivity() {
         }
 
         startActivity(Intent.createChooser(mIntent, "Choose Email Client..."))
+    }
+
+    private fun launchBrowserUrlIntent(policy: Uri) {
+        val mIntent = Intent().apply {
+            action = Intent.ACTION_VIEW
+            data = policy
+        }
+        startActivity(Intent.createChooser(mIntent, "Browse to privacy policy"))
     }
 
     private fun launchFactSharingIntent(factId: String) {

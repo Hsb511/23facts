@@ -15,4 +15,6 @@
     <string name="about_contact_title">Contact</string>
     <string name="about_contact_description">Pour toutes informations ou suggestion sur l\'ajout ou la modification d\'un fait veuillez me contacter à l\'adresse mail : </string>
     <string name="about_version">Version</string>
+    <string name="about_privacy_policy">Politique de confidentialité</string>
+    <string name="about_privacy_policy_read">Lisez notre</string>
 </resources>
